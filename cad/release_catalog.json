@@ -1,0 +1,1649 @@
+{
+  "schema": 1,
+  "catalog_id": "winder-machine-v1",
+  "currency": "USD",
+  "policy": {
+    "design_status_meaning": "The geometry and interface are selected and represented in the design.",
+    "purchase_status_meaning": "The exact supplier line or complete manufacturing handoff is ready.",
+    "cart_ready_scope": "Cart-ready identifies an exact supplier SKU and pack that can be put in the supplier cart. It does not assert a current price, fulfillment, order authorization, checkout success, installation approval, or motion authorization; unverified commercial terms must be rechecked at checkout.",
+    "rfq_ready_scope": "RFQ-ready means the hash-bound geometry, drawing, quote questions, receiving inspection, and qualification contract are complete and may be sent to a supplier. It does not assert supplier acceptance, quote receipt, order authorization, received-part acceptance, production use, or motion authorization.",
+    "required_lines_fail_closed": true,
+    "generic_or_equivalent_is_not_cart_ready": true,
+    "motion_authorization": "Cart-ready sourcing is not permission to wind. Legacy cad/assembly.step, out/links, raw clearance and raw wirepath artifacts are controller-baseline evidence only. A physical job must use conservative measured wire and installed-liner maxima, regenerate the selected integrated candidate, pass the exact two-turn raw-cycle gate, the full-cycle flexible-conductor authority, every required launch-corner certificate, and all physical qualification gates."
+  },
+  "items": [
+    {
+      "id": "kit-m0-m1-1-cl42t-s05-v41",
+      "class": "cots",
+      "scope": "machine",
+      "category": "motion",
+      "description": "M0/M1 closed-loop NEMA17 motor driver and cable kits",
+      "design_status": "selected",
+      "purchase_status": "cart_ready",
+      "quantity": {"required_qty": 2, "spare_qty": 0, "pack_qty": 1, "uom": "each"},
+      "selection": {
+        "manufacturer": "StepperOnline",
+        "mpn": "1-CL42T-S05-V41",
+        "supplier": "StepperOnline",
+        "supplier_sku": "1-CL42T-S05-V41",
+        "url": "https://www.omc-stepperonline.com/1-axis-closed-loop-stepper-cnc-kit-52ncm-73-64oz-in-nema-17-motor-driver-1-cl42t-s05-v41"
+      },
+      "model": {"authority": "manufacturer_step", "path": "cad/models/upgrades/17HS19-2004D-E1K.step"},
+      "note": "Each exact kit contains one 17HS19-2004D-E1K motor one CL42T-V41 driver and the programming cable; installed geometry and the official 24 V dynamic torque curve are regression-tested."
+    },
+    {
+      "id": "driver-m0-m1-cl42t",
+      "class": "electronics",
+      "scope": "excluded",
+      "category": "electronics",
+      "description": "Separate closed-loop stepper drivers for M0 and M1",
+      "design_status": "not_applicable",
+      "purchase_status": "excluded",
+      "quantity": {"required_qty": 0, "spare_qty": 0, "pack_qty": 1, "uom": "each"},
+      "note": "Do not order this line separately: both CL42T-V41 drivers are included in the two exact 1-CL42T-S05-V41 kit lines above."
+    },
+    {
+      "id": "motor-m2-leadshine-cs-m21708",
+      "class": "cots",
+      "scope": "machine",
+      "category": "motion",
+      "description": "Leadshine CS-M21708 M2 NEMA17 motor with 1000-line encoder",
+      "design_status": "selected",
+      "purchase_status": "cart_ready",
+      "authorization_status": "order_ready",
+      "quantity": {"required_qty": 1, "spare_qty": 0, "pack_qty": 1, "uom": "each"},
+      "selection": {
+        "manufacturer": "Leadshine",
+        "mpn": "CS-M21708",
+        "supplier": "Leadshine",
+        "supplier_sku": "CS-M21708",
+        "url": "https://www.leadshine.com/product-detail/closed-loop-stepper-drive/closed-loop-stepper/CS-M21708.html"
+      },
+      "model": {"authority": "supplier_step", "path": "cad/models/upgrades/CS-M21708.STEP", "sha256": "7e995e724fc7e019278e0a919ba1db8c8abb3333f156c64eb6e62485e0f6662b"},
+      "cost": {"status": "known_current", "unit_usd": 199.0, "extended_usd": 199.0, "basis": "Leadshine official online special price", "verified_on": "2026-07-11"},
+      "evidence": [
+        {
+          "source_type": "manufacturer_product_page",
+          "manufacturer": "Leadshine",
+          "mpn": "CS-M21708",
+          "url": "https://www.leadshine.com/product-detail/closed-loop-stepper-drive/closed-loop-stepper/CS-M21708.html",
+          "observed": "Official page shows the exact 83 mm NEMA17 motor, 1000-line encoder, 5 mm shaft, 0.8 N m holding torque, and a current Add-to-Cart price of 199 USD."
+        }
+      ],
+      "note": "The immutable vendor STEP is the source authority. The installed collision derivative cad/models/upgrades/CS-M21708_cableless.step is provenance-bound to it at SHA-256 1bb9b064a9e96a89f8b4bd6b8e1152fc2d2c9c122f665a7c8a9f176c3fbf9b8e; the loose 270 +/-15 mm leads remain a routing and reach obligation."
+    },
+    {
+      "id": "driver-m2-leadshine-cs-d508-conditional",
+      "class": "electronics",
+      "scope": "machine",
+      "category": "electronics",
+      "description": "Selected Leadshine CS-D508 closed-loop M2 driver; hardware order-ready, production current configuration remains a commissioning gate",
+      "design_status": "selected",
+      "purchase_status": "cart_ready",
+      "candidate_purchase_status": "cart_ready",
+      "authorization_status": "order_ready",
+      "quantity": {"required_qty": 1, "spare_qty": 0, "pack_qty": 1, "uom": "each"},
+      "selection": {"manufacturer": "Leadshine", "mpn": "CS-D508", "supplier": "Leadshine", "supplier_sku": "CS-D508", "url": "https://www.leadshine.com/product-detail/CS-D508.html"},
+      "cost": {"status": "known_current", "unit_usd": 199.0, "extended_usd": 199.0, "basis": "Leadshine official online special price for the conditional candidate", "verified_on": "2026-07-11"},
+      "evidence": [
+        {
+          "source_type": "manufacturer_manual",
+          "manufacturer": "Leadshine",
+          "mpn": "CS-D508",
+          "url": "https://www.leadshine.com/upfiles/downloads/6a05fc89c7f263374eafe258220c3463_1665569910600.pdf",
+          "local_path": "cad/models/upgrades/Leadshine_CS-D508_manual_v1.0.pdf",
+          "sha256": "0faaf40eebe24203511b50b3e3658bec9fc298b13221031759b84d3eb9bdba60",
+          "observed": "Manual revision 1.0 explicitly lists CS-M21708 as tested compatible, allows 20-50 VDC and 0.5-8.0 A peak, and identifies 36 V compatible supply candidates."
+        },
+        {
+          "source_type": "manufacturer_product_page",
+          "manufacturer": "Leadshine",
+          "mpn": "CS-D508",
+          "url": "https://www.leadshine.com/product-detail/CS-D508.html",
+          "observed": "Current official page is Add-to-Cart at 199 USD and specifies 20-50 VDC, 0.5-8.0 A software-configured peak current in 0.1 A increments, and 1000-line encoder compatibility."
+        },
+        {
+          "source_type": "manufacturer_software_manual",
+          "manufacturer": "Leadshine",
+          "mpn": "CS-D508",
+          "url": "https://www.leadshine.com/upfiles/downloads/14419125f0bab74945cb1577be162c56_1665570154673.pdf",
+          "observed": "ProTuner parameter PR 2 is peak current in 0.1 A units; CS-D508 supports values 10-80, so the exact 2.5 A RMS curve equivalent of 3.5355 A peak lies between settings 3.5 A and 3.6 A."
+        },
+        {
+          "source_type": "manufacturer_current_catalog",
+          "manufacturer": "Leadshine",
+          "mpn": "CS-M21708",
+          "url": "https://www.leadshine.com/upfiles/downloads/9d1b16bdd74302c1d533074657f1b972_1743650341386.pdf",
+          "observed": "The current Leadshine stepper catalog lists CS-M21708 at 2.5 A rated current and labels its 36/24 V speed-torque curve RMS 2.5 A, resolving the intended curve condition despite the separate product-page table typo."
+        },
+        {
+          "source_type": "integrated_load_authority",
+          "local_path": "out/reports/carriage_active_sector_terminal_guide_audit.json",
+          "observed": "Current exact active-sector authority requires 0.2357279818203625 N m and a 0.471455963640725 N m 2x threshold at M2; the official 36 V lower-edge curve is 0.735 N m (3.1180006477x), while configured-current and hot-dyno gates remain false."
+        }
+      ],
+      "commissioning_gate": {
+        "kind": "curve_configuration_or_hot_dyno_unreleased_before_motion",
+        "required": "Leadshine-confirmed CS-D508 PR 2 setting reproducing the official 36 V / RMS 2.5 A CS-M21708 curve, or a hot 36 V 300 RPM output dyno result at or above the current integrated 0.471455963640725 N m 2x threshold",
+        "observed": "The exact hardware is compatible and cart-ready, but PR 2 accepts only 0.1 A peak increments: 3.5 A is 2.4749 A RMS and 3.6 A is 2.5456 A RMS, bracketing rather than exactly reproducing the 2.5 A RMS curve."
+      },
+      "receiving_contract": {
+        "exact_model": "CS-D508",
+        "input_voltage_vdc": {"minimum": 20.0, "maximum": 50.0},
+        "encoder_lines": 1000,
+        "software_peak_current_A": {"candidate_lower": 3.5, "candidate_upper": 3.6, "released": null},
+        "commissioning_supply_vdc": 36.0,
+        "production_configuration_requires_manufacturer_or_dyno_proof": true
+      },
+      "note": "Exact driver hardware is selected and order-ready. The unresolved PR 2 choice and hot 36 V / 300 RPM dyno are post-purchase commissioning gates before energized production motion, not prerequisites for purchasing the driver needed to perform that proof. CS1-D503S is limited to 3.0 A peak and cannot bind the saved RMS 2.5 A curve; CL42T-V41 and any 24 V M2 release condition remain rejected."
+    },
+    {
+      "id": "linear-rail-mgn12h-150",
+      "class": "cots",
+      "scope": "machine",
+      "category": "motion",
+      "description": "150 mm MGN12 rail with MGN12H block",
+      "design_status": "selected",
+      "purchase_status": "cart_ready",
+      "quantity": {"required_qty": 2, "spare_qty": 0, "pack_qty": 1, "uom": "assembly"},
+      "selection": {"manufacturer": "ABRA house-brand", "mpn": "MP-LR12H-150", "supplier": "ABRA Electronics", "supplier_sku": "MP-LR12H-150", "url": "https://abra-electronics.com/3d-printers-en/linear-movement/linear-rails/mgn/mp-lr12h-150.html"},
+      "model": {"authority": "verified_vendor_step", "path": "cad/models/upgrades/mgn12r_rail.step"},
+      "note": "Exact live assembly SKU verified in stock 2026-07-10: 150 mm x 12 mm MGN12 rail with one MGN12H long block, supplied pre-lubricated. The collision model uses the dimension-verified HIWIN MGN12H/MGNR12 reference envelope. Receiving inspection must confirm assembled height 13.0 mm, block 45.4 x 27 mm, block M3 pattern 20 x 20 mm, rail 12 x 8 mm, and rail-hole pitch 25 mm before installation; reject or rework the interface if any check fails."
+    },
+    {
+      "id": "t8-antibacklash-flange-nut",
+      "class": "cots",
+      "scope": "machine",
+      "category": "motion",
+      "description": "T8x8 four-start POM anti-backlash flange nut",
+      "design_status": "selected",
+      "purchase_status": "cart_ready",
+      "quantity": {"required_qty": 1, "spare_qty": 0, "pack_qty": 1, "uom": "each"},
+      "selection": {
+        "manufacturer": "ZYLtech Engineering",
+        "mpn": "HW-SC-SMALLFL-P",
+        "supplier": "ZYLtech Engineering",
+        "supplier_sku": "HW-SC-SMALLFL-P / T8x8 option",
+        "url": "https://www.zyltech.com/delrin-anti-backlash-nut-small-flange-size-and-hole-pattern-t8x8-or-t8x2/"
+      },
+      "model": {"authority": "supplier_drawing_envelope", "path": "cad/models/parts/t8_p2_flange_nut.step"},
+      "receiving_contract": {
+        "required_option": "T8x8 (2 mm pitch, 4-start, 8 mm lead)",
+        "configured_installed_length_max_mm": 22.4,
+        "inspection": "Confirm both 15 mm Delrin halves, main flange OD22 x 4 with four M3 holes on PCD16, secondary flange OD14 x 4, free sliding engagement on the released screw, and backlash removal while the complete installed set remains within the 22.4 mm reserved axial envelope."
+      },
+      "note": "Exact in-stock set includes main nut body, spring, and secondary ring. CAD models all three supplied components; the annular spring solid is a conservative swept collision envelope because Zyltech does not publish spring wire or rate data."
+    },
+    {
+      "id": "t8x8-leadscrew-188-journal30",
+      "class": "custom",
+      "scope": "machine",
+      "category": "motion",
+      "description": "T8x8 four-start lead screw, 188 mm, native 30 mm smooth diameter-8 journal",
+      "design_status": "selected",
+      "purchase_status": "rfq_ready",
+      "quantity": {"required_qty": 1, "spare_qty": 0, "pack_qty": 1, "uom": "each"},
+      "manufacturing": {
+        "process": "custom lead-screw machining",
+        "revision": "A",
+        "material": "supplier engineering selection",
+        "artifacts": [
+          {"id": "t8-drawing", "role": "drawing_pdf", "path": "output/pdf/t8x8_leadscrew_188_journal30.pdf"},
+          {"id": "t8-step", "role": "step", "path": "out/custom/step/t8x8_leadscrew_188_journal30.step"}
+        ]
+      },
+      "note": "Do not turn an OD8 threaded crest into the required OD8 journal. Release only from a dimensioned RFQ drawing."
+    },
+    {
+      "id": "beam-coupling-5x8-24x32",
+      "class": "cots",
+      "scope": "machine",
+      "category": "motion",
+      "description": "Ruland 8 mm to 5 mm four-beam clamp coupling, OD22.2 x 27 mm",
+      "design_status": "selected",
+      "purchase_status": "cart_ready",
+      "quantity": {"required_qty": 2, "spare_qty": 0, "pack_qty": 1, "uom": "each"},
+      "selection": {"manufacturer": "Ruland Manufacturing", "mpn": "PCMR22-8-5-A", "supplier": "Ruland Manufacturing", "supplier_sku": "PCMR22-8-5-A", "url": "https://www.ruland.com/pcmr22-8-5-a.html"},
+      "model": {"authority": "verified_standard_part", "path": "cad/models/parts/beam_coupling_bore5_to_8.step"},
+      "note": "Exact zero-backlash 7075-aluminum clamp coupling: 8 x 5 mm bores, OD22.2 x 27.0 mm, 12.7 mm maximum penetration per shaft, 0.45 Nm reversing dynamic capacity, and 6000 rpm. The installed 12.5 mm engagements and 0.45 Nm duty margins are checked in loads.json. The verified OD24 x 32 reference STEP is retained as a conservative collision envelope."
+    },
+    {
+      "id": "bearing-608zz",
+      "class": "cots",
+      "scope": "machine",
+      "category": "bearing",
+      "description": "608ZZ 8x22x7 bearing",
+      "design_status": "selected",
+      "purchase_status": "cart_ready",
+      "quantity": {"required_qty": 2, "spare_qty": 1, "pack_qty": 1, "uom": "each"},
+      "selection": {"manufacturer": "AMPEC", "mpn": "S608-ZZ", "supplier": "Bearings Direct", "supplier_sku": "S608-ZZ", "url": "https://bearingsdirect.com/ss608-zz-stainless-steel-miniature-ball-bearing-8x22x7-shielded-ssr2280zz/"},
+      "model": {"authority": "verified_standard_part", "path": "cad/models/parts/bearing_608zz.step"}
+    },
+    {
+      "id": "bearing-6001zz",
+      "class": "cots",
+      "scope": "machine",
+      "category": "bearing",
+      "description": "6001ZZ 12x28x8 bearing",
+      "design_status": "selected",
+      "purchase_status": "cart_ready",
+      "quantity": {"required_qty": 2, "spare_qty": 0, "pack_qty": 1, "uom": "each"},
+      "selection": {"manufacturer": "AMPEC", "mpn": "6001-ZZ", "supplier": "Bearings Direct", "supplier_sku": "6001-ZZ", "url": "https://bearingsdirect.com/6001-zz-ball-bearing-12x28x8-shielded-9101kdd/"},
+      "model": {"authority": "verified_standard_part", "path": "cad/models/parts/bearing_6001_zz_shielded_simple.step"}
+    },
+    {
+      "id": "bearing-623zz",
+      "class": "cots",
+      "scope": "machine",
+      "category": "bearing",
+      "description": "623ZZ 3x10x4 dancer bearing",
+      "design_status": "selected",
+      "purchase_status": "cart_ready",
+      "quantity": {"required_qty": 1, "spare_qty": 0, "pack_qty": 1, "uom": "each"},
+      "selection": {"manufacturer": "AMPEC", "mpn": "623-ZZ", "supplier": "Bearings Direct", "supplier_sku": "623-ZZ", "url": "https://bearingsdirect.com/623-zz-mini-ball-bearing-3x10x4-shielded-r1030zz/"}
+    },
+    {
+      "id": "bearing-688-2rs",
+      "class": "cots",
+      "scope": "machine",
+      "category": "bearing",
+      "description": "688-2RS 8x16x5 fixed-end bearing",
+      "design_status": "selected",
+      "purchase_status": "cart_ready",
+      "quantity": {"required_qty": 1, "spare_qty": 0, "pack_qty": 1, "uom": "each"},
+      "selection": {"manufacturer": "AMPEC", "mpn": "688-2RS", "supplier": "Bearings Direct", "supplier_sku": "688-2RS", "url": "https://bearingsdirect.com/688-2rs-miniature-ball-bearing-8x16x5-sealed-mr688-2rs/"}
+    },
+    {
+      "id": "retaining-ring-din472-16",
+      "class": "cots",
+      "scope": "machine",
+      "category": "retention",
+      "description": "DIN 472 internal retaining ring for 16 mm bore",
+      "design_status": "selected",
+      "purchase_status": "cart_ready",
+      "quantity": {"required_qty": 1, "spare_qty": 1, "pack_qty": 5, "uom": "each"},
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "98394A431", "supplier": "McMaster-Carr", "supplier_sku": "98394A431", "url": "https://www.mcmaster.com/98394A431"},
+      "note": "Phosphate-coated carbon-steel DIN 472 ring for 16 mm bore; 1.0 mm thick, 5-pack. Exact dimensions and package verified 2026-07-10."
+    },
+    {
+      "id": "retaining-ring-din472-22",
+      "class": "cots",
+      "scope": "machine",
+      "category": "retention",
+      "description": "DIN 472 internal retaining ring for 22 mm bore",
+      "design_status": "selected",
+      "purchase_status": "cart_ready",
+      "quantity": {"required_qty": 2, "spare_qty": 1, "pack_qty": 5, "uom": "each"},
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "98394A440", "supplier": "McMaster-Carr", "supplier_sku": "98394A440", "url": "https://www.mcmaster.com/98394A440"},
+      "note": "Phosphate-coated carbon-steel DIN 472 ring for 22 mm bore; 1.0 mm thick, 5-pack. Exact dimensions and package verified 2026-07-10."
+    },
+    {
+      "id": "retaining-ring-din472-28",
+      "class": "cots",
+      "scope": "machine",
+      "category": "retention",
+      "description": "DIN 472 internal retaining ring for 28 mm bore",
+      "design_status": "selected",
+      "purchase_status": "cart_ready",
+      "quantity": {"required_qty": 1, "spare_qty": 1, "pack_qty": 1, "uom": "each"}
+      ,"selection": {"manufacturer": "McMaster-Carr", "mpn": "98394A447", "supplier": "McMaster-Carr", "supplier_sku": "98394A447", "url": "https://www.mcmaster.com/98394A447"}
+      ,"note": "Phosphate-coated carbon-steel DIN 472 ring for 28 mm bore; 1.2 mm thick, sold individually. Exact dimensions and package verified 2026-07-10."
+    },
+    {
+      "id": "bearing-retention-custom-set",
+      "class": "custom",
+      "scope": "machine",
+      "category": "retention",
+      "description": "Custom M0, M1, and M2 bearing race spacers, collar, and shim set",
+      "design_status": "selected",
+      "purchase_status": "rfq_ready",
+      "quantity": {"required_qty": 10, "spare_qty": 0, "pack_qty": 1, "uom": "piece"},
+      "manufacturing": {
+        "process": "precision turning",
+        "revision": "A",
+        "material": "drawing controlled",
+        "artifacts": [
+          {"id": "retention-drawing", "role": "drawing_pdf", "path": "output/pdf/bearing_retention_spacers.pdf"},
+          {"id": "m0-fixed-collar-step", "role": "step", "path": "out/custom/step/m0_fixed_collar.step"},
+          {"id": "m0-inner-shim-step", "role": "step", "path": "out/custom/step/m0_inner_shim.step"},
+          {"id": "m1-outer-spacer-step", "role": "step", "path": "out/custom/step/m1_outer_race_spacer.step"},
+          {"id": "m1-inner-spacer-step", "role": "step", "path": "out/custom/step/m1_inner_race_spacer.step"},
+          {"id": "m1-lower-spacer-step", "role": "step", "path": "out/custom/step/m1_lower_inner_spacer.step"},
+          {"id": "m1-upper-collar-step", "role": "step", "path": "out/custom/step/m1_upper_collar.step"},
+          {"id": "m2-outer-spacer-step", "role": "step", "path": "out/custom/step/m2_outer_race_spacer.step"},
+          {"id": "m2-rear-shim-step", "role": "step", "path": "out/custom/step/m2_rear_shim.step"},
+          {"id": "m2-center-spacer-step", "role": "step", "path": "out/custom/step/m2_center_inner_spacer.step"},
+          {"id": "m2-front-spacer-step", "role": "step", "path": "out/custom/step/m2_front_inner_spacer.step"}
+        ]
+      }
+    },
+    {
+      "id": "motor-pulley-nbk-p30-3gt-blp-6c-5-bnw-conditional",
+      "class": "custom",
+      "scope": "machine",
+      "category": "motion",
+      "description": "NBK P30-3GT-BLP-6C-5 stock split-clamp pulley with conditional BNW two-set-screw machining",
+      "design_status": "selected",
+      "purchase_status": "rfq_ready",
+      "candidate_purchase_status": "rfq_ready",
+      "authorization_status": "conditional",
+      "quantity": {"required_qty": 1, "spare_qty": 0, "pack_qty": 1, "uom": "each"},
+      "selection": {
+        "manufacturer": "Nabeya Bi-tech Kaisha (NBK)",
+        "mpn": "P30-3GT-BLP-6C-5 + BNW",
+        "supplier": "NBK configured-machining RFQ",
+        "supplier_sku": "P30-3GT-BLP-6C-5-BNW",
+        "url": "https://www.nbk1560.com/products/pulley/timingpulley/3GT-BLP-6C/P30-3GT-BLP-6C/"
+      },
+      "model": {"authority": "immutable_official_stock_supplier_step", "path": "cad/models/upgrades/NBK_P30-3GT-BLP-6C-5_AP214.step", "sha256": "996449b7d9ec7703e7b38c6f75eff00a1174e3e1f088c05f0f1460b205169df9"},
+      "cost": {"status": "planning_allowance", "unit_usd": 50.0, "extended_usd": 50.0, "basis": "Conservative inherited planning allowance; not a BNW quote", "verified_on": null},
+      "evidence": [
+        {
+          "source_type": "manufacturer_catalog",
+          "manufacturer": "Nabeya Bi-tech Kaisha (NBK)",
+          "mpn": "P30-3GT-BLP-6C-5",
+          "url": "https://www.nbk1560.com/products/pulley/timingpulley/3GT-BLP-6C/P30-3GT-BLP-6C/",
+          "observed": "Official catalog defines the stock one-solid P30, M2 split-clamp bolt and 0.5 N m clamp torque; BNW is two additional set-screw holes at 90 degrees, with size and position dependent on the configured pulley."
+        }
+      ],
+      "manufacturing": {
+        "process": "NBK configured BNW additional machining on the exact stock split-clamp pulley",
+        "revision": "M2-P30-D5-BNW-RFQ-A",
+        "artifacts": [
+          {"id": "m2-p30-d5-bnw-rfq-a", "role": "rfq_request", "path": "docs/rfq/m2_p30_d5_bnw_rfq_A.md"}
+        ],
+        "rfq_configuration": {
+          "base_part": "P30-3GT-BLP-6C-5",
+          "tooth_count": 30,
+          "pitch_mm": 3.0,
+          "belt_width_mm": 6.0,
+          "bore_mm": 5.0,
+          "stock_clamp_bolt": "M2 supplied; 0.5 N m tightening torque",
+          "additional_machining_code": "BNW",
+          "additional_set_screws": "two supplied set screws at 90 degrees",
+          "application_shaft": "Leadshine CS-M21708 5.0 mm D-shaft, 4.5 mm across flat, 15 mm D length",
+          "required_supplier_return": "configured drawing, complete configured part number, quote/lead time, bore tolerance, set-screw size/length/material/tip, axial and azimuthal hole stations, permitted insertion direction, and confirmation one screw may bear on the D-flat without crossing the split or clamp-bolt spot face",
+          "do_not_assume": "The separate M3x12 CAD witnesses are only inertia/clearance upper bounds and are not delivered hardware."
+        }
+      },
+      "blocker": {
+        "kind": "configured_BNW_retention_unreleased",
+        "required": "NBK response to RFQ revision M2-P30-D5-BNW-RFQ-A plus a reversing slip coupon at or above the current integrated 0.471455963640725 N m 2x threshold",
+        "observed": "The immutable exact stock D5 STEP is hash-pinned and NBK confirms BNW is order-configurable, but the public catalog explicitly leaves set-screw size and position product-dependent; only separate upper-bound CAD witnesses exist."
+      },
+      "note": "RFQ-ready authorizes sending revision M2-P30-D5-BNW-RFQ-A to NBK for a configured drawing and quote only. The 50 USD value is a planning allowance, not a quote. Do not count the two M3x12 review witnesses as supplied hardware, modify the CC BY-ND vendor STEP, place a production order, or authorize motion before the supplier-return and retention gates pass."
+    },
+    {
+      "id": "timing-belt-210-3gt-6",
+      "class": "cots",
+      "scope": "machine",
+      "category": "motion",
+      "description": "210 mm pitch-length 3GT timing belt, 6 mm wide",
+      "design_status": "selected",
+      "purchase_status": "cart_ready",
+      "authorization_status": "order_ready",
+      "quantity": {"required_qty": 1, "spare_qty": 1, "pack_qty": 1, "uom": "each"},
+      "selection": {"manufacturer": "Gates Unitta Asia", "mpn": "210-3GT-6", "supplier": "MISUMI US", "supplier_sku": "210-3GT-6", "url": "https://us.misumi-ec.com/vona2/detail/221004924969/?HissuCode=210-3GT-6"},
+      "cost": {"status": "known_current", "unit_usd": 11.14, "extended_usd": 22.28, "basis": "MISUMI US configured unit price", "verified_on": "2026-07-11"},
+      "note": "One installed plus one spare for the frozen 30T:30T exact 1:1 successor drive. The obsolete 200-2GT model is not release authority."
+    },
+    {
+      "id": "spindle-er11-c8-100l",
+      "class": "tooling",
+      "scope": "machine",
+      "category": "workholding",
+      "description": "Ounuowei C8-ER11A-100L straight-shank collet holder",
+      "design_status": "selected",
+      "purchase_status": "rfq_ready",
+      "quantity": {"required_qty": 1, "spare_qty": 0, "pack_qty": 1, "uom": "each"},
+      "model": {"authority": "drawing_derived", "path": "cad/models/upgrades/er11_c8_hifi.step"},
+      "manufacturing": {
+        "process": "supplier quotation of catalog C8-ER11A-100L holder followed by incoming dimensional inspection",
+        "revision": "OUNUOWEI-C8-ER11A-100L",
+        "artifacts": [
+          {"id": "er11-holder-reference-step", "role": "reference_step", "path": "cad/models/upgrades/er11_c8_hifi.step"},
+          {"id": "er11-holder-verification-report", "role": "verification_report", "path": "cad/models/upgrades/er11.report.md"}
+        ]
+      },
+      "evidence": [
+        {
+          "source_type": "manufacturer_catalog",
+          "manufacturer": "Ounuowei",
+          "mpn": "C8-ER11A-100L",
+          "url": "https://ounuowei.com/datasy/download/202503/06/1cdcda00c8e5e682353ec4fe677ec597.pdf",
+          "observed": "Controlled catalog row identifies C8-ER11A-100L with L116.6, L1 100, L2 16.6, D19, d11, C8, and M5x0.8 pull thread."
+        }
+      ],
+      "note": "RFQ the exact catalog model and inspect the received shank, nose, and nut envelope before use. Collets are ordered on the separate MariTool line. The verified standard working range remains 1-7 mm; use the custom socket holder for the exact 8.00 mm endpoint."
+    },
+    {
+      "id": "er11-metric-collet-set-1-7",
+      "class": "tooling",
+      "scope": "machine",
+      "category": "workholding",
+      "description": "MariTool ER11 13-piece metric collet set, 1-7 mm by 0.5 mm",
+      "design_status": "selected",
+      "purchase_status": "cart_ready",
+      "quantity": {"required_qty": 1, "spare_qty": 0, "pack_qty": 1, "uom": "set"},
+      "selection": {
+        "manufacturer": "MariTool",
+        "mpn": "ER11-13PIECE",
+        "supplier": "MariTool",
+        "supplier_sku": "ER11-13PIECE",
+        "url": "https://www.maritool.com/Collets-And-Sleeves-ER-Collets-ER-Collet-Sets/c21_56_22/p28/ER-11-COLLET-13-PIECE-METRIC-SET/product_info.html"
+      },
+      "evidence": [
+        {
+          "source_type": "manufacturer_store",
+          "manufacturer": "MariTool",
+          "mpn": "ER11-13PIECE",
+          "url": "https://www.maritool.com/Collets-And-Sleeves-ER-Collets-ER-Collet-Sets/c21_56_22/p28/ER-11-COLLET-13-PIECE-METRIC-SET/product_info.html",
+          "observed": "Current order page identifies a 13-piece ER11 metric set in 0.5 mm increments from 1 through 7 mm, in stock with Add to Cart."
+        }
+      ],
+      "note": "Select the smallest collet whose published collapse range contains the measured stator shaft. Do not use an 8 mm extended-range ER11 collet for this release."
+    },
+    {
+      "id": "m1-spindle-custom-d8-c8-100l",
+      "class": "tooling",
+      "scope": "machine",
+      "category": "workholding",
+      "description": "Custom 4140 prehard socket holder for the exact 8.00 mm shaft endpoint",
+      "design_status": "selected",
+      "purchase_status": "rfq_ready",
+      "quantity": {"required_qty": 1, "spare_qty": 0, "pack_qty": 1, "uom": "each"},
+      "manufacturing": {
+        "process": "precision turning, boring, and M4 port machining",
+        "revision": "A",
+        "material": "4140 prehard steel",
+        "artifacts": [
+          {"id": "shaft8-holder-drawing", "role": "drawing_pdf", "path": "output/pdf/shaft8_socket_holder.pdf"},
+          {"id": "shaft8-holder-step", "role": "step", "path": "out/custom/step/shaft8_socket_holder.step"}
+        ]
+      },
+      "note": "Interface m1-c8-8mm-stack-v1. This closes only 8.00 mm; it is not a continuous 7-8 mm collet range and is not a supplier SKU."
+    },
+    {
+      "id": "extrusion-hfs5-2020-cut-set",
+      "class": "raw_stock",
+      "scope": "machine",
+      "category": "structure",
+      "description": "2020 slot-6 extrusion cut set: 2x450, 3x180, 2x280, 2x235, 1x305 mm; 2775 mm total",
+      "design_status": "selected",
+      "purchase_status": "cart_ready",
+      "quantity": {"required_qty": 10, "spare_qty": 0, "pack_qty": 1, "uom": "cut_length"},
+      "selection": {"manufacturer": "MISUMI", "mpn": "HFS5-2020", "supplier": "MISUMI", "supplier_sku": "HFS5-2020-450 x2; HFS5-2020-180 x3; HFS5-2020-280 x2; HFS5-2020-235 x2; HFS5-2020-305 x1", "url": "https://us.misumi-ec.com/vona2/A0000000001/M1500000000/M1501000000/M1501010000/"},
+      "manufacturing": {
+        "process": "supplier square cut and deburr",
+        "revision": "FRAME-LOCAL-001",
+        "artifacts": [
+          {"id": "extrusion-cut-pdf", "role": "drawing_pdf", "path": "output/pdf/extrusion_cut_list.pdf"},
+          {"id": "extrusion-cut-csv", "role": "cut_list_csv", "path": "out/custom/shop/csv/extrusion_cut_list.csv"}
+        ]
+      },
+      "note": "The old BOM approximation of 2.5 m is incorrect. Exact 1 mm-increment MISUMI cut suffixes are selected; configured price is supplied by the MISUMI cart."
+    },
+    {
+      "id": "foot-stack-elesa-432001-wurth-970180581",
+      "class": "cots",
+      "scope": "excluded",
+      "category": "structure",
+      "description": "Foot-stack interface evidence; ordering is carried by the three exact hardware rows",
+      "design_status": "selected",
+      "purchase_status": "excluded",
+      "quantity": {"required_qty": 0, "spare_qty": 0, "pack_qty": 1, "uom": "stack"},
+      "model": {"authority": "controlled_cots_stack", "path": "cad/models/upgrades/foot_stack_review.step"},
+      "evidence": [
+        {
+          "source_type": "manufacturer_catalog",
+          "manufacturer": "Elesa",
+          "mpn": "432001",
+          "url": "https://www.elesa.com/siteassets/PDF/PDF_US/DVB.6%20DVB.7.pdf",
+          "observed": "Controlled row DVB.6-20-17-M5-6-55 specifies OD20, H17, M5x6 stud, 55 Shore A, 407 N maximum load, and 96 N/mm stiffness."
+        },
+        {
+          "source_type": "authorized_distributor_line",
+          "manufacturer": "Würth Elektronik",
+          "mpn": "970180581",
+          "url": "https://uk.farnell.com/wurth-elektronik/970180581/standoff-hex-female-female-18mm/dp/2884560",
+          "observed": "Farnell order code 2884560 identifies the WA-SSTII zinc-steel M5 female/female standoff with 18 mm body and 8 mm across-flats hex."
+        }
+      ],
+      "note": "Each installed stack is 18+17=35 mm. Order 4x ELESA-432001, 4x WURTH-970180581, and 4x ISO4026-M5x12 from the hardware order; do not order this zero-quantity evidence record separately. Bond each set screw with 4.8 +/-0.1 mm projection."
+    },
+    {
+      "id": "flyer-shaft-stock-d10-rev-d",
+      "class": "custom",
+      "scope": "machine",
+      "category": "structure",
+      "description": "L79.00 hollow flyer shaft with full OD10/ID6 stock-pulley seat, ID6-to-ID9 transition, OD12 main span and two arm flats",
+      "design_status": "selected",
+      "purchase_status": "rfq_ready",
+      "quantity": {"required_qty": 1, "spare_qty": 0, "pack_qty": 1, "uom": "each"},
+      "manufacturing": {
+        "process": "machine hollow bar with full 18.5 mm OD9.991-10.000 h6 / ID6.000-6.030 seat, 3 mm transition to ID9.000-9.050, OD11.980-12.000 main span, two indexed arm flats, shoulder datum and R0.5 internal-mouth polish",
+        "revision": "D",
+        "material": "6061-T6 aluminum or drawing-approved equivalent",
+        "artifacts": [
+          {"id": "flyer-shaft-drawing", "role": "drawing_pdf", "path": "output/pdf/flyer_shaft_d10_id6_to_id9_l79.pdf"},
+          {"id": "flyer-shaft-step", "role": "step", "path": "out/custom/step/flyer_shaft_d10_id6_to_id9_l79.step"}
+        ]
+      },
+      "note": "M2-001 Rev D controls an OD9.991-10.000 h6 round seat and ID6.000-6.030 over the complete 18.50 mm stock-pulley through-bore, giving 2.00 mm nominal and 1.9805 mm minimum neck wall at limits; the OD11.980-12.000 main span has ID9.000-9.050, joined by a 3.00 mm polished transition, with two arm flats at 64.75 mm from rear datum A. The finished front is z=-31.75, 0.25 mm behind the root-sleeve front; pulley-side flats are prohibited."
+    },
+    {
+      "id": "carriage-plate-mic6-0p250",
+      "class": "sendcutsend",
+      "scope": "machine",
+      "category": "fabricated",
+      "description": "0.250 inch MIC6 carriage plate",
+      "design_status": "selected",
+      "purchase_status": "upload_ready",
+      "quantity": {"required_qty": 1, "spare_qty": 0, "pack_qty": 1, "uom": "each"},
+      "selection": {"manufacturer": "SendCutSend", "mpn": "ALUMIC6-250", "supplier": "SendCutSend", "supplier_sku": "ALUMIC6-250", "url": "https://sendcutsend.com/"},
+      "manufacturing": {
+        "process": "fiber laser",
+        "revision": "A",
+        "material": "MIC6 cast aluminum plate, 0.250 inch",
+        "artifacts": [
+          {"id": "carriage-dxf", "role": "dxf", "path": "cad/fabricated_carriage.dxf"},
+          {"id": "carriage-step", "role": "step", "path": "cad/fabricated_carriage.step"},
+          {"id": "carriage-preflight", "role": "preflight_json", "path": "out/reports/sendcutsend_carriage.json"}
+        ]
+      }
+    },
+    {
+      "id": "endstop-omron-d2f-01l2-d3",
+      "class": "cots",
+      "scope": "machine",
+      "category": "sensor",
+      "description": "Omron D2F-01L2-D3 hinge-roller microswitch with solder terminals",
+      "design_status": "selected",
+      "purchase_status": "cart_ready",
+      "quantity": {"required_qty": 1, "spare_qty": 1, "pack_qty": 1, "uom": "each"},
+      "selection": {
+        "manufacturer": "Omron Electronics",
+        "mpn": "D2F-01L2-D3",
+        "supplier": "DigiKey",
+        "supplier_sku": "Z4701-ND",
+        "url": "https://www.digikey.com/en/products/detail/omron-electronics-inc-emc-div/D2F-01L2-D3/5236578"
+      },
+      "model": {"authority": "manufacturer_dimensioned_parametric", "path": "cad/models/upgrades/omron_d2f_01l2_d3.step"},
+      "evidence": [
+        {
+          "source_type": "manufacturer_datasheet",
+          "manufacturer": "Omron Electronics",
+          "mpn": "D2F-01L2-D3",
+          "url": "https://components.omron.com/sites/default/files/datasheet_pdf/B036-E1_0.pdf",
+          "observed": "Controlled D2F drawing specifies a 12.8 x 5.8 x 6.5 mm body, two 2.00 +0.12/0 mm mounting holes on 6.50 +/-0.10 mm centers, OD4.8 x 2.8 roller, 13 +/-2 mm operating position, M2 mounting screws, and 0.08-0.10 N m mounting torque."
+        },
+        {
+          "source_type": "authorized_distributor_line",
+          "manufacturer": "Omron Electronics",
+          "mpn": "D2F-01L2-D3",
+          "url": "https://www.digikey.com/en/products/detail/omron-electronics-inc-emc-div/D2F-01L2-D3/5236578",
+          "observed": "DigiKey Z4701-ND identifies the exact active chassis-mount SPDT roller-lever switch with solder lugs, current stock, unit ordering, and Add to Cart."
+        }
+      ],
+      "note": "Mount and flag are revised to the controlled 6.50 mm pitch and roller envelope. Wire COM/NO for normally-open homing logic; do not substitute the former KW12 geometry."
+    },
+    {
+      "id": "fixed-ceramic-eyelet-id4-od9",
+      "class": "custom",
+      "scope": "machine",
+      "category": "wire_path",
+      "description": "Drawing-controlled polished alumina fixed guide, ID4 x OD9 x 3 mm",
+      "design_status": "selected",
+      "purchase_status": "rfq_ready",
+      "quantity": {"required_qty": 1, "spare_qty": 1, "pack_qty": 1, "uom": "each"},
+      "model": {"authority": "custom_drawing_geometry", "path": "out/custom/step/fixed_eyelet_id4_od9_t3.step"},
+      "manufacturing": {
+        "process": "custom 99.8 percent alumina forming, diamond polishing, and dimensional inspection",
+        "revision": "A",
+        "material": "99.8 percent alumina ceramic",
+        "artifacts": [
+          {"id": "fixed-eyelet-drawing", "role": "drawing_pdf", "path": "output/pdf/fixed_eyelet_id4_od9_t3.pdf"},
+          {"id": "fixed-eyelet-step", "role": "step", "path": "out/custom/step/fixed_eyelet_id4_od9_t3.step"}
+        ]
+      },
+      "evidence": [
+        {
+          "source_type": "vendor_catalog_candidate",
+          "manufacturer": "Stanford Advanced Materials",
+          "mpn": "AC10042",
+          "url": "https://www.samaterials.com/item/ac10042-alumina-ceramic-ring-aluminum-oxide-ring-al2o3-ring-99-dia-9-mm.html",
+          "observed": "Catalog AC10042 proves 99 percent alumina and 9 mm ring diameter, but is inquiry-only and publishes neither the 4 mm bore nor 3 mm thickness; the vendor also warns actual specifications may vary."
+        },
+        {
+          "source_type": "manufacturer_capability",
+          "manufacturer": "KEIR Manufacturing",
+          "url": "https://keirmfg.com/products/guideseyeletsbushings",
+          "observed": "Manufacturer advertises custom ceramic guides, eyelets, and bushings for wire and fiber processing; the project drawing controls the exact geometry, material, and polished contact finish for quotation."
+        }
+      ],
+      "note": "RFQ only to the paired STEP/PDF and require supplier dimensional inspection. Generic fishing guides and AC10042 are not accepted substitutes. One entry guide is installed and one fragile-part spare is ordered; the flyer tip is now the separate one-piece PEEK guide/bell."
+    },
+    {
+      "id": "flyer-guide-peek-one-piece",
+      "class": "custom",
+      "scope": "machine",
+      "category": "wire_path",
+      "description": "One-piece natural-unfilled-PEEK flyer guide with integral polished exit bell",
+      "design_status": "selected",
+      "purchase_status": "rfq_ready",
+      "candidate_purchase_status": "rfq_ready",
+      "authorization_status": "blocked",
+      "quantity": {"required_qty": 1, "spare_qty": 0, "pack_qty": 1, "uom": "each"},
+      "cost": {"status": "tbd", "unit_usd": null, "extended_usd": null, "basis": "No supplier quote", "verified_on": null},
+      "manufacturing": {
+        "process": "5-axis CNC or supplier-approved molded-and-finish-machined process",
+        "revision": "A",
+        "material": "natural unfilled PEEK; exact resin grade and certified lot TBD",
+        "rfq_contract": {
+          "rfq_submission_status": "ready",
+          "order_authorized": false,
+          "production_authorized": false,
+          "material_design_basis": "Natural virgin unfilled PEEK stock shape; supplier must identify manufacturer, product/grade, filler declaration and traceable lot; no filled or recycled substitution.",
+          "supplier_return_requirements": ["Confirm the one-solid STEP is manufacturable without closing the ID0.60 passage, R3.25 root elbow or exit bell", "Return stock-shape manufacturer/product/grade, filler declaration, lot-certificate availability, process, achievable wire-contact finish and first-article inspection plan"],
+          "receiving_inspection": ["Verify material certificate and lot identify natural virgin unfilled PEEK", "Inspect the continuous ID0.60 passage, root elbow, exit bell, M2 interfaces and every wire-contact surface against the STEP"],
+          "qualification_before_use": ["M2 insert pull and guide-to-arm fit", "Abrasion, dielectric, varnish, 60 N hot-load, flexible-wire-route and hot 300 RPM endurance gates"]
+        },
+        "artifacts": [
+          {"id": "flyer-peek-guide-drawing", "role": "drawing_pdf", "path": "output/pdf/successor_custom_parts_rfq.pdf"},
+          {"id": "flyer-peek-guide-step", "role": "step", "path": "out/custom/successor/step/flyer_peek_guide_bell.step"},
+          {"id": "successor-rfq-csv", "role": "rfq_csv", "path": "out/custom/successor/successor_rfq.csv"},
+          {"id": "successor-manufacturing-manifest", "role": "manifest_json", "path": "out/custom/successor/manifest.json", "json_requirements": {"schema": "successor-manufacturing-packet/v1", "rfq_submission_authorized": true, "order_authorized": false, "production_authorized": false}}
+        ]
+      },
+      "blocker": {"kind": "material_and_coupon_unreleased", "required": "Supplier-returned exact unfilled PEEK grade/lot certificate, DFM/finish/inspection commitment, quote, insert pull, abrasion, dielectric, varnish and hot-load coupons", "observed": "Hash-bound one-solid STEP, drawing and CSV are complete for RFQ submission only; no order or production use is authorized"}
+    },
+    {
+      "id": "stator-short-leadin-peek-cap-pair",
+      "class": "custom",
+      "scope": "machine",
+      "category": "wire_path",
+      "description": "Front and rear natural-unfilled-PEEK stator caps, each with 24 two-branch short-leadin sectors (48 open branch grooves per cap)",
+      "design_status": "selected",
+      "purchase_status": "rfq_ready",
+      "candidate_purchase_status": "rfq_ready",
+      "authorization_status": "blocked",
+      "quantity": {"required_qty": 2, "spare_qty": 0, "pack_qty": 1, "uom": "each"},
+      "cost": {"status": "tbd", "unit_usd": null, "extended_usd": null, "basis": "No supplier quote", "verified_on": null},
+      "manufacturing": {
+        "process": "CNC machining and polish of all open wire-contact channels",
+        "revision": "B",
+        "material": "natural unfilled PEEK; exact resin grade and certified lot TBD",
+        "rfq_contract": {
+          "rfq_submission_status": "ready",
+          "order_authorized": false,
+          "production_authorized": false,
+          "material_design_basis": "Matched front/rear pair from one lot of natural virgin unfilled PEEK; no filled or recycled substitution.",
+          "supplier_return_requirements": ["Confirm both exact STEP files are manufacturable with all 24 two-branch short-leadin sectors (48 open branch grooves) per cap", "Return stock-shape manufacturer/product/grade, filler declaration, lot-certificate availability, process, achievable wire-contact finish and paired first-article inspection plan"],
+          "receiving_inspection": ["Verify the matched pair shares one certified natural-unfilled-PEEK lot", "Inspect all 24 two-branch short-leadin sectors (48 open branch grooves) per cap, front/rear identity, shared M2 retention interfaces and all wire-contact surfaces against the STEP files"],
+          "qualification_before_use": ["Paired-cap fit and M2 retention", "Abrasion, dielectric, hot-varnish and flexible-conductor launch-matrix gates"]
+        },
+        "artifacts": [
+          {"id": "peek-cap-drawing", "role": "drawing_pdf", "path": "output/pdf/successor_custom_parts_rfq.pdf"},
+          {"id": "peek-cap-front-step", "role": "step", "path": "out/custom/successor/step/stator_short_leadin_cap_front.step"},
+          {"id": "peek-cap-rear-step", "role": "step", "path": "out/custom/successor/step/stator_short_leadin_cap_rear.step"},
+          {"id": "successor-rfq-csv", "role": "rfq_csv", "path": "out/custom/successor/successor_rfq.csv"},
+          {"id": "successor-manufacturing-manifest", "role": "manifest_json", "path": "out/custom/successor/manifest.json", "json_requirements": {"schema": "successor-manufacturing-packet/v1", "rfq_submission_authorized": true, "order_authorized": false, "production_authorized": false}}
+        ]
+      },
+      "note": "Rev B binds the paired caps to the corrected source geometry: right branches start at the exact BREP waypoint; all R3.50 quarter bends are explicit XZ three-point arcs; R1.20 shells are fused before global R0.45 open-groove subtraction; and every right seam has the 2.40 x 0.75 x 0.90 mm radial breakout. RFQ and production authority remain blocked pending the existing supplier and coupon gates.",
+      "blocker": {"kind": "material_and_coupon_unreleased", "required": "Supplier-returned exact unfilled PEEK grade/lot certificate, DFM/finish/inspection commitment, quote and abrasion/dielectric/hot-varnish coupons", "observed": "Hash-bound paired STEP files, drawing and CSV are complete for RFQ submission only; no order or production use is authorized"}
+    },
+    {
+      "id": "active-sector-peek-guide-pair",
+      "class": "custom",
+      "scope": "machine",
+      "category": "wire_path",
+      "description": "Two M0-following, M1-static natural-unfilled-PEEK active-sector guides",
+      "design_status": "selected",
+      "purchase_status": "rfq_ready",
+      "candidate_purchase_status": "rfq_ready",
+      "authorization_status": "blocked",
+      "quantity": {"required_qty": 2, "spare_qty": 0, "pack_qty": 1, "uom": "each"},
+      "cost": {"status": "tbd", "unit_usd": null, "extended_usd": null, "basis": "No supplier quote", "verified_on": null},
+      "manufacturing": {
+        "process": "CNC machine open bowls, datum keys and heat-insert pilots; polish wire surfaces",
+        "revision": "A",
+        "material": "natural unfilled PEEK; exact resin grade and certified lot TBD",
+        "rfq_contract": {
+          "rfq_submission_status": "ready",
+          "order_authorized": false,
+          "production_authorized": false,
+          "material_design_basis": "Matched front/rear pair from one lot of natural virgin unfilled PEEK; no filled or recycled substitution.",
+          "supplier_return_requirements": ["Confirm both exact STEP files are manufacturable without closing any open bowl, datum key or insert pilot", "Return stock-shape manufacturer/product/grade, filler declaration, lot-certificate availability, process, achievable wire-contact finish and paired first-article inspection plan"],
+          "receiving_inspection": ["Verify the matched pair shares one certified natural-unfilled-PEEK lot", "Inspect front/rear identity, all datum keys, open bowls, M3 insert pilots and wire-contact surfaces against the STEP files"],
+          "qualification_before_use": ["Guide-key fit and all four M3 insert pull tests", "Abrasion, flexible-conductor capture, full launch-matrix and hot 300 RPM endurance gates"]
+        },
+        "artifacts": [
+          {"id": "active-guide-drawing", "role": "drawing_pdf", "path": "output/pdf/successor_custom_parts_rfq.pdf"},
+          {"id": "active-guide-front-step", "role": "step", "path": "out/custom/successor/step/active_sector_peek_guide_front.step"},
+          {"id": "active-guide-rear-step", "role": "step", "path": "out/custom/successor/step/active_sector_peek_guide_rear.step"},
+          {"id": "successor-rfq-csv", "role": "rfq_csv", "path": "out/custom/successor/successor_rfq.csv"},
+          {"id": "successor-manufacturing-manifest", "role": "manifest_json", "path": "out/custom/successor/manifest.json", "json_requirements": {"schema": "successor-manufacturing-packet/v1", "rfq_submission_authorized": true, "order_authorized": false, "production_authorized": false}}
+        ]
+      },
+      "blocker": {"kind": "material_and_coupon_unreleased", "required": "Supplier-returned exact unfilled PEEK grade/lot certificate, finish/DFM/inspection commitment, quote and guide-key/insert/abrasion coupons", "observed": "Hash-bound paired STEP files, drawing and CSV are complete for RFQ submission only; no order or production use is authorized"}
+    },
+    {
+      "id": "active-sector-aluminum-yoke",
+      "class": "custom",
+      "scope": "machine",
+      "category": "structure",
+      "description": "One-solid keyed aluminum carriage yoke for the active-sector guides",
+      "design_status": "selected",
+      "purchase_status": "rfq_ready",
+      "candidate_purchase_status": "rfq_ready",
+      "authorization_status": "blocked",
+      "quantity": {"required_qty": 1, "spare_qty": 0, "pack_qty": 1, "uom": "each"},
+      "cost": {"status": "tbd", "unit_usd": null, "extended_usd": null, "basis": "No supplier quote", "verified_on": null},
+      "manufacturing": {
+        "process": "CNC mill as one solid and inspect all keyed guide/tower datums and M3/M4 hole axes",
+        "revision": "B",
+        "material": "6061-T6 aluminum; no equivalent without written approval",
+        "rfq_contract": {
+          "rfq_submission_status": "ready",
+          "order_authorized": false,
+          "production_authorized": false,
+          "material_design_basis": "Certified 6061-T6 aluminum; no alloy or temper equivalent is pre-authorized.",
+          "supplier_return_requirements": ["Confirm one-piece CNC machining of the exact STEP and return a first-article inspection plan for keyed guide/tower datums and all M3/M4 clearance-hole axes", "State achievable tolerance, datum-face flatness and surface-treatment proposal with no buildup on locating or mating faces"],
+          "receiving_inspection": ["Verify the serialized material certificate states 6061-T6", "Review the first-article report and independently inspect tower keys, guide seats, datum faces and all M3/M4 clearance holes"],
+          "qualification_before_use": ["Re-run the exact rigid sweep with received-part measurements", "Pass guide fit, flexible-conductor, launch-matrix and physical-load gates"]
+        },
+        "artifacts": [
+          {"id": "active-yoke-drawing", "role": "drawing_pdf", "path": "output/pdf/successor_custom_parts_rfq.pdf"},
+          {"id": "active-yoke-step", "role": "step", "path": "out/custom/successor/step/active_sector_aluminum_yoke.step"},
+          {"id": "active-yoke-rigid-audit", "role": "geometry_audit", "path": "out/reports/carriage_active_sector_terminal_guide_audit.json"},
+          {"id": "successor-rfq-csv", "role": "rfq_csv", "path": "out/custom/successor/successor_rfq.csv"},
+          {"id": "successor-manufacturing-manifest", "role": "manifest_json", "path": "out/custom/successor/manifest.json", "json_requirements": {"schema": "successor-manufacturing-packet/v1", "rfq_submission_authorized": true, "order_authorized": false, "production_authorized": false}}
+        ]
+      },
+      "blocker": {"kind": "supplier_quote_unreleased", "required": "Supplier-returned DFM, 6061-T6 certificate commitment, dimensional-inspection plan and quote plus flexible-conductor, launch and physical qualification", "observed": "The hash-bound STEP/drawing/CSV packet is RFQ-ready and the rev6 outboard coil-bypass yoke passes the default-job rigid sweep at collision revision active-sector-r39p2__physical-bell-root-sleeve-six-slug__L79-stock-D10-P30__short-cap-leadins__rev6-front-plane-outboard-coil-bypass-yoke; ordering and non-rigid/physical gates remain blocked"}
+    },
+    {
+      "id": "flyer-pulley-nbk-p30-3gt-blp-6c-10",
+      "class": "cots",
+      "scope": "machine",
+      "category": "motion",
+      "description": "Stock NBK 30T 3GT backlash-less flyer pulley, 6 mm belt, D10 split-clamp bore",
+      "design_status": "selected",
+      "purchase_status": "cart_ready",
+      "candidate_purchase_status": "cart_ready",
+      "authorization_status": "blocked",
+      "quantity": {"required_qty": 1, "spare_qty": 0, "pack_qty": 1, "uom": "each"},
+      "cost": {"status": "tbd", "unit_usd": null, "extended_usd": null, "basis": "NBK official Japan page lists JPY 5,060 before tax / JPY 5,566 including tax; delivered USD price and shipping are not verified", "verified_on": "2026-07-12"},
+      "selection": {"manufacturer": "NBK", "mpn": "P30-3GT-BLP-6C-10", "supplier": "NBK", "supplier_sku": "P30-3GT-BLP-6C-10", "url": "https://www.nbk1560.com/products/pulley/timingpulley/3GT-BLP-6C/P30-3GT-BLP-6C/", "cart_state": "official_manufacturer_cart_in_stock", "verified_on": "2026-07-12"},
+      "checkout_condition": "Confirm the current delivered price, exact-line fulfillment, and destination shipping at checkout; cart_ready is not order or motion authorization.",
+      "model": {"authority": "immutable_official_vendor_occurrence", "path": "cad/models/upgrades/NBK_P30_D10_download/P30-3GT-BLP-6C-10.stp", "sha256": "780110e1d59a988661f5ae80e9ebbe5d2eb324b9037d33a481809c939fa4c9f1"},
+      "evidence": [{"source_type": "manufacturer_product_table", "manufacturer": "NBK", "mpn": "P30-3GT-BLP-6C-10", "url": "https://www.nbk1560.com/products/pulley/timingpulley/3GT-BLP-6C/P30-3GT-BLP-6C/", "verified_on": "2026-07-12", "observed": "Official standard-stock row is marked in stock with a cart action and JPY 5,060 before tax / JPY 5,566 including tax; it specifies 30 teeth, Dp28.7, De27.9, Df32, W11, A7.3, I1.85, L7.5, M2 clamp at 0.5 N m, D10 bore, recommended h6/h7 shaft, A2017 body, supplied SCM435 bolt, 28 g and 3.0e-6 kg m2."}],
+      "receiving_contract": {"part_number": "P30-3GT-BLP-6C-10", "bore_mm": 10.0, "mass_g": 28.0, "axial_j_kgm2": 0.000003, "source_step_sha256": "780110e1d59a988661f5ae80e9ebbe5d2eb324b9037d33a481809c939fa4c9f1", "supplied_clamp_bolt": "M2", "clamp_torque_nm": 0.5},
+      "blocker": {"kind": "retention_and_balance_release_unproven", "required": "Delivered D10 bore/bolt inspection, 0.5 N m reversing slip, shaft shoulder and belt-pretension checks, re-solved six-trim balance, and hot endurance", "observed": "Exact official in-stock cart line and immutable vendor STEP are selected; this is cart-ready reference evidence only, not production order authorization, and empirical retention/final balance remain open"},
+      "note": "The exact stock line is cart-ready on the official NBK Japan storefront. Delivered USD cost and shipping are not asserted. Cart-ready permits sourcing/qualification only; authorization_status remains blocked until the received part and rotating assembly pass the declared physical gates."
+    },
+    {
+      "id": "flyer-balance-b777-six-trim-set",
+      "class": "custom",
+      "scope": "machine",
+      "category": "balance",
+      "description": "Six serialized ASTM-B777 annular flyer-balance trims: four rear stacks plus two front trims",
+      "design_status": "selected",
+      "purchase_status": "rfq_ready",
+      "candidate_purchase_status": "rfq_ready",
+      "authorization_status": "blocked",
+      "quantity": {"required_qty": 6, "spare_qty": 0, "pack_qty": 1, "uom": "each"},
+      "cost": {"status": "tbd", "unit_usd": null, "extended_usd": null, "basis": "No material or machining quote", "verified_on": null},
+      "manufacturing": {
+        "process": "Precision machine each annular STEP to its solved dimension, weigh and serialize",
+        "revision": "A",
+        "material": "ASTM B777 tungsten heavy alloy at 18.49 g/cm3 balance-design density; class and certified lot TBD",
+        "rfq_contract": {
+          "rfq_submission_status": "ready",
+          "order_authorized": false,
+          "production_authorized": false,
+          "material_design_basis": "ASTM B777 tungsten heavy alloy at 18.49 g/cm3; this density is bound into all six solved STEP dimensions.",
+          "supplier_return_requirements": ["Quote each serialized STEP separately and state ASTM B777 class, certified density, chemistry, traceable lot, machining process and achievable dimensional tolerance", "Return predicted finished mass per serial and quote an actual mass record; flag any density other than 18.49 g/cm3 because all six STEP files must then be regenerated before order approval"],
+          "receiving_inspection": ["Verify ASTM B777 certificate, class, chemistry, traceable lot and certified density", "Measure and record each serial's OD, ID, axial length and finished mass; reject serial mix-up, rounded bearing faces or burrs"],
+          "qualification_before_use": ["Install the six measured serials and pass final G2.5 balance", "Pass every rear/front retention pull test and hot 300 RPM endurance"]
+        },
+        "artifacts": [
+          {"id": "balance-trim-drawing", "role": "drawing_pdf", "path": "output/pdf/successor_custom_parts_rfq.pdf"},
+          {"id": "balance-rear-1-step", "role": "step", "path": "out/custom/successor/step/balance_b777_rear_1_rear_left.step"},
+          {"id": "balance-rear-2-step", "role": "step", "path": "out/custom/successor/step/balance_b777_rear_2_rear_right.step"},
+          {"id": "balance-rear-3-step", "role": "step", "path": "out/custom/successor/step/balance_b777_rear_3_front_left.step"},
+          {"id": "balance-rear-4-step", "role": "step", "path": "out/custom/successor/step/balance_b777_rear_4_front_right.step"},
+          {"id": "balance-front-left-step", "role": "step", "path": "out/custom/successor/step/balance_b777_front_left.step"},
+          {"id": "balance-front-right-step", "role": "step", "path": "out/custom/successor/step/balance_b777_front_right.step"},
+          {"id": "successor-rfq-csv", "role": "rfq_csv", "path": "out/custom/successor/successor_rfq.csv"},
+          {"id": "successor-manufacturing-manifest", "role": "manifest_json", "path": "out/custom/successor/manifest.json", "json_requirements": {"schema": "successor-manufacturing-packet/v1", "rfq_submission_authorized": true, "order_authorized": false, "production_authorized": false}}
+        ]
+      },
+      "evidence": [{"source_type": "vendor_material_catalog", "supplier": "McMaster-Carr", "supplier_skus": ["5995N71", "5995N72"], "url": "https://www.mcmaster.com/products/tungsten-alloy-rods/", "verified_on": "2026-07-11", "observed": "Official catalog lists 1/2 inch, 8 inch and 12 inch ultra-dense corrosion-resistant tungsten rods 5995N71/5995N72 as ASTM B777 stock and states traceable-lot certificates are available; supplier must still certify the actual class and 18.49 g/cm3 design density for this RFQ."}],
+      "receiving_contract": {"design_density_g_cm3": 18.49, "density_substitution_requires_new_balance_solve": true, "required_serial_count": 6, "required_records": ["ASTM B777 class and lot certificate", "certified density", "OD, ID and axial length per serial", "finished mass per serial"]},
+      "blocker": {"kind": "material_balance_and_coupon_unreleased", "required": "Supplier-returned ASTM B777 class/18.49 g/cm3 density lot certificate, machining quote/tolerances, serialized measured masses, installed G2.5 balance, pull and hot endurance coupons", "observed": "Hash-bound six-STEP/drawing/CSV packet is complete for RFQ submission only; no material lot, order or production use is authorized"}
+    },
+    {
+      "id": "shaft-wrap-sleeve-default-d4",
+      "class": "tooling",
+      "scope": "job",
+      "category": "wire_path",
+      "description": "Default-job seamless polished shaft-wrap sleeve for nominal 4 mm shaft",
+      "design_status": "selected",
+      "purchase_status": "rfq_ready",
+      "quantity": {"required_qty": 1, "spare_qty": 1, "pack_qty": 1, "uom": "each"},
+      "manufacturing": {
+        "process": "custom ceramic sleeve manufacturing",
+        "revision": "A",
+        "material": "99.8 percent alumina",
+        "artifacts": [
+          {"id": "shaft-sleeve-family-drawing", "role": "drawing_pdf", "path": "output/pdf/shaft_wrap_sleeve_family.pdf"},
+          {"id": "shaft-sleeve-default-step", "role": "step", "path": "out/custom/step/shaft_wrap_sleeve_d4.step"}
+        ]
+      }
+    },
+    {
+      "id": "default-magnet-wire-32snsp125",
+      "class": "consumable",
+      "scope": "job",
+      "category": "winding_material",
+      "description": "Remington 32SNSP.125 32 AWG single-build wire; 0.22352 mm supplier nominal finished OD; measured job input must be 0.220-0.235 mm",
+      "design_status": "selected",
+      "purchase_status": "cart_ready",
+      "quantity": {"required_qty": 1, "spare_qty": 0, "pack_qty": 1, "uom": "2_oz_spool"},
+      "selection": {
+        "manufacturer": "Remington Industries",
+        "mpn": "32SNSP.125",
+        "supplier": "Remington Industries",
+        "supplier_sku": "32SNSP.125",
+        "url": "https://www.remingtonindustries.com/magnet-wire/magnet-wire-32-awg-enameled-copper-9-spool-sizes/"
+      },
+      "receiving_contract": {
+        "supplier_nominal_finished_diameter_in": 0.0088,
+        "supplier_nominal_finished_diameter_mm": 0.22352,
+        "default_simulation_finished_diameter_mm": 0.22352,
+        "accepted_conservative_measured_finished_diameter_mm": {"minimum": 0.22, "maximum": 0.235},
+        "measurement_rule": "Measure finished OD at no fewer than five separated locations with a suitable calibrated wire micrometer and use the conservative maximum including instrument uncertainty as the job input.",
+        "regeneration_command": ".venv/Scripts/python.exe cad/job_artifacts.py --wire-measured <wire_max_mm> --liner-measured <liner_max_mm>",
+        "inspection": "Accept this 50-turn job only when the conservative measured finished OD is 0.220-0.235 mm. Regenerate packing, winding plan, settings, packed routes, capture, continuous audit, and player from the measured value before hardware motion."
+      },
+      "note": "The 0.22352 mm supplier nominal is only the default digital-twin input, never a receiving certificate. Remington 32HNS heavy-build is not the selected substitute: its 0.0095 inch nominal is approximately 0.2413 mm, outside the accepted measured interval."
+    },
+    {
+      "id": "default-slot-liner-nomex410-5mil",
+      "class": "consumable",
+      "scope": "job",
+      "category": "winding_material",
+      "description": "DuPont Nomex Type 410 5 mil sheet; 0.127 mm supplier nominal; measured installed job input must be 0.120-0.140 mm",
+      "design_status": "selected",
+      "purchase_status": "cart_ready",
+      "quantity": {"required_qty": 1, "spare_qty": 0, "pack_qty": 1, "uom": "sheet"},
+      "selection": {
+        "manufacturer": "DuPont",
+        "mpn": "Nomex Type 410, 5 mil",
+        "supplier": "BAE Wire & Insulation",
+        "supplier_sku": "INNMX410005S",
+        "url": "https://www.baewire.com/NOMEX-TYPE-410-005-24-X-36-SHEETS-p/innmx410005s.htm"
+      },
+      "receiving_contract": {
+        "supplier_nominal_thickness_in": 0.005,
+        "supplier_nominal_thickness_mm": 0.127,
+        "default_simulation_installed_thickness_mm": 0.127,
+        "accepted_conservative_measured_installed_thickness_mm": {"minimum": 0.12, "maximum": 0.14},
+        "measurement_rule": "Form the slot-cell process, measure installed radial thickness at no fewer than five coupon locations, and use the conservative maximum including instrument uncertainty as the job input.",
+        "regeneration_command": ".venv/Scripts/python.exe cad/job_artifacts.py --wire-measured <wire_max_mm> --liner-measured <liner_max_mm>",
+        "inspection": "Accept this 50-turn job only when the conservative installed thickness is 0.120-0.140 mm and every core edge remains protected. Regenerate packing, winding plan, settings, packed routes, capture, continuous audit, and player before hardware motion."
+      },
+      "note": "The 0.127 mm supplier nominal is only the default digital-twin input. The physical winding contract uses the measured installed result of the qualified forming process, not loose-sheet catalog thickness."
+    },
+    {
+      "id": "end-turn-former-default",
+      "class": "tooling",
+      "scope": "optional",
+      "category": "wire_path",
+      "description": "Future optional end-turn forming tool; not part of the Goal1 flyer-winder mechanism",
+      "design_status": "pending",
+      "purchase_status": "blocked",
+      "quantity": {"required_qty": 0, "spare_qty": 0, "pack_qty": 1, "uom": "each"},
+      "note": "GOAL.md requires flyer winding and analytical coil-growth validation, not a separate printable end-turn former. Keep this future tooling line visible but non-blocking; do not invent release artifacts for it."
+    },
+    {
+      "id": "felt-backing-disc-20-4p5-1",
+      "class": "custom",
+      "scope": "machine",
+      "category": "tensioner",
+      "description": "OD20 x ID4.5 x 1 mm 304 stainless felt backing disc",
+      "design_status": "selected",
+      "purchase_status": "rfq_ready",
+      "quantity": {"required_qty": 2, "spare_qty": 0, "pack_qty": 1, "uom": "each"},
+      "manufacturing": {
+        "process": "sheet cutting",
+        "revision": "M3-LOCAL-001",
+        "material": "304 stainless, 1 mm",
+        "artifacts": [
+          {"id": "felt-backing-drawing", "role": "drawing_pdf", "path": "output/pdf/felt_tensioner_consumables.pdf"},
+          {"id": "felt-backing-dxf", "role": "dxf", "path": "out/custom/shop/dxf/local_felt_backing_disc_od20_id4p5.dxf"}
+        ]
+      },
+      "note": "The individual disc is below current SendCutSend minimum bounding size; select another supplier or a tabbed carrier artifact."
+    },
+    {
+      "id": "felt-pad-20-4p5-3",
+      "class": "custom",
+      "scope": "machine",
+      "category": "tensioner",
+      "description": "OD20 x ID4.5 x 3 mm wool felt drag pad",
+      "design_status": "selected",
+      "purchase_status": "rfq_ready",
+      "quantity": {"required_qty": 2, "spare_qty": 4, "pack_qty": 1, "uom": "each"},
+      "manufacturing": {
+        "process": "felt die or template cutting",
+        "revision": "M3-LOCAL-001",
+        "material": "McMaster 8341K31 F5 plain wool felt sheet, 1/8 inch; finished thickness 3.0 +/-0.3 mm",
+        "artifacts": [
+          {"id": "felt-pad-drawing", "role": "drawing_pdf", "path": "output/pdf/felt_tensioner_consumables.pdf"},
+          {"id": "felt-pad-template", "role": "dxf", "path": "out/custom/shop/dxf/local_felt_pad_od20_id4p5.dxf"}
+        ]
+      }
+    },
+    {
+      "id": "felt-sheet-8341k31",
+      "class": "consumable",
+      "scope": "machine",
+      "category": "tensioner",
+      "description": "F5 plain wool felt sheet stock for locally cut drag pads",
+      "design_status": "selected",
+      "purchase_status": "cart_ready",
+      "quantity": {"required_qty": 1, "spare_qty": 0, "pack_qty": 1, "uom": "sheet"},
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "8341K31", "supplier": "McMaster-Carr", "supplier_sku": "8341K31", "url": "https://www.mcmaster.com/product/8341K31/"},
+      "evidence": [
+        {
+          "source_type": "vendor_catalog",
+          "manufacturer": "McMaster-Carr",
+          "mpn": "8341K31",
+          "url": "https://www.mcmaster.com/products/f5-felt/",
+          "observed": "Exact row is one 12 x 12 inch plain-back F5 sheet, 1/8 inch thick, 95 percent wool, Durometer 25A, off-white, 400 psi tensile strength."
+        }
+      ],
+      "note": "One exact 12 x 12 x 1/8 inch sheet is ample for the two installed OD20 pads and four spares. Cut locally to the drawing; do not use adhesive-backed 8341K11."
+    },
+    {
+      "id": "dancer-standoff-sleeve-set",
+      "class": "custom",
+      "scope": "machine",
+      "category": "tensioner",
+      "description": "Dancer stand-off sleeves: 2x OD5/ID3.2/L4, 1x OD4/ID2.2/L1.5, 1x OD4/ID2.2/L4",
+      "design_status": "selected",
+      "purchase_status": "rfq_ready",
+      "quantity": {"required_qty": 4, "spare_qty": 0, "pack_qty": 1, "uom": "piece"},
+      "manufacturing": {
+        "process": "precision tube or turned spacer cutting",
+        "revision": "M3-LOCAL-002",
+        "material": "drawing controlled",
+        "artifacts": [
+          {"id": "dancer-sleeves-drawing", "role": "drawing_pdf", "path": "output/pdf/dancer_standoff_sleeves.pdf"},
+          {"id": "dancer-stop-sleeve-step", "role": "step", "path": "out/custom/shop/step/dancer_stop_sleeve_od5_id3p2_l4.step"},
+          {"id": "dancer-fixed-sleeve-step", "role": "step", "path": "out/custom/shop/step/dancer_fixed_anchor_sleeve_od4_id2p2_l1p5.step"},
+          {"id": "dancer-moving-sleeve-step", "role": "step", "path": "out/custom/shop/step/dancer_moving_anchor_sleeve_od4_id2p2_l4.step"}
+        ]
+      }
+    },
+    {
+      "id": "power-supply-m2-regulated-36v-condition",
+      "class": "electronics",
+      "scope": "machine",
+      "category": "electronics",
+      "description": "Selected Leadshine LSP-360-36 regulated 36 VDC M2 bench/commissioning supply; mains safety integration blocked",
+      "design_status": "selected",
+      "purchase_status": "blocked",
+      "candidate_purchase_status": "cart_ready",
+      "authorization_status": "conditional",
+      "quantity": {"required_qty": 1, "spare_qty": 0, "pack_qty": 1, "uom": "each"},
+      "selection": {
+        "manufacturer": "Leadshine",
+        "mpn": "LSP-360-36",
+        "supplier": "Leadshine",
+        "supplier_sku": "LSP-360-36",
+        "url": "https://www.leadshine.com/product-detail/LSP-360-36.html"
+      },
+      "cost": {"status": "known_current", "unit_usd": 199.0, "extended_usd": 199.0, "basis": "Leadshine official online special price for the selected conditional supply candidate", "verified_on": "2026-07-11"},
+      "evidence": [
+        {
+          "source_type": "manufacturer_manual",
+          "manufacturer": "Leadshine",
+          "mpn": "CS-D508",
+          "local_path": "cad/models/upgrades/Leadshine_CS-D508_manual_v1.0.pdf",
+          "sha256": "0faaf40eebe24203511b50b3e3658bec9fc298b13221031759b84d3eb9bdba60",
+          "observed": "The CS-D508 manual accepts 36 VDC and Appendix B names RPS3611V20 and RPS369 as compatible 36 V supply candidates."
+        },
+        {
+          "source_type": "manufacturer_product_page",
+          "manufacturer": "Leadshine",
+          "mpn": "LSP-360-36",
+          "url": "https://www.leadshine.com/product-detail/LSP-360-36.html",
+          "observed": "Current official page is Add-to-Cart at 199 USD and specifies 36 VDC, 10 A continuous, 18 A peak, 360 W, selectable 92-138 or 184-276 VAC input, 215 x 115 x 30 mm, short-circuit and overload protection."
+        },
+        {
+          "source_type": "manufacturer_current_catalog",
+          "manufacturer": "Leadshine",
+          "mpn": "LSP-360-36",
+          "url": "https://www.leadshine.com/upfiles/downloads/9d1b16bdd74302c1d533074657f1b972_1743650341386.pdf",
+          "observed": "Leadshine's current stepper catalog lists LSP-360-36 as an active LSP regulated power supply with 36 VDC, 10 A continuous, 18 A peak, 360 W, over-current/over-voltage/low-voltage protection, CE and RoHS."
+        }
+      ],
+      "receiving_contract": {
+        "exact_model": "LSP-360-36",
+        "output_voltage_vdc": 36.0,
+        "continuous_output_current_A": 10.0,
+        "peak_output_current_A": 18.0,
+        "rated_power_W": 360.0,
+        "input_voltage_windows_vac": [[92.0, 138.0], [184.0, 276.0]],
+        "input_selector_must_match_site_mains_before_energizing": true,
+        "maximum_envelope_mm": [215.0, 115.0, 30.0],
+        "mains_enclosure_and_protection_release_required": true
+      },
+      "blocker": {
+        "kind": "mains_safety_integration_unreleased",
+        "required": "Released mains enclosure and mounting, input-selector setting, branch over-current protection, disconnect/E-stop power architecture, protective-earth bonding, terminals/strain relief, wire schedule, thermal clearance, and deceleration/back-EMF verification",
+        "observed": "The exact 36 V supply SKU, electrical capacity, envelope, official price and cart availability are pinned; no machine-level mains or regenerative-energy integration has been designed or reviewed."
+      },
+      "note": "The selected supply may be cart-staged for a controlled bench/dyno build, but it remains blocked for production-machine ordering until mains safety integration is released. A 24 V supply must not be used to claim the selected M2 curve condition."
+    },
+    {
+      "id": "controller-board",
+      "class": "electronics",
+      "scope": "optional",
+      "category": "electronics",
+      "description": "Optional controller implementation for the required serial protocol",
+      "design_status": "pending",
+      "purchase_status": "blocked",
+      "quantity": {"required_qty": 1, "spare_qty": 0, "pack_qty": 1, "uom": "each"},
+      "note": "Optional under Goal1: controller and firmware internals are out of scope; only the serial protocol is contractual. STM32 NUCLEO-G431KB (DigiKey 497-19489-ND) is a candidate, not a released selection; level shifting, isolation, pinout, ESTOP, alarms, and connectors remain undefined."
+    },
+    {
+      "id": "structural-petg-filament",
+      "class": "consumable",
+      "scope": "machine",
+      "category": "print",
+      "description": "Structural PETG filament",
+      "design_status": "selected",
+      "purchase_status": "cart_ready",
+      "quantity": {"required_qty": 1, "spare_qty": 0, "pack_qty": 1, "uom": "1kg_spool"},
+      "selection": {
+        "manufacturer": "Inland",
+        "mpn": "PETG+175SB1",
+        "supplier": "Micro Center",
+        "supplier_sku": "151506",
+        "url": "https://www.microcenter.com/product/626528/inland-175mm-black-petg-3d-printer-filament-1kg-spool-%2822-lbs%29"
+      },
+      "evidence": [
+        {
+          "source_type": "vendor_catalog",
+          "manufacturer": "Inland",
+          "mpn": "PETG+175SB1",
+          "url": "https://www.microcenter.com/product/626528/inland-175mm-black-petg-3d-printer-filament-1kg-spool-%2822-lbs%29",
+          "observed": "Micro Center SKU 151506 is black Inland PETG+, 1.75 mm, 1.0 kg; product page showed Add to Cart and five units at the selected Brentwood store on 2026-07-10."
+        }
+      ],
+      "note": "Exact production material is black Inland PETG+ from this SKU. Dry the spool, print the qualification coupon from the same spool, and keep production printing blocked until the physical coupon passes."
+    },
+    {
+      "id": "ceramic-bonding-epoxy",
+      "class": "consumable",
+      "scope": "machine",
+      "category": "assembly_consumable",
+      "description": "Bonding epoxy for fixed ceramic eyelets and the interphase shaft-wrap sleeve",
+      "design_status": "selected",
+      "purchase_status": "cart_ready",
+      "quantity": {"required_qty": 1, "spare_qty": 0, "pack_qty": 1, "uom": "package"},
+      "selection": {
+        "manufacturer": "Henkel LOCTITE",
+        "mpn": "209717",
+        "supplier": "EIS",
+        "supplier_sku": "LOC21425",
+        "url": "https://www.eis-inc.com/product/epoxy-adhesive-loc21425"
+      },
+      "evidence": [
+        {
+          "source_type": "manufacturer_datasheet",
+          "manufacturer": "Henkel LOCTITE",
+          "mpn": "209717",
+          "url": "https://datasheets.tdx.henkel.com/LOCTITE-EA-445-en_GL.pdf",
+          "observed": "LOCTITE EA 445 is a two-part room-temperature epoxy for permanent bonding of metals, ceramics, and most plastics; 2-3 minute gel time, 5 minute application window, and 72 hour reference cure at 21 C."
+        },
+        {
+          "source_type": "distributor_line",
+          "manufacturer": "Henkel LOCTITE",
+          "mpn": "209717",
+          "url": "https://www.eis-inc.com/product/epoxy-adhesive-loc21425",
+          "observed": "EIS LOC21425 is available to order as ten premeasured 4 g EA 445 mixer cups per case."
+        }
+      ],
+      "note": "Use only for the fixed ceramic eyelets and interphase shaft-wrap sleeve; no obsolete flyer-tip torus is in this adhesive scope. Surface preparation and cure contract: degrease and dry both surfaces; fine-to-medium abrade the hidden bond areas only; wash and dry again; mix to uniform color; coat both surfaces and assemble within 5 minutes; immobilize and cure 72 hours at about 21 C before load. Keep adhesive off every exposed polished wire-contact surface. Henkel excludes PE/PP and recommends an application trial; qualify one scrap PETG-to-alumina and one steel-to-alumina bond before production use."
+    },
+    {
+      "id": "foot-stud-threadlocker-loctite-243",
+      "class": "consumable",
+      "scope": "machine",
+      "category": "assembly_consumable",
+      "description": "Medium-strength anaerobic threadlocker for the four foot-stack set screws",
+      "design_status": "selected",
+      "purchase_status": "cart_ready",
+      "quantity": {"required_qty": 1, "spare_qty": 0, "pack_qty": 1, "uom": "single_use_capsule"},
+      "selection": {
+        "manufacturer": "Henkel LOCTITE",
+        "mpn": "243",
+        "supplier": "McMaster-Carr",
+        "supplier_sku": "91458A114",
+        "url": "https://www.mcmaster.com/91458A114"
+      },
+      "evidence": [
+        {
+          "source_type": "manufacturer_product_page",
+          "manufacturer": "Henkel LOCTITE",
+          "mpn": "243",
+          "url": "https://next.henkel-adhesives.com/us/en/products/industrial-adhesives/central-pdp.html/loctite-243/BP000000316211.html",
+          "observed": "LOCTITE 243 is a removable medium-strength anaerobic threadlocker for metal fasteners, including plated surfaces, intended to prevent loosening under vibration."
+        },
+        {
+          "source_type": "distributor_line",
+          "manufacturer": "Henkel LOCTITE",
+          "mpn": "243",
+          "url": "https://www.mcmaster.com/91458A114",
+          "observed": "McMaster 91458A114 is the 0.02 fl oz single-use LOCTITE 243 capsule; one capsule is selected for the four M5 foot studs."
+        }
+      ],
+      "note": "Degrease the M5x12 set screw and standoff top threads, apply 243 only to the 7.2 mm internal engagement, set 4.8 +/-0.1 mm projection with calipers, wipe excess, and allow 24 hours before loading. Keep the foot's lower M5x6 joint removable and dry."
+    }
+  ],
+  "hardware_purchase_map": {
+    "91116A130": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 100,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "91116A130", "supplier": "McMaster-Carr", "supplier_sku": "91116A130", "url": "https://www.mcmaster.com/91116A130"}
+    },
+    "94125K614": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 5,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "94125K614", "supplier": "McMaster-Carr", "supplier_sku": "94125K614", "url": "https://www.mcmaster.com/94125K614"}
+    },
+    "ELESA-432001": {
+      "class": "cots",
+      "purchase_status": "cart_ready",
+      "pack_qty": 1,
+      "selection": {"manufacturer": "Elesa", "mpn": "432001", "supplier": "Reiman", "supplier_sku": "DVB.6-20-17-M5-6-55", "url": "https://reiman.pt/en/dvb-6-20-17-m5-6-55-rubber-buffers-steel-base-plate/"}
+    },
+    "WURTH-970180581": {
+      "class": "cots",
+      "purchase_status": "cart_ready",
+      "pack_qty": 1,
+      "selection": {"manufacturer": "Würth Elektronik", "mpn": "970180581", "supplier": "Farnell", "supplier_sku": "2884560", "url": "https://uk.farnell.com/wurth-elektronik/970180581/standoff-hex-female-female-18mm/dp/2884560"}
+    },
+    "ISO4026-M5x12": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 1,
+      "selection": {"manufacturer": "Accu", "mpn": "SSF-M5-12-A2", "supplier": "Accu", "supplier_sku": "SSF-M5-12-A2", "url": "https://accu-components.com/us/flat-point-set-screws/4538-SSF-M5-12-A2"}
+    },
+    "DIN315-M4": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 10,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "94300A411", "supplier": "McMaster-Carr", "supplier_sku": "94300A411", "url": "https://www.mcmaster.com/94300A411"}
+    },
+    "DIN976-M4x55": {
+      "class": "raw_stock",
+      "purchase_status": "cart_ready",
+      "pack_qty": 1,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "90024A221", "supplier": "McMaster-Carr", "supplier_sku": "90024A221", "url": "https://www.mcmaster.com/90024A221"},
+      "fabrication": "Cut one 55 mm stud from the 300 mm DIN 976 M4x0.7 threaded rod and deburr both ends."
+    },
+    "DIN988-3x6x0.5": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 1,
+      "selection": {"manufacturer": "Accu", "mpn": "HSHN-3-6-0-5-A2", "supplier": "Accu", "supplier_sku": "HSHN-3-6-0-5-A2", "url": "https://accu-components.com/us/shim-washers/62839-HSHN-3-6-0-5-A2"}
+    },
+    "DIN988-5x10x0.5": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 50,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "98055A098", "supplier": "McMaster-Carr", "supplier_sku": "98055A098", "url": "https://www.mcmaster.com/98055A098"}
+    },
+    "ISO10511-M2": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 10,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "90576A211", "supplier": "McMaster-Carr", "supplier_sku": "90576A211", "url": "https://www.mcmaster.com/90576A211"}
+    },
+    "ISO10511-M2.5": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 25,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "93625A103", "supplier": "McMaster-Carr", "supplier_sku": "93625A103", "url": "https://www.mcmaster.com/93625A103"}
+    },
+    "ISO10511-M4": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 100,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "90576A103", "supplier": "McMaster-Carr", "supplier_sku": "90576A103", "url": "https://www.mcmaster.com/90576A103"}
+    },
+    "ISO10511-M8": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 100,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "90576A117", "supplier": "McMaster-Carr", "supplier_sku": "90576A117", "url": "https://www.mcmaster.com/90576A117"}
+    },
+    "ISO4032-M4": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 100,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "90592A011", "supplier": "McMaster-Carr", "supplier_sku": "90592A011", "url": "https://www.mcmaster.com/90592A011"}
+    },
+    "ISO10642-M3x6": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 100,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "92125A126", "supplier": "McMaster-Carr", "supplier_sku": "92125A126", "url": "https://www.mcmaster.com/92125A126"},
+      "evidence": [{"source_type": "supplier_product_table", "supplier": "McMaster-Carr", "url": "https://www.mcmaster.com/92125A126", "verified_on": "2026-07-11", "observed": "Official McMaster table lists 18-8 stainless steel M3 x 0.5 mm, 6 mm long, 90 degree standard flat head, fully threaded, pack quantity 100, supplier SKU 92125A126."}],
+      "checkout_condition": "Confirm current pack price and line-specific fulfillment for this exact SKU at checkout; cart_ready is not order or motion authorization.",
+      "note": "Exact SKU and pack are verified. Current pack price and line-specific fulfillment are not asserted by this mapping and must be rechecked at checkout."
+    },
+    "ISO10642-M5x12": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 100,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "91263A833", "supplier": "McMaster-Carr", "supplier_sku": "91263A833", "url": "https://www.mcmaster.com/91263A833"}
+    },
+    "ISO14581-M2x12": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 50,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "90236A107", "supplier": "McMaster-Carr", "supplier_sku": "90236A107", "url": "https://www.mcmaster.com/90236A107"}
+    },
+    "ISO14581-M2x16": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 50,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "90236A108", "supplier": "McMaster-Carr", "supplier_sku": "90236A108", "url": "https://www.mcmaster.com/90236A108"}
+    },
+    "ISO4026-M3x8": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 25,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "92605A102", "supplier": "McMaster-Carr", "supplier_sku": "92605A102", "url": "https://www.mcmaster.com/92605A102"}
+    },
+    "ISO4762-M2x6": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 100,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "91290A013", "supplier": "McMaster-Carr", "supplier_sku": "91290A013", "url": "https://www.mcmaster.com/91290A013"},
+      "evidence": [{"source_type": "supplier_product_table", "supplier": "McMaster-Carr", "url": "https://www.mcmaster.com/91290A013", "verified_on": "2026-07-11", "observed": "Official McMaster table lists black-oxide alloy steel Class 12.9 M2 x 0.4 mm socket head screw, 6 mm long, fully threaded, pack quantity 100, supplier SKU 91290A013."}],
+      "checkout_condition": "Confirm current pack price and line-specific fulfillment for this exact SKU at checkout; cart_ready is not order or motion authorization.",
+      "note": "Exact SKU and pack are verified. Current pack price and line-specific fulfillment are not asserted by this mapping and must be rechecked at checkout."
+    },
+    "ISO4762-M2x8": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 100,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "91290A015", "supplier": "McMaster-Carr", "supplier_sku": "91290A015", "url": "https://www.mcmaster.com/91290A015"},
+      "evidence": [{"source_type": "supplier_product_table", "supplier": "McMaster-Carr", "url": "https://www.mcmaster.com/91290A015", "verified_on": "2026-07-11", "observed": "Official McMaster table lists black-oxide alloy steel Class 12.9 M2 x 0.4 mm socket head screw, 8 mm long, fully threaded, pack quantity 100, supplier SKU 91290A015."}],
+      "checkout_condition": "Confirm current pack price and line-specific fulfillment for this exact SKU at checkout; cart_ready is not order or motion authorization.",
+      "note": "Exact SKU and pack are verified. Current pack price and line-specific fulfillment are not asserted by this mapping and must be rechecked at checkout."
+    },
+    "ISO4762-M2x16": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 100,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "91290A047", "supplier": "McMaster-Carr", "supplier_sku": "91290A047", "url": "https://www.mcmaster.com/91290A047"}
+    },
+    "ISO4762-M2x20": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 100,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "91290A049", "supplier": "McMaster-Carr", "supplier_sku": "91290A049", "url": "https://www.mcmaster.com/91290A049"},
+      "evidence": [{"source_type": "supplier_product_table", "supplier": "McMaster-Carr", "url": "https://www.mcmaster.com/91290A049", "verified_on": "2026-07-11", "observed": "Official McMaster table lists black-oxide alloy steel Class 12.9 M2 x 0.4 mm socket head screw, 20 mm long, fully threaded, pack quantity 100, supplier SKU 91290A049."}],
+      "checkout_condition": "Confirm current pack price and line-specific fulfillment for this exact SKU at checkout; cart_ready is not order or motion authorization.",
+      "note": "Exact SKU and pack are verified. Current pack price and line-specific fulfillment are not asserted by this mapping and must be rechecked at checkout."
+    },
+    "ISO4762-M3x8": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 100,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "91502A103", "supplier": "McMaster-Carr", "supplier_sku": "91502A103", "url": "https://www.mcmaster.com/91502A103"}
+    },
+    "ISO4762-M3x10": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 100,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "91502A104", "supplier": "McMaster-Carr", "supplier_sku": "91502A104", "url": "https://www.mcmaster.com/91502A104"}
+    },
+    "ISO4762-M3x12": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 100,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "91502A105", "supplier": "McMaster-Carr", "supplier_sku": "91502A105", "url": "https://www.mcmaster.com/91502A105"}
+    },
+    "ISO4762-M3x14": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 100,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "91502A106", "supplier": "McMaster-Carr", "supplier_sku": "91502A106", "url": "https://www.mcmaster.com/91502A106"},
+      "evidence": [{"source_type": "supplier_product_table", "supplier": "McMaster-Carr", "url": "https://www.mcmaster.com/91502A106", "verified_on": "2026-07-11", "observed": "Official McMaster table lists blue-dyed zinc-plated alloy steel Class 12.9 M3 x 0.5 mm socket head screw, 14 mm long, fully threaded, pack quantity 100, supplier SKU 91502A106."}],
+      "checkout_condition": "Confirm current pack price and line-specific fulfillment for this exact SKU at checkout; cart_ready is not order or motion authorization.",
+      "note": "Exact SKU and pack are verified. Current pack price and line-specific fulfillment are not asserted by this mapping and must be rechecked at checkout."
+    },
+    "ISO4762-M4x10": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 100,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "90128A212", "supplier": "McMaster-Carr", "supplier_sku": "90128A212", "url": "https://www.mcmaster.com/90128A212"},
+      "evidence": [{"source_type": "supplier_product_table", "supplier": "McMaster-Carr", "url": "https://www.mcmaster.com/90128A212", "verified_on": "2026-07-11", "observed": "Official McMaster table lists black-oxide alloy steel Class 12.9 M4 x 0.7 mm socket head screw, 10 mm long, fully threaded, pack quantity 100, supplier SKU 90128A212."}],
+      "checkout_condition": "Confirm current pack price and line-specific fulfillment for this exact SKU at checkout; cart_ready is not order or motion authorization.",
+      "note": "Exact SKU and pack are verified. Current pack price and line-specific fulfillment are not asserted by this mapping and must be rechecked at checkout."
+    },
+    "ISO4762-M4x20": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 100,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "90128A216", "supplier": "McMaster-Carr", "supplier_sku": "90128A216", "url": "https://www.mcmaster.com/90128A216"}
+    },
+    "ISO4762-M4x25": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 100,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "90128A217", "supplier": "McMaster-Carr", "supplier_sku": "90128A217", "url": "https://www.mcmaster.com/90128A217"}
+    },
+    "ISO4762-M5x12": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 100,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "90128A236", "supplier": "McMaster-Carr", "supplier_sku": "90128A236", "url": "https://www.mcmaster.com/90128A236"}
+    },
+    "ISO4762-M5x16": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 100,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "90128A244", "supplier": "McMaster-Carr", "supplier_sku": "90128A244", "url": "https://www.mcmaster.com/90128A244"}
+    },
+    "ISO4762-M8x75": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 25,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "91290A461", "supplier": "McMaster-Carr", "supplier_sku": "91290A461", "url": "https://www.mcmaster.com/91290A461"}
+    },
+    "ISO7089-M2": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 100,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "91166A180", "supplier": "McMaster-Carr", "supplier_sku": "91166A180", "url": "https://www.mcmaster.com/91166A180"}
+    },
+    "ISO7089-M3": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 100,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "91166A210", "supplier": "McMaster-Carr", "supplier_sku": "91166A210", "url": "https://www.mcmaster.com/91166A210"}
+    },
+    "ISO7089-M4": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 100,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "91166A230", "supplier": "McMaster-Carr", "supplier_sku": "91166A230", "url": "https://www.mcmaster.com/91166A230"}
+    },
+    "ISO7089-M8": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 100,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "91166A270", "supplier": "McMaster-Carr", "supplier_sku": "91166A270", "url": "https://www.mcmaster.com/91166A270"}
+    },
+    "LEM050AB01": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 1,
+      "selection": {"manufacturer": "Lee Spring", "mpn": "LEM050AB 01 M", "supplier": "Lee Spring", "supplier_sku": "LEM050AB 01 M", "url": "https://www.leespring.com/extension-specific-new/268401"}
+    },
+    "MCMASTER-90265A420": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 1,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "90265A420", "supplier": "McMaster-Carr", "supplier_sku": "90265A420", "url": "https://www.mcmaster.com/90265A420"}
+    },
+    "MCMASTER-94459A120": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 50,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "94459A120", "supplier": "McMaster-Carr", "supplier_sku": "94459A120", "url": "https://www.mcmaster.com/94459A120"},
+      "evidence": [{"source_type": "supplier_product_table", "supplier": "McMaster-Carr", "url": "https://www.mcmaster.com/94459A120", "verified_on": "2026-07-11", "observed": "Official McMaster table lists standard-profile brass M2 x 0.4 mm heat-set insert, 4 mm installed length, 3.3 mm maximum hole diameter, pack quantity 50, supplier SKU 94459A120."}],
+      "checkout_condition": "Confirm current pack price and line-specific fulfillment for this exact SKU at checkout; cart_ready is not order or motion authorization.",
+      "note": "Exact SKU and pack are verified. Current pack price and line-specific fulfillment are not asserted by this mapping and must be rechecked at checkout."
+    },
+    "MCMASTER-94459A130": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 50,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "94459A130", "supplier": "McMaster-Carr", "supplier_sku": "94459A130", "url": "https://www.mcmaster.com/94459A130"}
+    },
+    "MCMASTER-94459A140": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 50,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "94459A140", "supplier": "McMaster-Carr", "supplier_sku": "94459A140", "url": "https://www.mcmaster.com/94459A140"}
+    },
+    "MCMASTER-94459A150": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 50,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "94459A150", "supplier": "McMaster-Carr", "supplier_sku": "94459A150", "url": "https://www.mcmaster.com/94459A150"},
+      "evidence": [{"source_type": "supplier_product_table", "supplier": "McMaster-Carr", "url": "https://www.mcmaster.com/94459A150", "verified_on": "2026-07-11", "observed": "Official McMaster table lists standard-profile brass M4 x 0.7 mm heat-set insert, 4.7 mm installed length, 5.6 mm maximum hole diameter, pack quantity 50, supplier SKU 94459A150."}],
+      "checkout_condition": "Confirm current pack price and line-specific fulfillment for this exact SKU at checkout; cart_ready is not order or motion authorization.",
+      "note": "Exact SKU and pack are verified. Current pack price and line-specific fulfillment are not asserted by this mapping and must be rechecked at checkout."
+    },
+    "MCMASTER-94459A769": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 50,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "94459A769", "supplier": "McMaster-Carr", "supplier_sku": "94459A769", "url": "https://www.mcmaster.com/94459A769"}
+    },
+    "MCMASTER-96654A127": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 1,
+      "selection": {"manufacturer": "McMaster-Carr", "mpn": "96654A127", "supplier": "McMaster-Carr", "supplier_sku": "96654A127", "url": "https://www.mcmaster.com/96654A127"}
+    },
+    "MISUMI-CBSA5-10": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 1,
+      "selection": {"manufacturer": "MISUMI", "mpn": "CBSA5-10", "supplier": "MISUMI", "supplier_sku": "CBSA5-10", "url": "https://us.misumi-ec.com/vona2/detail/110302603510/?HissuCode=CBSA5-10"}
+    },
+    "MISUMI-HNTAJ5-5": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 1,
+      "selection": {"manufacturer": "MISUMI", "mpn": "HNTAJ5-5", "supplier": "MISUMI", "supplier_sku": "HNTAJ5-5", "url": "https://us.misumi-ec.com/vona2/detail/110302247910/?HissuCode=HNTAJ5-5"}
+    },
+    "MISUMI-HNTA5-3": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 1,
+      "selection": {"manufacturer": "MISUMI", "mpn": "HNTA5-3", "supplier": "MISUMI", "supplier_sku": "HNTA5-3", "url": "https://us.misumi-ec.com/vona2/detail/110302608320/?HissuCode=HNTA5-3"}
+    },
+    "MISUMI-HNTA5-4": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 1,
+      "selection": {"manufacturer": "MISUMI", "mpn": "HNTA5-4", "supplier": "MISUMI", "supplier_sku": "HNTA5-4", "url": "https://us.misumi-ec.com/vona2/detail/110302608320/?HissuCode=HNTA5-4"}
+    },
+    "MISUMI-HNTA5-5": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 1,
+      "selection": {"manufacturer": "MISUMI", "mpn": "HNTA5-5", "supplier": "MISUMI", "supplier_sku": "HNTA5-5", "url": "https://us.misumi-ec.com/vona2/detail/110302608320/?HissuCode=HNTA5-5"}
+    },
+    "MISUMI-HBKTST5": {
+      "class": "fastener",
+      "purchase_status": "cart_ready",
+      "pack_qty": 1,
+      "selection": {"manufacturer": "MISUMI", "mpn": "HBKTST5", "supplier": "MISUMI", "supplier_sku": "HBKTST5", "url": "https://us.misumi-ec.com/vona2/detail/110302060920/?HissuCode=HBKTST5"}
+    },
+    "CUSTOM-304-DISC-20-4.5-1": {
+      "class": "custom",
+      "purchase_status": "rfq_ready",
+      "pack_qty": 1,
+      "catalog_item_id": "felt-backing-disc-20-4p5-1"
+    },
+    "CUSTOM-FELT-20-4.5-3": {
+      "class": "custom",
+      "purchase_status": "rfq_ready",
+      "pack_qty": 1,
+      "catalog_item_id": "felt-pad-20-4p5-3"
+    },
+    "SLEEVE-4-2.2-1.5": {
+      "class": "custom",
+      "purchase_status": "rfq_ready",
+      "pack_qty": 1,
+      "catalog_item_id": "dancer-standoff-sleeve-set"
+    },
+    "SLEEVE-4-2.2-4": {
+      "class": "custom",
+      "purchase_status": "rfq_ready",
+      "pack_qty": 1,
+      "catalog_item_id": "dancer-standoff-sleeve-set"
+    },
+    "SLEEVE-5-3.2-4": {
+      "class": "custom",
+      "purchase_status": "rfq_ready",
+      "pack_qty": 1,
+      "catalog_item_id": "dancer-standoff-sleeve-set"
+    }
+  },
+  "print_plan": {
+    "purchase_status": "blocked",
+    "profile": {
+      "printer": "Bambu Lab A1 0.4 nozzle",
+      "material": "INLAND PETG Plus",
+      "nozzle_mm": 0.4,
+      "layer_height_mm": 0.2,
+      "walls": 6,
+      "top_layers": 5,
+      "bottom_layers": 3,
+      "infill_percent": 25,
+      "infill_pattern": "cubic",
+      "build_plate": "Textured PEI Plate",
+      "supports_default": false,
+      "profile_source": "print/profiles/winder_a1_0p4_petg_strength.json",
+      "qualification_status": "physical_coupon_test_required"
+    },
+    "qualification": {
+      "status": "physical_test_required",
+      "production_release_allowed": false,
+      "blocker": "Print the project coupon with the frozen profile and record every fit, insert, and 44 mm bridge check as passed.",
+      "physical_test_record": null,
+      "coupon": {
+        "part": "fit_bridge_coupon",
+        "revision": "A",
+        "purpose": "qualification_only_not_a_machine_component",
+        "quantity": 1,
+        "material": "same dry INLAND PETG Plus spool intended for production",
+        "supports": false,
+        "instructions": "print/COUPON.md",
+        "artifacts": [
+          {"id": "coupon-source", "role": "source", "path": "cad/fit_bridge_coupon.py"},
+          {"id": "coupon-prepare-source", "role": "source", "path": "print/prepare_coupon.py"},
+          {"id": "coupon-slice-source", "role": "source", "path": "print/slice_coupon.py"},
+          {"id": "coupon-profile-prepare-source", "role": "source", "path": "print/prepare_profile.py"},
+          {"id": "coupon-instructions", "role": "instructions", "path": "print/COUPON.md"},
+          {"id": "coupon-profile", "role": "profile", "path": "print/profiles/winder_a1_0p4_petg_strength.json"},
+          {"id": "coupon-orca-process", "role": "profile", "path": "print/profiles/orca_winder_a1_0p4_petg_strength_process.json"},
+          {"id": "coupon-orca-filament", "role": "profile", "path": "print/profiles/orca_inland_petg_plus_a1_0p4.json"},
+          {"id": "coupon-step", "role": "step", "path": "out/print/coupon/fit_bridge_coupon.step"},
+          {"id": "coupon-stl", "role": "stl", "path": "out/print/coupon/fit_bridge_coupon.stl"},
+          {"id": "coupon-3mf", "role": "3mf", "path": "out/print/coupon/fit_bridge_coupon.3mf"},
+          {"id": "coupon-a1-slicer-stl", "role": "slicer_input", "path": "out/print/coupon/fit_bridge_coupon_a1_plate.stl"},
+          {"id": "coupon-gcode", "role": "gcode", "path": "out/print/coupon/fit_bridge_coupon.gcode"},
+          {"id": "coupon-manifest", "role": "evidence", "path": "out/print/coupon/coupon-manifest.json"},
+          {"id": "coupon-profile-lock", "role": "evidence", "path": "out/print/profile/profile-lock.json"}
+        ]
+      }
+    },
+    "items": [
+      {"part": "flyer_block", "quantity": 1, "revision": "unreleased", "artifacts": [{"id": "print-flyer-block-stl", "role": "stl", "path": "out/stl/flyer_block.stl"}, {"id": "print-flyer-block-step", "role": "step", "path": "out/step/flyer_block.step"}]},
+      {"part": "flyer_arm", "quantity": 1, "revision": "successor-A", "overrides": {"infill_percent": 100, "supports": true, "postprocess": ["ream the final unioned root sleeve ID12.10 to the released fit", "install and pull-test all flyer-guide and front-trim inserts before balance"]}, "artifacts": [{"id": "print-flyer-arm-stl", "role": "stl", "path": "out/stl/flyer_arm.stl"}, {"id": "print-flyer-arm-step", "role": "step", "path": "out/step/flyer_arm.step"}]},
+      {"part": "m2_motor_mount", "quantity": 1, "revision": "unreleased", "overrides": {"supports": true}, "artifacts": [{"id": "print-m2-mount-stl", "role": "stl", "path": "out/stl/m2_motor_mount.stl"}, {"id": "print-m2-mount-step", "role": "step", "path": "out/step/m2_motor_mount.step"}]},
+      {"part": "carriage_endstop_flag", "quantity": 1, "revision": "unreleased", "artifacts": [{"id": "print-flag-stl", "role": "stl", "path": "out/stl/carriage_endstop_flag.stl"}, {"id": "print-flag-step", "role": "step", "path": "out/step/carriage_endstop_flag.step"}]},
+      {"part": "spindle_tower", "quantity": 1, "revision": "active-sector-A", "overrides": {"supports": false, "bridge_qualification": "44 mm coupon span must pass", "postprocess": ["gauge four M4 insert pilots and two aluminum-yoke datum pockets"]}, "artifacts": [{"id": "print-spindle-tower-stl", "role": "stl", "path": "out/stl/spindle_tower.stl"}, {"id": "print-spindle-tower-step", "role": "step", "path": "out/step/spindle_tower.step"}]},
+      {"part": "nut_bracket", "quantity": 1, "revision": "unreleased", "overrides": {"supports": true}, "artifacts": [{"id": "print-nut-bracket-stl", "role": "stl", "path": "out/stl/nut_bracket.stl"}, {"id": "print-nut-bracket-step", "role": "step", "path": "out/step/nut_bracket.step"}]},
+      {"part": "m0_motor_mount", "quantity": 1, "revision": "unreleased", "artifacts": [{"id": "print-m0-mount-stl", "role": "stl", "path": "out/stl/m0_motor_mount.stl"}, {"id": "print-m0-mount-step", "role": "step", "path": "out/step/m0_motor_mount.step"}]},
+      {"part": "m0_fixed_end_mount", "quantity": 1, "revision": "unreleased", "overrides": {"supports": true}, "artifacts": [{"id": "print-m0-fixed-stl", "role": "stl", "path": "out/stl/m0_fixed_end_mount.stl"}, {"id": "print-m0-fixed-step", "role": "step", "path": "out/step/m0_fixed_end_mount.step"}]},
+      {"part": "endstop_mount", "quantity": 1, "revision": "unreleased", "overrides": {"supports": true}, "artifacts": [{"id": "print-endstop-stl", "role": "stl", "path": "out/stl/endstop_mount.stl"}, {"id": "print-endstop-step", "role": "step", "path": "out/step/endstop_mount.step"}]},
+      {"part": "spool_bracket", "quantity": 1, "revision": "unreleased", "artifacts": [{"id": "print-spool-bracket-stl", "role": "stl", "path": "out/stl/spool_bracket.stl"}, {"id": "print-spool-bracket-step", "role": "step", "path": "out/step/spool_bracket.step"}]},
+      {"part": "spool_drum", "quantity": 1, "revision": "unreleased", "overrides": {"supports": true}, "artifacts": [{"id": "print-spool-drum-stl", "role": "stl", "path": "out/stl/spool_drum.stl"}, {"id": "print-spool-drum-step", "role": "step", "path": "out/step/spool_drum.step"}]},
+      {"part": "felt_tensioner", "quantity": 1, "revision": "unreleased", "artifacts": [{"id": "print-felt-stl", "role": "stl", "path": "out/stl/felt_tensioner.stl"}, {"id": "print-felt-step", "role": "step", "path": "out/step/felt_tensioner.step"}]},
+      {"part": "dancer_base", "quantity": 1, "revision": "unreleased", "artifacts": [{"id": "print-dancer-base-stl", "role": "stl", "path": "out/stl/dancer_base.stl"}, {"id": "print-dancer-base-step", "role": "step", "path": "out/step/dancer_base.step"}]},
+      {"part": "dancer_arm", "quantity": 1, "revision": "unreleased", "artifacts": [{"id": "print-dancer-arm-stl", "role": "stl", "path": "out/stl/dancer_arm.stl"}, {"id": "print-dancer-arm-step", "role": "step", "path": "out/step/dancer_arm.step"}]},
+      {"part": "dancer_pulley", "quantity": 1, "revision": "unreleased", "artifacts": [{"id": "print-dancer-pulley-stl", "role": "stl", "path": "out/stl/dancer_pulley.stl"}, {"id": "print-dancer-pulley-step", "role": "step", "path": "out/step/dancer_pulley.step"}]},
+      {"part": "entry_bracket", "quantity": 1, "revision": "unreleased", "overrides": {"supports": true}, "artifacts": [{"id": "print-entry-stl", "role": "stl", "path": "out/stl/entry_bracket.stl"}, {"id": "print-entry-step", "role": "step", "path": "out/step/entry_bracket.step"}]},
+      {"part": "rear_post_left_shoe", "quantity": 1, "revision": "unreleased", "artifacts": [{"id": "print-rear-shoe-stl", "role": "stl", "path": "out/stl/rear_post_left_shoe.stl"}, {"id": "print-rear-shoe-step", "role": "step", "path": "out/step/rear_post_left_shoe.step"}]},
+      {"part": "balance_retainer_rear_left", "quantity": 1, "revision": "successor-A", "overrides": {"infill_percent": 100, "supports": false, "postprocess": ["weigh with its three integral spacer posts", "install 94459A130 insert and pass the stack pull coupon"]}, "artifacts": [{"id": "print-balance-retainer-rear-left-stl", "role": "stl", "path": "out/stl/balance_retainer_rear_left.stl"}, {"id": "print-balance-retainer-rear-left-step", "role": "step", "path": "out/step/balance_retainer_rear_left.step"}]},
+      {"part": "balance_retainer_rear_right", "quantity": 1, "revision": "successor-A", "overrides": {"infill_percent": 100, "supports": false, "postprocess": ["weigh with its three integral spacer posts", "install 94459A130 insert and pass the stack pull coupon"]}, "artifacts": [{"id": "print-balance-retainer-rear-right-stl", "role": "stl", "path": "out/stl/balance_retainer_rear_right.stl"}, {"id": "print-balance-retainer-rear-right-step", "role": "step", "path": "out/step/balance_retainer_rear_right.step"}]},
+      {"part": "balance_retainer_front_left", "quantity": 1, "revision": "successor-A", "overrides": {"infill_percent": 100, "supports": false, "postprocess": ["weigh with its three integral spacer posts", "install 94459A130 insert and pass the stack pull coupon"]}, "artifacts": [{"id": "print-balance-retainer-front-left-stl", "role": "stl", "path": "out/stl/balance_retainer_front_left.stl"}, {"id": "print-balance-retainer-front-left-step", "role": "step", "path": "out/step/balance_retainer_front_left.step"}]},
+      {"part": "balance_retainer_front_right", "quantity": 1, "revision": "successor-A", "overrides": {"infill_percent": 100, "supports": false, "postprocess": ["weigh with its three integral spacer posts", "install 94459A130 insert and pass the stack pull coupon"]}, "artifacts": [{"id": "print-balance-retainer-front-right-stl", "role": "stl", "path": "out/stl/balance_retainer_front_right.stl"}, {"id": "print-balance-retainer-front-right-step", "role": "step", "path": "out/step/balance_retainer_front_right.step"}]}
+    ]
+  },
+  "release_artifacts": [
+    {"id": "release-catalog-source", "role": "catalog", "path": "cad/release_catalog.json"},
+    {"id": "release-readme", "role": "build_readme", "path": "README.md"},
+    {"id": "release-bom", "role": "bom", "path": "bom.csv"},
+    {"id": "release-license", "role": "license", "path": "LICENSE"},
+    {"id": "release-notice", "role": "third_party_notice", "path": "NOTICE.md"},
+    {"id": "release-assembly-step", "role": "legacy_controller_baseline_assembly", "path": "cad/assembly.step"},
+    {"id": "release-integrated-candidate-step", "role": "selected_geometry_step", "path": "out/review/integrated_release_candidate.step"},
+    {"id": "release-integrated-candidate-report", "role": "selected_geometry_authority", "path": "out/reports/integrated_release_candidate.json", "json_requirements": {"schema": "integrated-release-candidate/v1", "production_authorized": true}},
+    {"id": "release-active-sector-audit", "role": "selected_rigid_motion_authority", "path": "out/reports/carriage_active_sector_terminal_guide_audit.json", "json_requirements": {"schema": "carriage-active-sector-terminal-guide-audit/v1", "status": "GEOMETRY_TERMINAL_TOLERANCE_PASS_REVIEW_ONLY__CONTINUOUS_CONDUCTOR_AND_PHYSICAL_GATES_FAIL", "assembly_geometry_integration_authorized": true}},
+    {"id": "release-active-sector-loci", "role": "selected_terminal_locus_api", "path": "out/reports/carriage_active_sector_terminal_guide_loci.json", "json_requirements": {"schema": "carriage-active-sector-terminal-guide-loci/v1"}},
+    {"id": "release-custom-manifest", "role": "manufacturing_manifest", "path": "out/custom/manifest.json"},
+    {"id": "release-successor-manufacturing-source", "role": "manufacturing_source", "path": "cad/successor_manufacturing.py"},
+    {"id": "release-successor-manufacturing-manifest", "role": "manufacturing_manifest", "path": "out/custom/successor/manifest.json", "json_requirements": {"schema": "successor-manufacturing-packet/v1", "production_authorized": false, "order_authorized": false}},
+    {"id": "release-successor-rfq-csv", "role": "rfq_csv", "path": "out/custom/successor/successor_rfq.csv"},
+    {"id": "release-successor-rfq-drawing", "role": "drawing_pdf", "path": "output/pdf/successor_custom_parts_rfq.pdf"},
+    {"id": "release-shop-manifest", "role": "manufacturing_manifest", "path": "out/custom/shop/manifest.json"},
+    {"id": "release-settings", "role": "settings", "path": "out/settings.yml"},
+    {"id": "release-upstream-raw-capture", "role": "capture_authority", "path": "out/capture/upstream_current_raw.jsonl"},
+    {"id": "release-upstream-raw-animation-glb", "role": "animation", "path": "out/winding_cycle_upstream_raw.glb"},
+    {"id": "release-upstream-raw-player", "role": "animation_player", "path": "out/play_animation_upstream_raw.html"},
+    {"id": "release-validation-json", "role": "validation_summary", "path": "out/reports/validation.json", "json_requirements": {"schema": "machine-validation/v2", "status": "PASS", "passed": true}},
+    {"id": "release-validation-md", "role": "validation_report", "path": "out/reports/validation.md"},
+    {"id": "release-upstream-raw-cycle", "role": "evidence", "path": "out/reports/upstream_current_raw_cycle.json", "json_requirements": {"schema": "captured-cycle-verification/v2", "status": "PASS", "passed": true}},
+    {"id": "release-upstream-raw-clearance", "role": "legacy_baseline_evidence", "path": "out/reports/clearance_upstream_raw.json", "json_requirements": {"schema": "collision-clearance/v2", "status": "PASS", "passed": true}},
+    {"id": "release-static-audit", "role": "evidence", "path": "out/reports/static_audit.json"},
+    {"id": "release-upstream-raw-wirepath", "role": "legacy_baseline_evidence", "path": "out/reports/wirepath_upstream_raw.json", "json_requirements": {"schema": "wirepath-validation/v2", "status": "PASS", "passed": true}},
+    {"id": "release-elastic-wire-contact", "role": "evidence", "path": "out/reports/elastic_wire_contact_study.json", "json_requirements": {"schema": "elastic-wire-contact-study/v1"}},
+    {"id": "release-winding-tooling-authority", "role": "historical_predecessor_evidence", "path": "out/reports/winding_tooling_authority.json", "required": false, "json_requirements": {"schema": "winding-tooling-authority/v1"}},
+    {"id": "release-integrated-adapter-manifest", "role": "selected_review_adapter", "path": "out/review/integrated_adapter/links/manifest.json", "json_requirements": {"schema": "integrated-candidate-player-adapter/v1", "status": "REVIEW_ASSETS_READY_RELEASE_GATES_OPEN", "production_authorized": false, "canonical_promotion_authorized": false}},
+    {"id": "release-continuous-conductor-presentation", "role": "presentation_only_not_authority", "path": "out/reports/continuous_conductor_route.json", "json_requirements": {"schema": "continuous-conductor-route/v1", "structural_status": "PASS", "production_authorized": false}},
+    {"id": "release-full-cycle-conductor-authority", "role": "selected_flexible_conductor_authority", "path": "out/reports/full_cycle_continuous_conductor_authority_audit.json", "json_requirements": {"schema": "full-cycle-continuous-conductor-authority-audit/v1", "status": "PASS", "production_authorized": true}},
+    {"id": "release-shaft-wrap-regression", "role": "fail_closed_regression_evidence", "path": "out/reports/shaft_wrap_regression_evidence.json", "json_requirements": {"schema": "shaft-wrap-regression-evidence/v1", "evidence_bundle_complete": true, "release_authority": false}},
+    {"id": "release-launch-envelope-authority", "role": "launch_matrix_authority", "path": "out/reports/launch_envelope_authority.json", "json_requirements": {"schema": "launch-envelope-authority/v1", "status": "PASS", "production_authorized": true}},
+    {"id": "release-integrated-player-render", "role": "review_player_manifest", "path": "out/review/integrated_adapter/player_render.json", "json_requirements": {"schema": "integrated-candidate-player-render/v1", "review_only": true, "canonical_assets_modified": false}},
+    {"id": "release-integrated-animation-glb", "role": "selected_review_animation", "path": "out/review/integrated_adapter/winding_cycle_integrated_candidate_raw.glb"},
+    {"id": "release-integrated-player", "role": "selected_review_player", "path": "out/review/integrated_adapter/play_integrated_candidate_raw.html"},
+    {"id": "release-loads", "role": "evidence", "path": "out/reports/loads.json"},
+    {"id": "release-buildability", "role": "evidence", "path": "out/reports/buildability.json"},
+    {"id": "release-coil-growth", "role": "evidence", "path": "out/reports/coil_growth.json"},
+    {"id": "release-dancer-loads", "role": "evidence", "path": "out/reports/dancer_loads.json"},
+    {"id": "release-felt-loads", "role": "evidence", "path": "out/reports/felt_loads.json"},
+    {"id": "release-carriage-audit", "role": "evidence", "path": "out/reports/carriage_hardware_audit.json"},
+    {"id": "release-frame-audit", "role": "evidence", "path": "cad/frame_hardware_audit.report.json"},
+    {"id": "release-m2-m3-audit", "role": "evidence", "path": "out/reports/m2_m3_hardware_audit.json"},
+    {"id": "release-sendcutsend", "role": "evidence", "path": "out/reports/sendcutsend_carriage.json"},
+    {"id": "release-procurement", "role": "evidence", "path": "out/reports/procurement.json", "generated": true},
+    {"id": "release-catalog-procurement", "role": "evidence", "path": "out/reports/release_catalog_procurement.json", "generated": true},
+    {"id": "release-readiness", "role": "downstream_generated_evidence", "path": "out/reports/release_readiness.json", "generated": true},
+    {"id": "release-hardware-order", "role": "order_csv", "path": "out/order/hardware_order.csv", "generated": true},
+    {"id": "release-full-order", "role": "order_csv", "path": "out/order/full_order.csv", "generated": true},
+    {"id": "release-print-jobs", "role": "print_csv", "path": "out/order/print_jobs.csv", "generated": true}
+  ]
+}

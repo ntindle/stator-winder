@@ -1,0 +1,16 @@
+bd-warehouse==0.2.0
+build123d==0.11.1
+ezdxf==1.4.4
+manifold3d==3.5.2
+numpy==2.4.6
+pydantic==2.13.4
+pygltflib==1.16.5
+pypdf==6.14.2
+pypdfium2==5.11.0
+python-fcl==0.7.0.11
+PyYAML==6.0.3
+reportlab==5.0.0
+rtree==1.4.1
+scipy==1.17.1
+shapely==2.1.2
+trimesh==4.12.2

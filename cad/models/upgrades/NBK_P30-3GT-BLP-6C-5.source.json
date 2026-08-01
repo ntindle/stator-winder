@@ -1,0 +1,109 @@
+{
+  "schema": "robotics.cad.cots-source.v1",
+  "manufacturer": "NBK (Nabeya Bi-tech Kaisha)",
+  "part_number": "P30-3GT-BLP-6C-5",
+  "configuration": {
+    "catalog_family": "3GT-BLP-6C",
+    "stock_attachment": "BLP backlash-less split-clamp hub",
+    "bore_mm": 5.0,
+    "additional_machining": null,
+    "bnw_two_set_screw_machining_present": false
+  },
+  "artifacts": {
+    "step": {
+      "path": "NBK_P30-3GT-BLP-6C-5_AP214.step",
+      "sha256": "996449b7d9ec7703e7b38c6f75eff00a1174e3e1f088c05f0f1460b205169df9",
+      "bytes": 57134,
+      "format": "STEP AP214",
+      "header_name": "P30-3GT-BLP-6C-5",
+      "header_timestamp": "2026-07-11T16:55:26+02:00",
+      "header_organization": "CADENAS",
+      "header_originating_system": "PARTsolutions",
+      "header_author": "License CC BY-ND 4.0"
+    },
+    "official_family_drawing": {
+      "path": "NBK_3GT-BLP-6C_official_drawing.pdf",
+      "sha256": "a6559b594f927fd3e7e4878ec341f6877f628e14cd9fc46a79cac7dc8e1dde87",
+      "bytes": 460402
+    },
+    "cadenas_manifest": {
+      "path": "NBK_P30-3GT-BLP-6C-5_CADENAS_download.xml",
+      "sha256": "dc08ed45bdb3833831004822d7db7902fdde36972c01924e7f53e66bb9c1db2d",
+      "order_number": "22026071116552634207953d0b6156e",
+      "generated_filename": "P30-3GT-BLP-6C-5.stp"
+    },
+    "cadenas_terms_copy": {
+      "path": "NBK_PARTcommunity_terms.txt",
+      "sha256": "91e9e661965585ded6ef16c986873e79516256ff059e7d8904f999941e701f46",
+      "bytes": 2688
+    }
+  },
+  "official_sources": {
+    "product_page": "https://www.nbk1560.com/products/pulley/timingpulley/3GT-BLP-6C/P30-3GT-BLP-6C/",
+    "family_drawing": "https://www.nbk1560.com/images/ja-JP/product/timingpulley/3GT-BLP-6C/3GT-BLP-6C_1.pdf",
+    "official_cad_portal": "https://misumi.partcommunity.com/3d-cad-models/?info=nbk%2Fmotion_control_parts%2Fpulleys_belts%2F3gt_6.prj",
+    "official_generator_entry": "https://webassistants.partcommunity.com/cgi-bin/vbshtmlcgi?Maker=NBK&dxf2d=n&info=nbk%2Fmotion_control_parts%2Fpulleys_belts%2F3gt_6.prj&lina=P30-3GT-BLP-6C-5&script=%24CADENAS_DATA%2F23d-libs%2Fnbk_assistant%2Fwebassistant%2Fformat.vbb&varset=%7BCN%3DP30-3GT-BLP-6C%7D",
+    "generator_part_expression": "{$CADENAS_DATA/23d-libs/nbk/motion_control_parts/pulleys_belts/3gt_6.prj},{CN=P30-3GT-BLP-6C}",
+    "generated_manifest_url": "https://webassistants.partcommunity.com/partserver/preview/22026071116552634207953d0b6156e/download.xml",
+    "terms_of_use": "https://www.cadenas.de/terms-of-use-3d-cad-models"
+  },
+  "official_table": {
+    "tooth_pitch_mm": 3.0,
+    "belt_width_mm": 6.0,
+    "tooth_count": 30,
+    "Dp_mm": 28.7,
+    "De_mm": 27.9,
+    "Db_mm": 20.0,
+    "E_mm": 23.0,
+    "Df_mm": 32.0,
+    "W_mm": 11.0,
+    "A_mm": 7.3,
+    "I_mm": 1.85,
+    "L_mm": 7.5,
+    "F_mm": 2.75,
+    "G_mm": 7.5,
+    "clamp_bolt": "M2",
+    "clamp_bolt_tightening_torque_Nm": 0.5,
+    "standard_bore_D_mm": 5.0,
+    "moment_of_inertia_kg_m2": 0.000003,
+    "declared_mass_g": 28.0,
+    "body_material": "A2017 aluminum alloy",
+    "clamp_bolt_material": "SCM435, black oxide"
+  },
+  "measured_step": {
+    "kind": "single part",
+    "solid_count": 1,
+    "face_count": 49,
+    "shaft_axis_local": "+X",
+    "shaft_axis_center_yz_mm": [0.0, 0.0],
+    "bounds_mm": {
+      "min": [-5.5, -16.0, -16.0],
+      "max": [13.0, 16.0, 16.0]
+    },
+    "overall_axial_length_mm": 18.5,
+    "bore_diameter_mm": 5.0,
+    "hub_diameter_mm": 20.0,
+    "E_diameter_mm": 23.0,
+    "tooth_envelope_diameter_mm": 27.9,
+    "flange_diameter_mm": 32.0,
+    "tooth_axial_width_A_mm": 7.3,
+    "flange_total_axial_width_I_mm": 1.85,
+    "flange_span_W_mm": 11.0,
+    "right_hub_extension_G_mm": 7.5,
+    "clamp_axis_setback_F_mm": 2.75,
+    "brep_volume_mm3": 8844.456907625592
+  },
+  "mass_authority": {
+    "value_g": 28.0,
+    "authority": "NBK product table",
+    "step_mass_recalculation": "not authoritative",
+    "reason": "The AP214 is a single union B-rep and does not preserve separate A2017 and SCM435 material assignments or densities."
+  },
+  "license_handling": {
+    "license_from_step_header": "CC BY-ND 4.0",
+    "vendor_step_must_remain_byte_for_byte_unmodified": true,
+    "permitted_integration": "Import the stock STEP as an occurrence and apply assembly placement transforms without rewriting the source artifact.",
+    "bnw_representation": "If BNW is selected, keep any hole/screw witnesses as separate assembly occurrences and attach NBK configured-drawing or RFQ metadata; do not cut, fuse, heal, or re-export a derived vendor STEP."
+  },
+  "scope_note": "This is the stock split-clamp model. It does not contain the optional BNW pair of two set-screw holes at 90 degrees. NBK states that optional set-screw size and position depend on the pulley and must be confirmed through its additional-machining service."
+}

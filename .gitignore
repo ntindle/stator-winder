@@ -1,0 +1,40 @@
+# Python and local tooling
+.venv/
+.tools/
+.pytest_cache/
+.benchmarks/
+**/__pycache__/
+*.py[cod]
+
+# Generated project output
+out/
+output/
+tmp/
+data/
+*.log
+*.report.json
+*.snapshots.json
+bambu-printers.json
+
+# Generated CAD, meshes, drawings, previews, and supplier downloads.
+# Source files and provenance manifests remain tracked.
+*.step
+*.stp
+*.stl
+*.3mf
+*.glb
+*.gltf
+*.dxf
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.zip
+cad/models/**/*.xml
+cad/models/**/*.txt
+
+# IDE and OS noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "id": "winder-a1-0p4-petg-strength-v1",
+  "status": "frozen_for_coupon_qualification",
+  "production_release_condition": "physical fit_bridge_coupon acceptance must be recorded before production printing",
+  "machine": {
+    "manufacturer": "Bambu Lab",
+    "model": "A1",
+    "native_profile": "Bambu Lab A1 0.4 nozzle",
+    "nozzle_mm": 0.4,
+    "bed_size_mm": [256, 256],
+    "z_height_mm": 256,
+    "build_plate": "Textured PEI Plate",
+    "motion_bounds_mm": {
+      "x": [-48.2, 267.0],
+      "y": [-0.5, 262.5],
+      "z": [-1.01, 256.0]
+    },
+    "motion_bounds_source": "OrcaSlicer 2.4.2 BBL A1 native start/end G-code"
+  },
+  "process": {
+    "native_parent": "0.20mm Strength @BBL A1",
+    "layer_height_mm": 0.2,
+    "initial_layer_height_mm": 0.2,
+    "walls": 6,
+    "top_layers": 5,
+    "bottom_layers": 3,
+    "infill_percent": 25,
+    "infill_pattern": "cubic",
+    "elephant_foot_compensation_mm": 0.075,
+    "supports_default": false,
+    "coupon_supports": false,
+    "production_supports": "per-part overrides from release_catalog.json",
+    "flyer_arm_infill_percent": 100,
+    "successor_flyer_arm_infill_percent": 100,
+    "balance_retainer_infill_percent": 100
+  },
+  "filament": {
+    "vendor": "INLAND",
+    "name": "PETG Plus",
+    "type": "PETG",
+    "diameter_mm": 1.75,
+    "density_g_cm3": 1.25,
+    "flow_ratio": 0.94,
+    "max_volumetric_speed_mm3_s": 9,
+    "nozzle_temp_c": 260,
+    "initial_nozzle_temp_c": 260,
+    "textured_plate_temp_c": 70,
+    "initial_textured_plate_temp_c": 70,
+    "fan_min_percent": 10,
+    "fan_max_percent": 40,
+    "qualification_note": "dry the spool and use this same spool for coupon and production parts"
+  },
+  "toolchain": {
+    "backend": "orcaslicer",
+    "version": "2.4.2",
+    "official_release": "https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/v2.4.2",
+    "portable_asset": "OrcaSlicer_Windows_V2.4.2_x64_portable.zip",
+    "portable_asset_sha256": "feba3009dfb9d268779cca5758a1a5bc3b7d0722bf8fa48d5c57340de975d6be"
+  }
+}

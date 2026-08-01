@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Winder full-cycle playback</title>
+<style>
+  :root {
+    color-scheme: dark;
+    --page: #11161d;
+    --scene: #171d25;
+    --panel: rgba(20, 27, 36, .94);
+    --text: #edf2f7;
+    --muted: #aeb9c7;
+    --border: #3a4654;
+    --control: #26313e;
+    --control-hover: #354355;
+    --active: #e38b39;
+    --active-text: #15100b;
+    --copper: #e0772b;
+    --coil-start: #ffd166;
+    --ok: #76c893;
+    --shadow: rgba(0, 0, 0, .4);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; }
+  body {
+    background: var(--page);
+    color: var(--text);
+    font: 14px/1.35 system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  button, select, input { font: inherit; }
+  button, select {
+    min-height: 34px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--control);
+    color: var(--text);
+  }
+  button { padding: 5px 10px; cursor: pointer; }
+  button:hover, select:hover { background: var(--control-hover); }
+  button:focus-visible, select:focus-visible, input:focus-visible {
+    outline: 2px solid var(--active);
+    outline-offset: 2px;
+  }
+  button.primary {
+    background: var(--active);
+    border-color: var(--active);
+    color: var(--active-text);
+    font-weight: 600;
+  }
+  select { padding: 5px 28px 5px 8px; }
+  #viewport { position: absolute; inset: 0; }
+  #viewport canvas { display: block; width: 100%; height: 100%; }
+  .panel {
+    position: absolute;
+    z-index: 2;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--panel);
+    box-shadow: 0 4px 20px var(--shadow);
+    backdrop-filter: blur(8px);
+  }
+  #status-panel {
+    top: 12px;
+    left: 12px;
+    width: min(440px, calc(100vw - 24px));
+    padding: 12px;
+  }
+  #view-panel {
+    top: 12px;
+    right: 12px;
+    width: 260px;
+    padding: 10px;
+  }
+  #transport {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    padding: 10px 12px 12px;
+  }
+  .title-row, .control-row, .check-row, .time-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .title-row { justify-content: space-between; margin-bottom: 7px; }
+  h1 { margin: 0; font-size: 16px; font-weight: 650; }
+  h2 { margin: 0 0 8px; font-size: 13px; font-weight: 650; }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 25px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--control);
+    color: var(--text);
+  }
+  .badge.active { background: var(--active); color: var(--active-text); }
+  #operation { margin: 2px 0 8px; font-weight: 600; }
+  #coil-start-banner {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2px 9px;
+    align-items: center;
+    margin: 1px 0 9px;
+    padding: 8px 10px;
+    border: 1px solid color-mix(in srgb, var(--coil-start), transparent 20%);
+    border-left: 5px solid var(--coil-start);
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--coil-start), transparent 88%);
+    box-shadow: 0 0 18px color-mix(in srgb, var(--coil-start), transparent 78%);
+  }
+  #coil-start-banner[hidden] { display: none; }
+  #coil-start-stage {
+    grid-row: 1 / span 2;
+    align-self: stretch;
+    display: grid;
+    place-items: center;
+    min-width: 92px;
+    padding: 4px 7px;
+    border-radius: 4px;
+    background: var(--coil-start);
+    color: #201604;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .06em;
+    text-align: center;
+    white-space: pre-line;
+  }
+  #coil-start-title { font-weight: 750; }
+  #coil-start-detail { color: var(--muted); font-size: 12px; }
+  #detail-line { margin: 0 0 9px; color: var(--muted); }
+  #axis-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  #axis-table th, #axis-table td { padding: 3px 4px; text-align: right; }
+  #axis-table th:first-child, #axis-table td:first-child { text-align: left; }
+  #axis-table thead { color: var(--muted); }
+  #axis-table tbody tr + tr { border-top: 1px solid color-mix(in srgb, var(--border), transparent 45%); }
+  .motion-state { color: var(--muted); }
+  .motion-state.moving { color: var(--active); }
+  .axis-value { white-space: nowrap; }
+  .axis-subvalue { display: block; color: var(--muted); font-size: 10px; }
+  .axis-progress {
+    display: block;
+    width: 78px;
+    height: 5px;
+    margin: 3px 0 0 auto;
+    accent-color: var(--active);
+  }
+  code {
+    display: block;
+    margin-top: 8px;
+    padding: 6px 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-radius: 5px;
+    background: var(--page);
+    color: var(--ok);
+    font: 13px/1.3 ui-monospace, SFMono-Regular, Consolas, monospace;
+  }
+  .field { display: grid; gap: 4px; margin-bottom: 9px; }
+  .field label, .hint { color: var(--muted); font-size: 12px; }
+  .field select { width: 100%; }
+  .check-row { align-items: flex-start; gap: 7px 14px; }
+  .check-row label { white-space: nowrap; cursor: pointer; }
+  .visual-legend { display: grid; gap: 5px; margin-top: 9px; color: var(--muted); font-size: 12px; }
+  .legend-row { display: flex; align-items: center; gap: 7px; }
+  .swatch { width: 13px; height: 13px; border: 1px solid rgba(255,255,255,.25); border-radius: 3px; }
+  .swatch.felt { background: #381306; }
+  .swatch.drive { background: linear-gradient(90deg, #0c1116 0 50%, #a8b2c2 50%); }
+  .swatch.counterweight { background: linear-gradient(90deg, #3b4045 0 50%, #b8bfcf 50%); }
+  .swatch.peek { background: #dbc78f; }
+  .swatch.exact-terminal { background: #48e1dc; }
+  .swatch.unproven-route { background: #ff3b30; }
+  input[type="checkbox"] { accent-color: var(--active); }
+  .hint { margin: 8px 0 0; }
+  .time-row { justify-content: space-between; margin-bottom: 6px; }
+  #time-label { font-variant-numeric: tabular-nums; font-weight: 600; }
+  #event-label { color: var(--muted); }
+  #scrub { width: 100%; accent-color: var(--active); cursor: pointer; }
+  .control-row { margin-top: 7px; }
+  .spacer { flex: 1 1 auto; }
+  .speed-label { color: var(--muted); }
+  #loading {
+    position: absolute;
+    z-index: 4;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px 14px;
+    border-radius: 6px;
+    background: var(--panel);
+  }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+  @media (max-width: 760px) {
+    #status-panel { width: calc(100vw - 24px); }
+    #view-panel { top: auto; right: 12px; bottom: 150px; width: min(260px, calc(100vw - 24px)); }
+    #axis-table .secondary { display: none; }
+    #transport { padding-bottom: 10px; }
+  }
+  @media (max-width: 500px) {
+    #view-panel { display: none; }
+    #status-panel { padding: 9px; }
+    #detail-line { display: none; }
+    #axis-table th, #axis-table td { padding: 2px 3px; }
+    .control-row button { padding-inline: 8px; }
+  }
+</style>
+</head>
+<body>
+<main id="viewport" aria-label="Animated four-axis stator winder"></main>
+<div id="loading" role="status">Loading machine and captured cycle...</div>
+
+<section id="status-panel" class="panel" aria-label="Live winding state">
+  <div class="title-row">
+    <h1 id="cycle-title">Winding-cycle review</h1>
+    <span id="run-badge" class="badge active">Playing</span>
+  </div>
+  <div id="coil-start-banner" role="status" aria-live="polite" hidden>
+    <span id="coil-start-stage">COIL START</span>
+    <span id="coil-start-title">Preparing first coil</span>
+    <span id="coil-start-detail">Conductor authority is shown during playback.</span>
+  </div>
+  <div id="operation">Initialising playback</div>
+  <p id="detail-line">Captured command motion with explicit geometry-authority labels.</p>
+  <table id="axis-table">
+    <thead><tr><th>Axis</th><th>Actual</th><th>Commanded</th><th class="secondary">Controller</th><th>Progress</th></tr></thead>
+    <tbody>
+      <tr><th>M0 carriage</th><td class="axis-value"><span id="m0-pos">0.000 rad</span><span id="m0-units" class="axis-subvalue">0.00 mm</span></td><td id="m0-target">--</td><td id="m0-controller" class="secondary">--</td><td><span id="m0-state" class="motion-state">holding</span><progress id="m0-progress" class="axis-progress" max="1" value="1"></progress></td></tr>
+      <tr><th>M1 stator</th><td class="axis-value"><span id="m1-pos">0.0 deg</span><span id="m1-units" class="axis-subvalue">0.000 rev</span></td><td id="m1-target">--</td><td id="m1-controller" class="secondary">--</td><td><span id="m1-state" class="motion-state">holding</span><progress id="m1-progress" class="axis-progress" max="1" value="1"></progress></td></tr>
+      <tr><th>M2 flyer</th><td class="axis-value"><span id="m2-pos">0.0 deg</span><span id="m2-units" class="axis-subvalue">0.000 rev</span></td><td id="m2-target">--</td><td id="m2-controller" class="secondary">--</td><td><span id="m2-state" class="motion-state">holding</span><progress id="m2-progress" class="axis-progress" max="1" value="1"></progress></td></tr>
+      <tr><th>M3 tension</th><td class="axis-value"><span id="m3-pos">0.000 command</span><span id="m3-units" class="axis-subvalue">motorless</span></td><td id="m3-target">--</td><td id="m3-controller" class="secondary">--</td><td><span id="m3-state" class="motion-state">passive</span><progress id="m3-progress" class="axis-progress" max="1" value="1"></progress></td></tr>
+    </tbody>
+  </table>
+  <div id="command-position" class="hint">Command 0/0</div>
+  <code id="command">No controller command yet</code>
+  <div id="command-summary" class="hint">M0 0 · M1 0 · M2 0 · M3 0</div>
+</section>
+
+<section id="view-panel" class="panel" aria-label="View options">
+  <h2>View</h2>
+  <div class="field">
+    <label for="camera">Camera preset</label>
+    <select id="camera">
+      <option value="overview">Overview</option>
+      <option value="wire">Full wire path</option>
+      <option value="flyer">Flyer and tooth</option>
+      <option value="stator">Stator carriage</option>
+      <option value="front">Front</option>
+      <option value="side">Side</option>
+      <option value="top">Top</option>
+      <option value="custom" disabled>Custom orbit</option>
+    </select>
+  </div>
+  <div class="check-row">
+    <label><input id="show-wire" type="checkbox" checked> Wire</label>
+    <label><input id="show-coils" type="checkbox" checked> <span id="coil-build-label">Coil build</span></label>
+    <label><input id="show-reference" type="checkbox"> Axes/grid</label>
+    <label><input id="follow-wire" type="checkbox"> Follow active wire</label>
+  </div>
+  <div class="visual-legend" aria-label="Machine material legend">
+    <span class="legend-row"><span class="swatch felt"></span>Dark brown: two real wool-felt drag pads</span>
+    <span class="legend-row"><span class="swatch drive"></span>Dark belt + silver P30 pulleys: overlap is intended tooth engagement; orange/copper wire is separate</span>
+    <span class="legend-row"><span class="swatch counterweight"></span>Dark/silver: four retained rear stacks plus two front B777 trim stacks, all positively attached</span>
+    <span class="legend-row"><span class="swatch peek"></span>Natural tan: one-piece flyer guide, cap pair, and active-sector guides</span>
+    <span class="legend-row"><span class="swatch exact-terminal"></span><span id="exact-terminal-label">Cyan: exact sampled machine-side terminal prefix</span></span>
+    <span class="legend-row"><span class="swatch unproven-route"></span><span id="unproven-route-label">Red dashed: unproved cap-to-live-tail and transition span</span></span>
+  </div>
+  <p class="hint">Drag to orbit, wheel to zoom, right-drag to pan. Belt/pulley overlap is intended engagement; the true-diameter copper wire remains separate. Rendering is not the sequential route proof.</p>
+</section>
+
+<section id="transport" class="panel" aria-label="Playback controls">
+  <div class="time-row">
+    <span id="time-label">00:00.00 / 00:00.00 virtual</span>
+    <span id="event-label">Awaiting model</span>
+  </div>
+  <label class="sr-only" for="scrub">Cycle time</label>
+  <input id="scrub" type="range" min="0" max="1" step="0.01" value="0">
+  <div class="control-row">
+    <button id="prev-command" type="button" aria-label="Previous motor command">Prev cmd</button>
+    <button id="play" class="primary" type="button">Pause</button>
+    <button id="next-command" type="button" aria-label="Next motor command">Next cmd</button>
+    <button id="restart" type="button">Restart</button>
+    <span class="spacer"></span>
+    <label class="speed-label" for="speed">Virtual speed</label>
+    <select id="speed">
+      <option value="0.1">0.1x</option>
+      <option value="0.25">0.25x</option>
+      <option value="0.5">0.5x</option>
+      <option value="1">1x</option>
+      <option value="2">2x</option>
+      <option value="5">5x</option>
+      <option value="10" selected>10x</option>
+      <option value="20">20x</option>
+      <option value="50">50x</option>
+    </select>
+  </div>
+  <div class="control-row" aria-label="Coil-start navigation">
+    <button id="prev-coil" type="button" aria-label="Previous coil start">Prev coil</button>
+    <button id="next-coil" type="button" aria-label="Next coil start">Next coil</button>
+    <label><input id="hold-coil-starts" type="checkbox" checked> Hold + slow starts</label>
+    <label><input id="focus-coil-starts" type="checkbox" checked> Focus active wire</label>
+    <span id="coil-navigation-label" class="hint">Coil 1/24</span>
+  </div>
+</section>
+
+<script type="importmap">{"imports":{
+  "three":"https://unpkg.com/three@0.160.0/build/three.module.js",
+  "three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"
+}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+
+const glbB64 = "__GLB_B64__";
+const stateB64 = "__STATE_B64__";
+const decodeB64 = value => Uint8Array.from(atob(value), char => char.charCodeAt(0));
+const state = JSON.parse(new TextDecoder().decode(decodeB64(stateB64)));
+const glb = decodeB64(glbB64);
+const reviewParams = new URLSearchParams(location.search);
+if (state.schema !== 'winder-player/v3') throw new Error('Unsupported player state schema');
+if (!['contract_plan', 'upstream_raw'].includes(state.captureMode)) {
+  throw new Error('Unsupported capture mode');
+}
+if (state.slotPlan.transitionStatus !== 'PASS') throw new Error('Diagnostic slot plan is not valid');
+if (state.slotPlan.placements.length !== state.turnsPerTooth) {
+  throw new Error('Slot plan placement count does not match the capture');
+}
+if (!Array.isArray(state.coilStarts) || state.coilStarts.length !== state.windings.length) {
+  throw new Error('Every tooth pass must have one explicit coil-start event');
+}
+if (!(state.wireRenderRadius > 0)
+    || Math.abs(2 * state.wireRenderRadius - state.slotPlan.job.wireFinishedDiameter) > 1e-9) {
+  throw new Error('Rendered wire is not true job diameter');
+}
+if (state.commandCount !== state.commands.length) throw new Error('Command count drifted');
+
+const rawUpstream = state.captureMode === 'upstream_raw';
+const integratedRawConductor = rawUpstream
+  && state.conductorEvidence?.mode === 'integrated_fail_closed_review';
+const legacyRawBaseline = rawUpstream
+  && state.conductorEvidence?.mode === 'legacy_baseline_unavailable_unproved';
+const shaftWrapToleranceTurns = 1e-3;
+const rawWrapContractPass = !rawUpstream || (
+  Array.isArray(state.wraps)
+  && state.wraps.length === 2
+  && state.wraps.every(wrap => Number.isFinite(wrap.turns)
+    && Math.abs(wrap.turns - 2) <= shaftWrapToleranceTurns)
+);
+if (rawUpstream) {
+  if (!state.conductorEvidence
+      || state.conductorEvidence.continuousConductorAuthorized !== false
+      || state.conductorEvidence.productionAuthorized !== false) {
+    throw new Error('Raw player conductor evidence did not fail closed');
+  }
+  if (integratedRawConductor) {
+    if (state.conductorEvidence.playerGoverning !== true
+        || state.conductorEvidence.continuousRouteAvailable !== true
+        || state.conductorEvidence.activeTerminalLociAvailable !== true) {
+      throw new Error('Integrated raw player evidence contract drifted');
+    }
+    if (!state.conductorRoute
+        || state.conductorRoute.schema !== 'continuous-conductor-route/v1') {
+      throw new Error('Integrated raw player lacks its continuous conductor route');
+    }
+    if (state.conductorRoute.report_sha256 !== state.conductorRouteSha256) {
+      throw new Error('Continuous conductor route hash binding drifted');
+    }
+    if (state.conductorRoute.structural_status !== 'PASS'
+        || state.conductorRoute.status !== 'FAIL'
+        || state.conductorRoute.production_authorized !== false) {
+      throw new Error('Continuous conductor route did not remain structurally valid and release-failed');
+    }
+    if (Math.abs(state.conductorRoute.timeline.end_time_s - state.virtualDuration) > 1e-6) {
+      throw new Error('Continuous conductor route does not cover full player timeline');
+    }
+    if (!state.activeTerminalLoci
+        || state.activeTerminalLoci.schema !== 'carriage-active-sector-terminal-guide-loci/v1'
+        || !Array.isArray(state.activeTerminalLoci.loci)
+        || state.activeTerminalLoci.loci.length !== 2400) {
+      throw new Error('Integrated raw player lacks its exact 2400 active terminal loci');
+    }
+    if (state.activeTerminalLoci.locus_payload_sha256
+        !== state.activeTerminalLociSha256) {
+      throw new Error('Active terminal locus hash binding drifted');
+    }
+    if (!state.activeTerminalLoci.flyer_reference
+        || !Array.isArray(state.activeTerminalLoci.flyer_reference
+          .geometric_bore_to_tensioned_handoff_local_samples_mm)
+        || state.activeTerminalLoci.flyer_reference
+          .geometric_bore_to_tensioned_handoff_local_samples_mm.length < 2) {
+      throw new Error('Active terminal flyer reference polyline is missing');
+    }
+    if (!(state.activeTerminalLociMaxEdges > 0)
+        || state.activeTerminalLociMaxEdges > state.dynamicWireSegmentCapacity) {
+      throw new Error('Dynamic wire pool cannot render a complete active terminal locus');
+    }
+    if (!state.wireHandoff
+        || state.wireHandoff.status !== 'PASS'
+        || !Array.isArray(state.wireHandoff.static_to_flyer_seam_local_mm)
+        || state.wireHandoff.static_to_flyer_seam_local_mm.length !== 3
+        || state.wireHandoff.maximum_gap_mm > state.wireHandoff.tolerance_mm
+        || state.wireHandoff.static_owner_continues_through_shaft_to_guide_root !== true
+        || state.wireHandoff.static_to_flyer_handoff_is_M2_axis_invariant !== true
+        || state.wireHandoff.unsupported_flexible_intervals_authorized !== false) {
+      throw new Error('Static supply, flyer bore, and exact terminal route do not share one fail-closed handoff');
+    }
+    state.coilStarts.forEach((start, passIndex) => {
+      if (start.firstTerminalLocusExact !== true
+          || start.firstTerminalLocusIndex !== passIndex * 100
+          || Math.abs(start.firstTerminalLocusTime - start.layStart) > 1e-6) {
+        throw new Error(`Coil start ${passIndex} is not bound to its first exact terminal locus`);
+      }
+    });
+  } else if (legacyRawBaseline) {
+    if (state.conductorEvidence.playerGoverning !== false
+        || state.conductorEvidence.continuousRouteAvailable !== false
+        || state.conductorEvidence.activeTerminalLociAvailable !== false
+        || state.conductorRoute !== null
+        || state.conductorRouteSha256 !== null
+        || state.activeTerminalLoci !== null
+        || state.activeTerminalLociSha256 !== null
+        || state.wireHandoff !== null
+        || state.coilStarts.some(start => start.continuousConductor !== false
+          || start.continuityStatus !== 'UNAVAILABLE_UNPROVED')) {
+      throw new Error('Legacy raw baseline implied unavailable conductor authority');
+    }
+  } else {
+    throw new Error('Raw player conductor evidence mode is unknown');
+  }
+}
+
+const requestedCoil = Number(reviewParams.get('coil'));
+const requestedTime = Number(reviewParams.get('t'));
+const reviewStartTime = Number.isInteger(requestedCoil)
+    && requestedCoil >= 1 && requestedCoil <= state.coilStarts.length
+  ? state.coilStarts[requestedCoil - 1].positioningStart
+  : (Number.isFinite(requestedTime) && requestedTime >= 0
+    ? Math.min(requestedTime, state.virtualDuration) : 0);
+
+const $ = id => document.getElementById(id);
+const viewport = $('viewport');
+$('cycle-title').textContent = rawUpstream
+  ? `${integratedRawConductor ? 'Selected integrated' : 'Legacy baseline'} unmodified upstream cycle${rawWrapContractPass ? '' : ' - GOAL contract FAIL'}`
+  : 'Full ContractWind diagnostic cycle';
+$('coil-build-label').textContent = rawUpstream
+  ? (integratedRawConductor
+    ? 'Conductor (cyan = exact locus; red = unproven)'
+    : 'Disconnected approximate turns (continuity unavailable)')
+  : 'Exact plan-center coil build';
+$('exact-terminal-label').textContent = legacyRawBaseline
+  ? 'Cyan terminal locus: unavailable in legacy baseline'
+  : 'Cyan: exact sampled machine-side terminal prefix';
+$('unproven-route-label').textContent = legacyRawBaseline
+  ? 'Red route witness: unavailable; no flexible span is drawn'
+  : 'Red dashed: unproved cap-to-live-tail and transition span';
+$('command-summary').textContent = [0, 1, 2, 3]
+  .map(axis => `M${axis} ${state.commandCountsByAxis[String(axis)]}`)
+  .join(' · ');
+$('detail-line').textContent = rawUpstream
+  ? `${integratedRawConductor ? 'Raw axes are authoritative. Cyan shows one of 2,400 exact sampled machine-side terminal prefixes; it is held between half-turn crossings. The cap-to-live-tail span and park/index/load/unload remain red dashed and unproven.' : 'Raw axes are authoritative. This legacy baseline has no continuous route or active-terminal-locus artifact; only the rigid guide-wire meshes and disconnected approximate turns are shown.'} Sag, tension dynamics, settling, and neatness are not simulated.${rawWrapContractPass ? '' : ' The two inter-phase M1 moves do not both execute the required 2.000 physical turns, so release remains FAIL.'}`
+  : 'Plan-bound captured motion. Slot legs use exact constructive centers; end turns and the live feed span are visualization-only.';
+const renderer = new THREE.WebGLRenderer({antialias: true, powerPreference: 'high-performance'});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+viewport.appendChild(renderer.domElement);
+
+const style = getComputedStyle(document.documentElement);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(style.getPropertyValue('--scene').trim());
+const camera = new THREE.PerspectiveCamera(42, innerWidth / innerHeight, 0.5, 5000);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.08;
+controls.minDistance = 35;
+controls.maxDistance = 1200;
+
+scene.add(new THREE.HemisphereLight(0xffffff, 0x4c5b6d, 1.35));
+const keyLight = new THREE.DirectionalLight(0xffffff, 2.0);
+keyLight.position.set(300, 420, -220);
+scene.add(keyLight);
+const fillLight = new THREE.DirectionalLight(0xb8d4ff, 1.0);
+fillLight.position.set(-350, 120, 300);
+scene.add(fillLight);
+
+const grid = new THREE.GridHelper(500, 25, 0x657386, 0x394553);
+grid.material.transparent = true;
+grid.material.opacity = 0.32;
+grid.visible = false;
+scene.add(grid);
+const axes = new THREE.AxesHelper(70);
+axes.visible = false;
+scene.add(axes);
+
+let mixer = null;
+let clipDuration = Infinity;
+let machine = null;
+let spindleNode = null;
+let wireStaticNode = null;
+let wireFlyerNode = null;
+let coilGroup = null;
+let coilMesh = null;
+let coilRanges = [];
+let routeSolidMesh = null;
+let routeUnprovenMesh = null;
+let routeSolidEndTimes = [];
+let routeUnprovenEndTimes = [];
+let activeRouteSegments = [];
+let coilStartMarker = null;
+let coilStartMarkerRing = null;
+let activeCoilStartPass = null;
+let playing = reviewParams.get('autoplay') !== '0';
+let virtualTime = 0;
+const requestedRate = Number(reviewParams.get('rate'));
+let playbackRate = Number.isFinite(requestedRate) && requestedRate > 0
+  ? requestedRate : state.defaultRate;
+let applyingCamera = false;
+let coilStartHoldUntilMs = 0;
+const heldCoilStartPasses = new Set();
+const COIL_START_HOLD_MS = 1000;
+const COIL_START_SLOW_FACTOR = 0.25;
+
+const dynamicWireMaterial = new THREE.MeshStandardMaterial({
+  color: new THREE.Color(style.getPropertyValue('--copper').trim()),
+  roughness: 0.45,
+  metalness: 0.18,
+  emissive: new THREE.Color(0x341304),
+  emissiveIntensity: 0.32
+});
+const dynamicWireContactMaterial = dynamicWireMaterial.clone();
+dynamicWireContactMaterial.color.offsetHSL(0.025, 0.08, 0.10);
+const dynamicWireLayMaterial = dynamicWireMaterial.clone();
+dynamicWireLayMaterial.color.offsetHSL(-0.02, 0.14, 0.16);
+const exactTerminalWireMaterial = new THREE.MeshStandardMaterial({
+  color: new THREE.Color(0x48e1dc),
+  roughness: 0.34,
+  metalness: 0.12,
+  emissive: new THREE.Color(0x073d43),
+  emissiveIntensity: 0.75
+});
+const unprovenWireMaterial = new THREE.MeshStandardMaterial({
+  color: new THREE.Color(0xff3b30),
+  roughness: 0.52,
+  metalness: 0.05,
+  emissive: new THREE.Color(0x5d0805),
+  emissiveIntensity: 0.8
+});
+const dynamicWire = new THREE.Group();
+const dynamicWireSegments = [];
+const dynamicWireGeometry = new THREE.CylinderGeometry(
+  state.wireRenderRadius, state.wireRenderRadius, 1, 10
+);
+for (let index = 0; index < state.dynamicWireSegmentCapacity; index += 1) {
+  const segment = new THREE.Mesh(dynamicWireGeometry, dynamicWireMaterial);
+  segment.visible = false;
+  dynamicWire.add(segment);
+  dynamicWireSegments.push(segment);
+}
+dynamicWire.visible = false;
+scene.add(dynamicWire);
+
+const cameraPresets = {
+  overview: {position: [420, 175, 270], target: [0, -75, 25]},
+  wire: {position: [245, 90, -285], target: [-18, -43, -92]},
+  flyer: {position: [155, 80, -145], target: [0, 8, -25]},
+  stator: {position: [190, 120, 175], target: [0, 0, 55]},
+  front: {position: [0, 55, -520], target: [0, -15, 15]},
+  side: {position: [520, 45, 25], target: [0, -20, 25]},
+  top: {position: [0, 540, 45], target: [0, -25, 45]}
+};
+
+function setCameraPreset(name) {
+  if (!cameraPresets[name]) return;
+  const preset = cameraPresets[name];
+  applyingCamera = true;
+  camera.position.fromArray(preset.position);
+  controls.target.fromArray(preset.target);
+  controls.update();
+  applyingCamera = false;
+}
+
+const requestedCamera = reviewParams.get('camera');
+const initialCamera = requestedCamera && cameraPresets[requestedCamera]
+  ? requestedCamera : 'overview';
+setCameraPreset(initialCamera);
+$('camera').value = initialCamera;
+controls.addEventListener('start', () => {
+  if (!applyingCamera) $('camera').value = 'custom';
+});
+
+function sampleKnots(knots, time) {
+  if (time <= knots[0][0]) return knots[0][1];
+  if (time >= knots[knots.length - 1][0]) return knots[knots.length - 1][1];
+  let lo = 0;
+  let hi = knots.length - 1;
+  while (lo + 1 < hi) {
+    const mid = (lo + hi) >> 1;
+    if (knots[mid][0] <= time) lo = mid;
+    else hi = mid;
+  }
+  const [t0, p0] = knots[lo];
+  const [t1, p1] = knots[hi];
+  return t1 <= t0 ? p1 : p0 + (p1 - p0) * (time - t0) / (t1 - t0);
+}
+
+function upperBound(items, time, timeIndex = 0) {
+  let lo = 0;
+  let hi = items.length;
+  while (lo < hi) {
+    const mid = (lo + hi) >> 1;
+    if (items[mid][timeIndex] <= time) lo = mid + 1;
+    else hi = mid;
+  }
+  return lo;
+}
+
+function numericUpperBound(items, value) {
+  let lo = 0;
+  let hi = items.length;
+  while (lo < hi) {
+    const mid = (lo + hi) >> 1;
+    if (items[mid] <= value) lo = mid + 1;
+    else hi = mid;
+  }
+  return lo;
+}
+
+const commandsByAxis = [0, 1, 2, 3].map(axis =>
+  state.commands.filter(command => command[1] === axis)
+);
+const depositionEndTimes = state.depositions.map(deposition => deposition.end);
+const firstDepositionByPass = new Map(
+  state.depositions.filter(deposition => deposition.turn === 0)
+    .map(deposition => [deposition.passIndex, deposition])
+);
+
+function lastCommand(time) {
+  const index = upperBound(state.commands, time) - 1;
+  return index >= 0 ? state.commands[index] : null;
+}
+
+function lastAxisCommand(axis, time) {
+  const commands = commandsByAxis[axis];
+  const index = upperBound(commands, time) - 1;
+  return index >= 0 ? commands[index] : null;
+}
+
+function activeInterval(intervals, time) {
+  return intervals.find(interval => interval.start <= time && time <= interval.end) || null;
+}
+
+function turnsAt(winding, time) {
+  if (time < winding.start) return 0;
+  if (time >= winding.end) return state.turnsPerTooth;
+  return numericUpperBound(winding.turnTimes, time);
+}
+
+function currentPhase(time) {
+  let phase = -1;
+  for (const marker of state.markers) {
+    if (marker[0] > time) break;
+    if (marker[1] === 'wind' && marker[2].length) phase = Number(marker[2][0]);
+  }
+  return phase;
+}
+
+function humanEvent(name) {
+  const labels = {
+    wind: 'Starting phase',
+    coil_start: 'Starting tooth-pass winding motion',
+    wind_done: 'Phase complete',
+    wind_wire: 'Starting tooth pass',
+    wind_wire_done: 'Tooth pass complete',
+    move_to_teeth: 'Indexing stator',
+    move_to_teeth_done: 'Stator indexed',
+    set_motor2_wire_position: 'Positioning flyer',
+    set_motor2_wire_position_done: 'Flyer positioned',
+    prevent_collision: 'Clearing flyer',
+    prevent_collision_done: 'Flyer clear',
+    wind_wire_around_shaft: 'Shaft wrap',
+    wind_wire_around_shaft_done: 'Shaft wrap complete',
+    raw_shaft_contact_start: 'Raw shaft contact inferred from M1 command',
+    raw_shaft_contact_done: 'Raw shaft M1 target reached',
+    move_wire_to_right_position: 'Parking wire',
+    move_wire_to_right_position_done: 'Wire parked',
+    cycle_complete: 'Cycle complete'
+  };
+  return labels[name] || name.replaceAll('_', ' ');
+}
+
+function formatTime(seconds) {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds - mins * 60;
+  return `${String(mins).padStart(2, '0')}:${secs.toFixed(2).padStart(5, '0')}`;
+}
+
+function setCylinderBetween(mesh, start, end) {
+  const midpoint = start.clone().add(end).multiplyScalar(0.5);
+  const direction = end.clone().sub(start);
+  const length = direction.length();
+  if (length < 1e-6) {
+    mesh.visible = false;
+    return;
+  }
+  mesh.visible = true;
+  mesh.position.copy(midpoint);
+  mesh.scale.set(1, length, 1);
+  mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), direction.normalize());
+}
+
+function dashedEdges(points, dashLength = 1.4, gapLength = 0.85) {
+  const edges = [];
+  for (let index = 0; index + 1 < points.length; index += 1) {
+    const start = points[index];
+    const end = points[index + 1];
+    const delta = end.clone().sub(start);
+    const length = delta.length();
+    if (length < 1e-8) continue;
+    const direction = delta.multiplyScalar(1 / length);
+    for (let cursor = 0; cursor < length; cursor += dashLength + gapLength) {
+      const dashEnd = Math.min(length, cursor + dashLength);
+      edges.push([
+        start.clone().addScaledVector(direction, cursor),
+        start.clone().addScaledVector(direction, dashEnd)
+      ]);
+    }
+  }
+  return edges;
+}
+
+function setWirePolyline(points, tags = [], visualStyle = 'solid_copper') {
+  const rendered = visualStyle === 'dashed_red'
+    ? dashedEdges(points)
+    : points.slice(1).map((end, index) => [points[index], end]);
+  if (rendered.length > dynamicWireSegments.length) {
+    throw new Error(`Dynamic wire pool truncates ${rendered.length} edges`);
+  }
+  const count = rendered.length;
+  for (let index = 0; index < dynamicWireSegments.length; index += 1) {
+    const segment = dynamicWireSegments[index];
+    if (index < count) {
+      const tag = tags[index] || 'guide_free';
+      segment.material = visualStyle === 'dashed_red'
+        ? unprovenWireMaterial
+        : (tag === 'active_lay'
+          ? dynamicWireLayMaterial
+          : (tag === 'tip_guide_contact' || tag === 'slot_liner_glide')
+            ? dynamicWireContactMaterial : dynamicWireMaterial);
+      setCylinderBetween(segment, rendered[index][0], rendered[index][1]);
+    }
+    else segment.visible = false;
+  }
+  dynamicWire.visible = count > 0;
+}
+
+function activeTerminalLocusAt(time) {
+  if (!integratedRawConductor) return null;
+  const halfTurn = activeInterval(state.halfTurns, time);
+  if (!halfTurn) return null;
+  const index = halfTurn.passIndex * 100 + halfTurn.halfTurnIndex;
+  const locus = state.activeTerminalLoci.loci[index];
+  if (!locus || locus.locus_index !== index
+      || locus.pass_index !== halfTurn.passIndex
+      || locus.state_index !== halfTurn.halfTurnIndex
+      || Math.abs(locus.time_s - halfTurn.start) > 1e-6) {
+    throw new Error(`Active terminal locus ${index} does not bind this raw half turn`);
+  }
+  return locus;
+}
+
+function setExactTerminalLocus(locus, unprovedTarget = null) {
+  let edgeIndex = 0;
+  let firstPoint = null;
+  let lastPoint = null;
+  function appendSegment(name, points) {
+    const contract = state.activeTerminalLoci.segment_contract[name];
+    if (!contract) {
+      throw new Error(`Exact terminal segment ${name} lacks global metadata`);
+    }
+    if (firstPoint === null) firstPoint = points[0].clone();
+    lastPoint = points[points.length - 1].clone();
+    for (let pointIndex = 0; pointIndex + 1 < points.length; pointIndex += 1) {
+      if (edgeIndex >= dynamicWireSegments.length) {
+        throw new Error(`Exact terminal locus ${locus.locus_index} exceeds wire pool`);
+      }
+      const mesh = dynamicWireSegments[edgeIndex];
+      mesh.material = exactTerminalWireMaterial;
+      mesh.userData.exactSegmentName = name;
+      mesh.userData.surfaceOwner = contract.surface_owner;
+      mesh.userData.localFrame = contract.local_frame;
+      mesh.userData.routeAuthority = contract.authority;
+      setCylinderBetween(mesh, points[pointIndex], points[pointIndex + 1]);
+      edgeIndex += 1;
+    }
+  }
+  const flyerAngle = locus.axes.M2_flyer_rad;
+  const zAxis = new THREE.Vector3(0, 0, 1);
+  const flyerReference = state.activeTerminalLoci.flyer_reference
+    .geometric_bore_to_tensioned_handoff_local_samples_mm
+    .map(point => new THREE.Vector3(...point).applyAxisAngle(zAxis, flyerAngle));
+  appendSegment('flyer_geometric_bore', flyerReference);
+  for (const segmentRecord of locus.segments) {
+    appendSegment(
+      segmentRecord.name,
+      segmentRecord.machine_world_samples_mm.map(
+        point => new THREE.Vector3(...point)
+      )
+    );
+  }
+  const exactEdgeCount = edgeIndex;
+  const exactLastPoint = lastPoint === null ? null : lastPoint.clone();
+  let unprovedConnectorEdgeCount = 0;
+  if (lastPoint !== null && unprovedTarget !== null) {
+    const witnessEdges = dashedEdges([lastPoint, unprovedTarget]);
+    for (const witness of witnessEdges) {
+      if (edgeIndex >= dynamicWireSegments.length) {
+        throw new Error(
+          `Exact terminal locus ${locus.locus_index} plus cap-to-live-tail `
+          + 'witness exceeds wire pool'
+        );
+      }
+      const mesh = dynamicWireSegments[edgeIndex];
+      mesh.material = unprovenWireMaterial;
+      mesh.userData.exactSegmentName = null;
+      mesh.userData.surfaceOwner = 'UNPROVED_FREE_SPAN_NO_SUPPORT_OWNER';
+      mesh.userData.localFrame = 'machine_world';
+      mesh.userData.routeAuthority =
+        'unproved_cap_endpoint_to_live_deposited_tail_witness';
+      setCylinderBetween(mesh, witness[0], witness[1]);
+      edgeIndex += 1;
+      unprovedConnectorEdgeCount += 1;
+    }
+    lastPoint = unprovedTarget.clone();
+  }
+  if (exactEdgeCount > state.activeTerminalLociMaxEdges) {
+    throw new Error(
+      `Exact terminal locus ${locus.locus_index} has ${exactEdgeCount} edges; `
+      + `declared maximum ${state.activeTerminalLociMaxEdges}`
+    );
+  }
+  for (let index = edgeIndex; index < dynamicWireSegments.length; index += 1) {
+    dynamicWireSegments[index].visible = false;
+  }
+  dynamicWire.visible = edgeIndex > 0;
+  dynamicWire.userData.routeAuthority =
+    'exact_sampled_machine_prefix_plus_unproved_cap_to_live_tail_witness';
+  dynamicWire.userData.activeTerminalLocus = locus.locus_index;
+  dynamicWire.userData.unprovedConnectorEdgeCount = unprovedConnectorEdgeCount;
+  return {firstPoint, lastPoint, exactLastPoint, unprovedConnectorEdgeCount};
+}
+
+function coilTurnPoints(deposition) {
+  const placement = state.slotPlan.placements[deposition.placementIndex];
+  const activeRadial = deposition.visualActiveRadialMm ?? placement.activeRadial;
+  const straightSamples = state.depositionSummary.straightSamples;
+  const endTurnSamples = state.depositionSummary.endTurnSamples;
+  const stackHalf = state.slotPlan.job.stack * 0.5;
+  const angle = deposition.tooth * Math.PI * 2 / state.teethCount;
+  const yAxis = new THREE.Vector3(0, 1, 0);
+  const radial = new THREE.Vector3(-Math.sin(angle), 0, -Math.cos(angle));
+  const tangent = new THREE.Vector3().crossVectors(yAxis, radial).normalize();
+  const axis = new THREE.Vector3(0, 0, state.standoff);
+  const leftT = placement.leftActiveTangential;
+  const rightT = placement.rightActiveTangential;
+  if (!(leftT < 0 && rightT > 0) || Math.abs(leftT + rightT) > 1e-9) {
+    throw new Error(`Placement ${deposition.placementIndex} is not exactly two-sided`);
+  }
+  const sideRadius = rightT;
+  const startSign = deposition.clockwise ? 1 : -1;
+  const points = [];
+  const point = (tangential, axial) => axis.clone()
+    .addScaledVector(radial, activeRadial)
+    .addScaledVector(tangent, tangential)
+    .addScaledVector(yAxis, axial);
+
+  // Exact in-slot leg center 1: positive stack face to negative stack face.
+  for (let index = 0; index <= straightSamples; index += 1) {
+    points.push(point(
+      startSign * sideRadius,
+      stackHalf - 2 * stackHalf * index / straightSamples
+    ));
+  }
+  // Illustrative negative-face connector between the two exact leg centers.
+  for (let index = 1; index <= endTurnSamples; index += 1) {
+    const theta = Math.PI * index / endTurnSamples;
+    points.push(point(
+      startSign * sideRadius * Math.cos(theta),
+      -stackHalf - sideRadius * Math.sin(theta)
+    ));
+  }
+  // Exact in-slot leg center 2: negative stack face to positive stack face.
+  for (let index = 1; index <= straightSamples; index += 1) {
+    points.push(point(
+      -startSign * sideRadius,
+      -stackHalf + 2 * stackHalf * index / straightSamples
+    ));
+  }
+  // Illustrative positive-face connector, returning to the first exact leg.
+  for (let index = 1; index <= endTurnSamples; index += 1) {
+    const theta = Math.PI * index / endTurnSamples;
+    points.push(point(
+      -startSign * sideRadius * Math.cos(theta),
+      stackHalf + sideRadius * Math.sin(theta)
+    ));
+  }
+  return points;
+}
+
+function conductorItemAt(time) {
+  if (!integratedRawConductor) return null;
+  const items = state.conductorRoute.items;
+  let lo = 0;
+  let hi = items.length - 1;
+  while (lo < hi) {
+    const mid = (lo + hi) >> 1;
+    if (items[mid].end_time_s < time - 1e-9) lo = mid + 1;
+    else hi = mid;
+  }
+  const item = items[lo];
+  if (item.start_time_s > time + 1e-6 || item.end_time_s < time - 1e-6) {
+    throw new Error(`No continuous conductor item covers t=${time}`);
+  }
+  return item;
+}
+
+function conductorTailAt(time) {
+  const item = conductorItemAt(time);
+  const points = item.points_mm;
+  if (points.length === 1) {
+    return {item, edgeIndex: null, fraction: 0,
+      point: new THREE.Vector3(...points[0]), run: null};
+  }
+  const clocks = item.point_times_s;
+  let edgeIndex = Math.max(0, Math.min(
+    points.length - 2,
+    numericUpperBound(clocks, time) - 1
+  ));
+  const leftTime = clocks[edgeIndex];
+  const rightTime = clocks[edgeIndex + 1];
+  const fraction = rightTime <= leftTime
+    ? 1 : THREE.MathUtils.clamp((time - leftTime) / (rightTime - leftTime), 0, 1);
+  const point = new THREE.Vector3(...points[edgeIndex])
+    .lerp(new THREE.Vector3(...points[edgeIndex + 1]), fraction);
+  const run = item.runs.find(candidate =>
+    candidate.start_edge <= edgeIndex && edgeIndex < candidate.end_edge
+  ) || null;
+  return {item, edgeIndex, fraction, point, run};
+}
+
+function setInstanceBetween(mesh, index, start, end) {
+  const delta = end.clone().sub(start);
+  const length = delta.length();
+  const midpoint = start.clone().add(end).multiplyScalar(0.5);
+  const quaternion = new THREE.Quaternion().setFromUnitVectors(
+    new THREE.Vector3(0, 1, 0), delta.normalize()
+  );
+  const matrix = new THREE.Matrix4().compose(
+    midpoint, quaternion, new THREE.Vector3(1, length, 1)
+  );
+  mesh.setMatrixAt(index, matrix);
+}
+
+function routeEdgeStyle(item, edgeIndex) {
+  const run = item.runs.find(candidate =>
+    candidate.start_edge <= edgeIndex && edgeIndex < candidate.end_edge
+  );
+  if (!run) throw new Error(`Route item ${item.index} edge ${edgeIndex} lacks style`);
+  return run;
+}
+
+function createContinuousRoute() {
+  coilGroup = new THREE.Group();
+  coilGroup.name = 'phase_aware_ordered_continuous_conductor';
+  const solid = [];
+  const unproven = [];
+  for (const item of state.conductorRoute.items) {
+    for (let edgeIndex = 0; edgeIndex + 1 < item.points_mm.length; edgeIndex += 1) {
+      const start = new THREE.Vector3(...item.points_mm[edgeIndex]);
+      const end = new THREE.Vector3(...item.points_mm[edgeIndex + 1]);
+      const style = routeEdgeStyle(item, edgeIndex);
+      const leftTime = item.point_times_s[edgeIndex];
+      const rightTime = item.point_times_s[edgeIndex + 1];
+      if (style.visual_style === 'dashed_red') {
+        const dashes = dashedEdges([start, end], 0.62, 0.38);
+        const total = start.distanceTo(end);
+        for (const dash of dashes) {
+          const fraction = total <= 1e-9 ? 1 : start.distanceTo(dash[1]) / total;
+          unproven.push({start: dash[0], end: dash[1],
+            endTime: THREE.MathUtils.lerp(leftTime, rightTime, fraction)});
+        }
+      } else {
+        solid.push({start, end, endTime: rightTime});
+      }
+    }
+  }
+  const cylinder = new THREE.CylinderGeometry(
+    state.wireRenderRadius, state.wireRenderRadius, 1, 8
+  );
+  routeSolidMesh = new THREE.InstancedMesh(
+    cylinder, dynamicWireLayMaterial, Math.max(1, solid.length)
+  );
+  routeUnprovenMesh = new THREE.InstancedMesh(
+    cylinder, unprovenWireMaterial, Math.max(1, unproven.length)
+  );
+  solid.forEach((edge, index) => setInstanceBetween(
+    routeSolidMesh, index, edge.start, edge.end
+  ));
+  unproven.forEach((edge, index) => setInstanceBetween(
+    routeUnprovenMesh, index, edge.start, edge.end
+  ));
+  routeSolidEndTimes = solid.map(edge => edge.endTime);
+  routeUnprovenEndTimes = unproven.map(edge => edge.endTime);
+  routeSolidMesh.count = 0;
+  routeUnprovenMesh.count = 0;
+  routeSolidMesh.instanceMatrix.needsUpdate = true;
+  routeUnprovenMesh.instanceMatrix.needsUpdate = true;
+  coilGroup.add(routeSolidMesh, routeUnprovenMesh);
+
+  for (let index = 0; index < 8; index += 1) {
+    const segment = new THREE.Mesh(cylinder, unprovenWireMaterial);
+    segment.visible = false;
+    coilGroup.add(segment);
+    activeRouteSegments.push(segment);
+  }
+  spindleNode.add(coilGroup);
+}
+
+function updateActiveRouteSegment(tail) {
+  activeRouteSegments.forEach(segment => { segment.visible = false; });
+  if (tail.edgeIndex === null || tail.fraction <= 1e-8) return;
+  const start = new THREE.Vector3(...tail.item.points_mm[tail.edgeIndex]);
+  const style = tail.run?.visual_style || 'dashed_red';
+  const rendered = style === 'dashed_red'
+    ? dashedEdges([start, tail.point], 0.62, 0.38)
+    : [[start, tail.point]];
+  rendered.slice(0, activeRouteSegments.length).forEach((edge, index) => {
+    const mesh = activeRouteSegments[index];
+    mesh.material = style === 'dashed_red'
+      ? unprovenWireMaterial : dynamicWireLayMaterial;
+    setCylinderBetween(mesh, edge[0], edge[1]);
+  });
+}
+
+function updateContinuousRoute(time) {
+  const show = $('show-coils').checked;
+  coilGroup.visible = show;
+  if (!show) return;
+  routeSolidMesh.count = numericUpperBound(routeSolidEndTimes, time);
+  routeUnprovenMesh.count = numericUpperBound(routeUnprovenEndTimes, time);
+  updateActiveRouteSegment(conductorTailAt(time));
+}
+
+function createCoils() {
+  if (integratedRawConductor) {
+    createContinuousRoute();
+    return;
+  }
+  coilGroup = new THREE.Group();
+  coilGroup.name = rawUpstream
+    ? 'raw_M0_radial_approximate_elastic_turns'
+    : 'plan_center_progressive_turns';
+  const segments = 2 * (
+    state.depositionSummary.straightSamples
+    + state.depositionSummary.endTurnSamples
+  );
+  const actualWireRadius = rawUpstream
+    ? state.wireRenderRadius
+    : state.slotPlan.job.modelWireEnvelope * 0.5;
+  const cylinder = new THREE.CylinderGeometry(
+    actualWireRadius, actualWireRadius, 1, 8
+  );
+  const copper = new THREE.MeshStandardMaterial({
+    color: new THREE.Color(style.getPropertyValue('--copper').trim()),
+    roughness: 0.42,
+    metalness: 0.28
+  });
+  coilMesh = new THREE.InstancedMesh(
+    cylinder, copper, state.depositions.length * segments
+  );
+  coilMesh.instanceMatrix.setUsage(THREE.StaticDrawUsage);
+  const yUnit = new THREE.Vector3(0, 1, 0);
+  const matrix = new THREE.Matrix4();
+  const quaternion = new THREE.Quaternion();
+  const scale = new THREE.Vector3();
+  let instance = 0;
+
+  for (const deposition of state.depositions) {
+    const first = instance;
+    const points = coilTurnPoints(deposition);
+    if (points.length !== segments + 1) throw new Error('Coil segment count drifted');
+    for (let segment = 0; segment < segments; segment += 1) {
+      const start = points[segment];
+      const end = points[segment + 1];
+      const delta = end.clone().sub(start);
+      const length = delta.length();
+      const midpoint = start.clone().add(end).multiplyScalar(0.5);
+      quaternion.setFromUnitVectors(yUnit, delta.normalize());
+      scale.set(1, length, 1);
+      matrix.compose(midpoint, quaternion, scale);
+      coilMesh.setMatrixAt(instance, matrix);
+      instance += 1;
+    }
+    coilRanges.push({
+      start: deposition.start,
+      midpoint: deposition.midpoint,
+      end: deposition.end,
+      first,
+      count: segments,
+      tooth: deposition.tooth,
+      turn: deposition.turn
+    });
+  }
+  coilMesh.count = 0;
+  coilMesh.instanceMatrix.needsUpdate = true;
+  coilGroup.add(coilMesh);
+  spindleNode.add(coilGroup);
+}
+
+function createCoilStartMarker() {
+  coilStartMarker = new THREE.Group();
+  coilStartMarker.name = rawUpstream
+    ? 'coil_start_annotation_first_physical_raw_turn'
+    : 'coil_start_annotation_exact_plan_center';
+  const markerMaterial = new THREE.MeshStandardMaterial({
+    color: new THREE.Color(style.getPropertyValue('--coil-start').trim()),
+    emissive: new THREE.Color(0x9b5700),
+    emissiveIntensity: 1.1,
+    roughness: 0.35,
+    metalness: 0.0,
+    transparent: true,
+    opacity: 0.92,
+    depthTest: false
+  });
+  const dot = new THREE.Mesh(new THREE.SphereGeometry(1.8, 16, 10), markerMaterial);
+  dot.renderOrder = 20;
+  coilStartMarker.add(dot);
+  coilStartMarkerRing = new THREE.Mesh(
+    new THREE.TorusGeometry(4.2, 0.38, 8, 32), markerMaterial.clone()
+  );
+  coilStartMarkerRing.material.opacity = 0.78;
+  coilStartMarkerRing.renderOrder = 20;
+  coilStartMarker.add(coilStartMarkerRing);
+  coilStartMarker.visible = false;
+  spindleNode.add(coilStartMarker);
+}
+
+function coilStartAt(time) {
+  return state.coilStarts.find(start =>
+    start.positioningStart <= time && time <= start.firstTurnEnd
+  ) || null;
+}
+
+function coilStartIndexAt(time) {
+  let result = 0;
+  for (let index = 0; index < state.coilStarts.length; index += 1) {
+    if (state.coilStarts[index].positioningStart <= time + 1e-6) result = index;
+    else break;
+  }
+  return result;
+}
+
+function focusCoilStart(start) {
+  if (!$('focus-coil-starts').checked) return;
+  $('camera').value = 'flyer';
+  $('follow-wire').checked = true;
+  setCameraPreset('flyer');
+}
+
+function updateCoilNavigation(time) {
+  const index = coilStartIndexAt(time);
+  const start = state.coilStarts[index];
+  $('coil-navigation-label').textContent = start
+    ? `Coil ${index + 1}/${state.coilStarts.length} - phase ${start.phase + 1} - tooth ${start.tooth + 1}`
+    : `Coil 1/${state.coilStarts.length}`;
+}
+
+function stepCoil(direction) {
+  const current = coilStartIndexAt(virtualTime);
+  let target = current;
+  if (direction > 0) {
+    target = Math.min(state.coilStarts.length - 1,
+      state.coilStarts.findIndex(start => start.positioningStart > virtualTime + 1e-4));
+    if (target < 0) target = state.coilStarts.length - 1;
+  } else if (Math.abs(
+    virtualTime - state.coilStarts[current].positioningStart
+  ) <= 1e-3) {
+    target = Math.max(0, current - 1);
+  }
+  const start = state.coilStarts[target];
+  setPlaying(false);
+  focusCoilStart(start);
+  seek(start.positioningStart);
+}
+
+function crossedUnheldCoilStart(previousTime, nextTime) {
+  if (!$('hold-coil-starts').checked) return null;
+  return state.coilStarts.find(start =>
+    !heldCoilStartPasses.has(start.passIndex)
+    && start.positioningStart >= previousTime - 1e-7
+    && start.positioningStart < nextTime + 1e-7
+  ) || null;
+}
+
+function updateCoilStart(time) {
+  const start = coilStartAt(time);
+  const banner = $('coil-start-banner');
+  if (!start) {
+    banner.hidden = true;
+    if (coilStartMarker) coilStartMarker.visible = false;
+    activeCoilStartPass = null;
+    return;
+  }
+  if (start.cutOrJoin
+      || (integratedRawConductor && !start.continuousConductor)
+      || (legacyRawBaseline && start.continuousConductor !== false)) {
+    throw new Error(`Pass ${start.passIndex} conductor annotation drifted`);
+  }
+  const deposition = firstDepositionByPass.get(start.passIndex);
+  if (!deposition) throw new Error(`Pass ${start.passIndex} has no first turn`);
+  const positioning = time < start.layStart;
+  const indexing = time < start.toothPresentedAt;
+  $('coil-start-stage').textContent = positioning
+    ? (indexing ? 'COIL START\nINDEXING' : 'COIL START\nPOSITIONING')
+    : 'FIRST TURN\nIN PROGRESS';
+  $('coil-start-title').textContent = `Phase ${start.phase + 1}/${state.phaseCount} - pass ${start.passIndex + 1}/${state.windings.length} - tooth ${start.tooth + 1}/${state.teethCount} - ${start.direction}`;
+  const continuity = legacyRawBaseline
+    ? 'continuity from the supply or prior pass is unavailable/unproved'
+    : (start.continuityFromPassIndex === null
+      ? 'incoming supply conductor'
+      : `continuous from pass ${start.continuityFromPassIndex + 1}`);
+  $('coil-start-detail').textContent = positioning
+    ? (rawUpstream
+      ? `${continuity}; preparing the first physical raw M2 turn. ${integratedRawConductor ? 'The live transition is red/dashed and unproved until the first audited terminal prefix; its cap-to-tail continuation remains red/dashed afterward.' : 'No flexible live-wire span or terminal locus is rendered in this legacy baseline.'} Yellow marker uses approximate elastic slot placement, not a controller center.`
+      : `${continuity}; presenting the exact first plan center. Yellow marker is an annotation, not lead-wire geometry.`)
+    : `${continuity}; first physical turn lays ${start.firstSide} then ${start.secondSide}. ${integratedRawConductor ? 'Cyan is the exact sampled machine-side prefix; the red/dashed cap-to-tail continuation is visible but unproved. Neither proves sag, tension, settling, or neatness. No cut or join between passes.' : 'The displayed turn is disconnected approximate elastic review geometry, not continuity evidence.'}`;
+  banner.hidden = false;
+  if (coilStartMarker) {
+    if (activeCoilStartPass !== start.passIndex) {
+      coilStartMarker.position.copy(coilTurnPoints(deposition)[0]);
+      activeCoilStartPass = start.passIndex;
+    }
+    const pulse = 1 + 0.13 * Math.sin(time * Math.PI * 4);
+    coilStartMarkerRing.scale.setScalar(pulse);
+    coilStartMarker.visible = true;
+  }
+}
+
+function updateCoils(time) {
+  if (integratedRawConductor) {
+    if (coilGroup) updateContinuousRoute(time);
+    return;
+  }
+  if (!coilGroup || !coilMesh) return;
+  const show = $('show-coils').checked;
+  coilGroup.visible = show;
+  if (!show) {
+    coilMesh.count = 0;
+    return;
+  }
+  let visibleInstances = 0;
+  for (const range of coilRanges) {
+    if (time >= range.end) {
+      visibleInstances = range.first + range.count;
+      continue;
+    }
+    if (time >= range.start) {
+      const progress = time <= range.midpoint
+        ? 0.5 * THREE.MathUtils.clamp(
+          (time - range.start) / Math.max(range.midpoint - range.start, 1e-9), 0, 1
+        )
+        : 0.5 + 0.5 * THREE.MathUtils.clamp(
+          (time - range.midpoint) / Math.max(range.end - range.midpoint, 1e-9), 0, 1
+        );
+      visibleInstances = range.first + Math.floor(progress * range.count);
+    }
+    break;
+  }
+  coilMesh.count = visibleInstances;
+}
+
+function shaftTangentTarget(reference, axisZ, side) {
+  const dx = reference.x;
+  const dz = reference.z - axisZ;
+  const d2 = dx * dx + dz * dz;
+  const radius = state.shaftContact.radius_to_wire_center_mm;
+  const baseX = dx * radius * radius / d2;
+  const baseZ = axisZ + dz * radius * radius / d2;
+  const offset = radius * Math.sqrt(d2 - radius * radius) / d2;
+  return new THREE.Vector3(
+    baseX + side * (-dz) * offset,
+    state.shaftContact.axial_y_mm,
+    baseZ + side * dx * offset
+  );
+}
+
+function wrapRadians(value) {
+  return Math.atan2(Math.sin(value), Math.cos(value));
+}
+
+function presentedToothResidual(winding, pose) {
+  return wrapRadians(
+    pose[1] + winding.tooth * Math.PI * 2 / state.teethCount
+  );
+}
+
+function planHalfTurnTarget(halfTurn, time, pose) {
+  const placement = state.slotPlan.placements[halfTurn.placementIndex];
+  const winding = state.windings[halfTurn.passIndex];
+  const residual = presentedToothResidual(winding, pose);
+  if (Math.abs(residual) > THREE.MathUtils.degToRad(0.001)) return null;
+  const axisZ = state.standoff + pose[0] * state.mmPerRadM0;
+  const activeRadial = rawUpstream
+    ? axisZ - state.toothContact.z_mm
+    : placement.activeRadial;
+  const yAxis = new THREE.Vector3(0, 1, 0);
+  const radial = new THREE.Vector3(0, 0, -1).applyAxisAngle(yAxis, residual);
+  const tangent = new THREE.Vector3().crossVectors(yAxis, radial).normalize();
+  const progress = THREE.MathUtils.clamp(
+    (time - halfTurn.start) / Math.max(halfTurn.end - halfTurn.start, 1e-9), 0, 1
+  );
+  const stackHalf = state.slotPlan.job.stack * 0.5;
+  const axial = halfTurn.half === 0
+    ? stackHalf * (1 - 2 * progress)
+    : stackHalf * (-1 + 2 * progress);
+  const tangential = halfTurn.side === 'right'
+    ? placement.rightActiveTangential : placement.leftActiveTangential;
+  return new THREE.Vector3(0, 0, axisZ)
+    .addScaledVector(radial, activeRadial)
+    .addScaledVector(tangent, tangential)
+    .addScaledVector(yAxis, axial);
+}
+
+function updateWire(time, pose) {
+  dynamicWire.userData.halfTurn = null;
+  dynamicWire.userData.activeTerminalLocus = null;
+  dynamicWire.userData.routeAuthority = null;
+  const visible = $('show-wire').checked;
+  if (wireStaticNode) wireStaticNode.visible = visible;
+  if (wireFlyerNode) wireFlyerNode.visible = visible;
+  if (!visible) {
+    dynamicWire.visible = false;
+    return;
+  }
+  const zAxis = new THREE.Vector3(0, 0, 1);
+  const feed = new THREE.Vector3(...state.flyerFeed).applyAxisAngle(zAxis, pose[2]);
+  const guideCenter = new THREE.Vector3(...state.flyerGuideCenter)
+    .applyAxisAngle(zAxis, pose[2]);
+  if (integratedRawConductor) {
+    const tail = conductorTailAt(time);
+    machine.updateMatrixWorld(true);
+    const target = spindleNode.localToWorld(tail.point.clone());
+    const exactLocus = activeTerminalLocusAt(time);
+    let focusStart;
+    let focusEnd;
+    if (exactLocus) {
+      const endpoints = setExactTerminalLocus(exactLocus, target);
+      const staticSeam = new THREE.Vector3(
+        ...state.wireHandoff.static_to_flyer_seam_local_mm
+      );
+      if (endpoints.firstPoint.distanceTo(staticSeam)
+          > state.wireHandoff.tolerance_mm) {
+        throw new Error(
+          `Exact terminal locus ${exactLocus.locus_index} misses the static guide-root seam`
+        );
+      }
+      focusStart = endpoints.firstPoint;
+      focusEnd = endpoints.lastPoint;
+      if (wireFlyerNode) wireFlyerNode.visible = false;
+    } else {
+      // There is no authorized flexible route for park/index/load/unload.
+      // Keep continuity visible only as an explicit straight red/dashed
+      // witness; do not invent another guide tangent or imply sag proof.
+      setWirePolyline([feed, target], [], 'dashed_red');
+      dynamicWire.userData.routeAuthority =
+        'unproved_straight_transition_witness_not_flexible_wire_solution';
+      focusStart = feed;
+      focusEnd = target;
+    }
+    dynamicWire.userData.conductorItem = tail.item.index;
+    dynamicWire.userData.depositedTailLocal = tail.point.toArray();
+    dynamicWire.userData.liveEndpointWorld = focusEnd.toArray();
+    if ($('follow-wire').checked) {
+      controls.target.lerp(
+        focusStart.clone().add(focusEnd).multiplyScalar(0.5), 0.15
+      );
+    }
+    return;
+  }
+  if (legacyRawBaseline) {
+    // The historical manifest binds only rigid static/flyer guide meshes.  Do
+    // not draw a straight span to the workpiece: that would fabricate the
+    // missing flexible route and visually imply continuity.
+    dynamicWire.visible = false;
+    dynamicWire.userData.routeAuthority =
+      'legacy_baseline_continuous_route_unavailable_unproved';
+    return;
+  }
+  const winding = activeInterval(state.windings, time);
+  const halfTurn = activeInterval(state.halfTurns, time);
+  const wrap = activeInterval(state.wraps, time);
+  if ((!winding && !wrap) || (winding && !halfTurn)) {
+    dynamicWire.visible = false;
+    return;
+  }
+  let target;
+  if (winding && halfTurn) {
+    target = planHalfTurnTarget(halfTurn, time, pose);
+    if (!target) {
+      dynamicWire.visible = false;
+      return;
+    }
+    setWirePolyline([feed, target], ['active_lay']);
+    dynamicWire.userData.routeAuthority =
+      'contract_plan_straight_visualization_not_route_proof';
+    dynamicWire.userData.halfTurn = halfTurn;
+  } else {
+    target = shaftTangentTarget(
+      guideCenter,
+      state.standoff + pose[0] * state.mmPerRadM0,
+      -(wrap.direction || 1)
+    );
+    setWirePolyline([feed, target]);
+    dynamicWire.userData.routeAuthority =
+      'contract_plan_shaft_span_visualization_not_route_proof';
+    dynamicWire.userData.halfTurn = null;
+  }
+  if ($('follow-wire').checked) {
+    controls.target.lerp(guideCenter.clone().add(target).multiplyScalar(0.5), 0.15);
+  }
+}
+
+function updateStatus(time, pose) {
+  const [m0, m1, m2, m3] = pose;
+  $('m0-pos').textContent = `${m0.toFixed(3)} rad`;
+  $('m0-units').textContent = `${(m0 * state.mmPerRadM0).toFixed(2)} mm`;
+  $('m1-pos').textContent = `${THREE.MathUtils.radToDeg(m1).toFixed(1)} deg`;
+  $('m1-units').textContent = `${(m1 / (2 * Math.PI)).toFixed(3)} rev`;
+  $('m2-pos').textContent = `${THREE.MathUtils.radToDeg(m2).toFixed(1)} deg`;
+  $('m2-units').textContent = `${(m2 / (2 * Math.PI)).toFixed(3)} rev`;
+  $('m3-pos').textContent = `${m3.toFixed(3)} command`;
+
+  for (let axis = 0; axis < 4; axis += 1) {
+    const command = lastAxisCommand(axis, time);
+    const target = command ? Number(command[2]) : null;
+    if (target === null) $(`m${axis}-target`).textContent = '--';
+    else if (axis === 1 || axis === 2) {
+      $(`m${axis}-target`).textContent = `${THREE.MathUtils.radToDeg(target).toFixed(1)} deg`;
+    } else {
+      $(`m${axis}-target`).textContent = target.toFixed(3);
+    }
+    const controllerTarget = command && command[3] !== null
+      ? Number(command[3]) : null;
+    $(`m${axis}-controller`).textContent = controllerTarget === null
+      ? '--' : controllerTarget.toFixed(3);
+    const tolerance = axis === 0 || axis === 3 ? 0.005 : THREE.MathUtils.degToRad(0.25);
+    const moving = target !== null && Math.abs(pose[axis] - target) > tolerance;
+    const stateCell = $(`m${axis}-state`);
+    stateCell.textContent = axis === 3
+      ? (moving ? 'passive change' : 'passive hold')
+      : (moving ? 'moving' : 'holding');
+    stateCell.classList.toggle('moving', moving);
+    let progress = 1;
+    if (command && target !== null) {
+      const commandStart = sampleKnots(
+        state.axisKnots[axis], Math.max(0, Number(command[0]) - 1e-5)
+      );
+      const travel = target - commandStart;
+      progress = Math.abs(travel) <= 1e-9
+        ? 1 : THREE.MathUtils.clamp((pose[axis] - commandStart) / travel, 0, 1);
+    }
+    $(`m${axis}-progress`).value = progress;
+  }
+  const commandIndex = upperBound(state.commands, time) - 1;
+  const command = commandIndex >= 0 ? state.commands[commandIndex] : null;
+  $('command').textContent = command ? command[4] : 'No controller command yet';
+  $('command-position').textContent = command
+    ? `Command ${commandIndex + 1}/${state.commands.length} · M${command[1]} · ${rawUpstream ? 'raw upstream serial' : 'ContractWind diagnostic serial'}`
+    : `Command 0/${state.commands.length}`;
+
+  const winding = activeInterval(state.windings, time);
+  const wrap = activeInterval(state.wraps, time);
+  const phase = currentPhase(time);
+  const completedPasses = state.windings.filter(item => item.end <= time).length;
+  const completedTurns = numericUpperBound(depositionEndTimes, time);
+  const activeDeposition = activeInterval(state.depositions, time);
+  const activeHalfTurn = activeInterval(state.halfTurns, time);
+  if (winding) {
+    const turns = turnsAt(winding, time);
+    const laying = time >= winding.motionStart;
+    const activeTurn = Math.min(turns + 1, state.turnsPerTooth);
+    const halfProgress = activeHalfTurn
+      ? THREE.MathUtils.clamp((time - activeHalfTurn.start)
+        / Math.max(activeHalfTurn.end - activeHalfTurn.start, 1e-9), 0, 1)
+      : 0;
+    const progress = activeHalfTurn
+      ? (activeHalfTurn.half + halfProgress) * 0.5
+      : (activeDeposition ? 1 : 0);
+    const turnLabel = laying
+      ? `${activeTurn}/${state.turnsPerTooth} (${(progress * 100).toFixed(0)}%)`
+      : `0/${state.turnsPerTooth}`;
+    const sideLabel = activeHalfTurn ? ` - ${activeHalfTurn.side} slot side` : '';
+    $('operation').textContent = `Phase ${phase + 1}/${state.phaseCount} - pass ${winding.passIndex + 1}/${state.windings.length} - tooth ${winding.tooth + 1}/${state.teethCount} - turn ${turnLabel}${sideLabel}`;
+    $('event-label').textContent = laying
+      ? (winding.clockwise ? 'Winding clockwise' : 'Winding counter-clockwise')
+      : 'Positioning before wire lay';
+    if (laying && activeHalfTurn) {
+      const placement = state.slotPlan.placements[activeHalfTurn.placementIndex];
+      if (rawUpstream) {
+        const rawRadial = THREE.MathUtils.lerp(
+          activeHalfTurn.rawActiveRadialStartMm,
+          activeHalfTurn.rawActiveRadialEndMm,
+          halfProgress
+        );
+        const rawM0 = THREE.MathUtils.lerp(
+          activeHalfTurn.rawM0StartRad,
+          activeHalfTurn.rawM0EndRad,
+          halfProgress
+        );
+        const approximateTangential = activeHalfTurn.side === 'right'
+          ? placement.rightActiveTangential : placement.leftActiveTangential;
+        const exactLocus = activeTerminalLocusAt(time);
+        const locusLabel = exactLocus
+          ? `Cyan machine-side prefix is exact sampled locus ${exactLocus.locus_index + 1}/2400 at this half-turn start and is held until the next crossing; its cap-to-live-tail continuation is the red/dashed unproved span. `
+          : (legacyRawBaseline
+            ? 'Continuous route and active-terminal-locus geometry are unavailable in this legacy baseline. '
+            : '');
+        $('detail-line').textContent = `${locusLabel}Observed raw M0=${rawM0.toFixed(3)} rad maps to active radius ${rawRadial.toFixed(3)} mm; physical M2 half-turn ${activeHalfTurn.halfTurnIndex + 1}/100. Displayed t=${approximateTangential.toFixed(3)} mm and final layer are approximate elastic placement from the diagnostic plan, not raw controller authority. Sag, tension dynamics, settling, and neatness remain unproved.`;
+      } else {
+        const predecessors = placement.supportPredecessors.length
+          ? `turn ${placement.supportPredecessors.map(value => value + 1).join(', ')}`
+          : 'liner';
+        $('detail-line').textContent = `Plan center r=${placement.activeRadial.toFixed(3)} mm, ${activeHalfTurn.side} t=${(activeHalfTurn.side === 'right' ? placement.rightActiveTangential : placement.leftActiveTangential).toFixed(3)} mm; contact ${placement.contact}; support ${placement.support} (${predecessors}). Live feed/end-turn rendering is not route proof.`;
+      }
+    } else {
+      $('detail-line').textContent = rawUpstream
+        ? (integratedRawConductor
+          ? `Completed ${completedTurns}/${state.depositions.length} physical raw M2 turns; the live endpoint remains attached to the ordered deposited tail during positioning. The straight red/dashed park/index/load/unload witness is explicit, geometrically unproved, and not a sag/tension solution.`
+          : `Completed ${completedTurns}/${state.depositions.length} physical raw M2 turns. The legacy baseline draws no live endpoint or inter-pass span because continuous routing is unavailable/unproved.`)
+        : `Deposited ${completedTurns}/${state.depositions.length} plan-center turns; positioning before exact half-turn waypoint 1.`;
+    }
+  } else if (wrap) {
+    const turns = Math.abs(m1 - wrap.startM1) / (2 * Math.PI);
+    const wrapContractPass = Math.abs(wrap.turns - 2) <= shaftWrapToleranceTurns;
+    $('operation').textContent = `Shaft wrap ${wrap.number} - ${turns.toFixed(3)} physical M1 turns - GOAL ${wrapContractPass ? 'PASS' : 'FAIL'}`;
+    $('event-label').textContent = `Phase ${phase + 1}/${state.phaseCount} - ${completedPasses}/${state.windings.length} passes - required 2.000, actual ${wrap.turns.toFixed(3)} turns`;
+    $('detail-line').textContent = rawUpstream
+      ? `Raw interval inferred from ${wrap.sourceCommand}; actual reconstructed travel ends at ${wrap.turns.toFixed(6)} turns (${wrapContractPass ? 'inside' : 'outside'} the 2.000 +/- ${shaftWrapToleranceTurns.toFixed(3)} turn contract). ${integratedRawConductor ? 'The shaft wrap persists in the ordered presentation conductor; its red dashed helix and live span remain geometrically unproven.' : 'No shaft-wrap conductor or live span is rendered by this legacy baseline; continuity remains unavailable/unproved.'}`
+      : `Deposited ${completedTurns}/${state.depositions.length} plan-center turns; live flyer-guide-to-shaft span is a visualization, not route authority.`;
+  } else {
+    const markerIndex = upperBound(state.markers, time) - 1;
+    const marker = markerIndex >= 0 ? state.markers[markerIndex] : null;
+    $('operation').textContent = marker ? humanEvent(marker[1]) : 'Machine initial pose';
+    $('event-label').textContent = phase >= 0
+      ? `Phase ${phase + 1}/${state.phaseCount} - ${completedPasses}/${state.windings.length} passes complete`
+      : 'Before phase 1';
+    $('detail-line').textContent = rawUpstream
+      ? (integratedRawConductor
+        ? `Completed ${completedTurns}/${state.depositions.length} physical raw turns. The connected live wire stays visible through indexing; park/index/load/unload transitions are red/dashed and keep route ${state.conductorRoute.status}. Capture ${state.captureSha256.slice(0, 10)}…, continuous route ${state.conductorRouteSha256.slice(0, 10)}…, and terminal loci ${state.activeTerminalLociSha256.slice(0, 10)}… are bound.`
+        : `Completed ${completedTurns}/${state.depositions.length} physical raw turns. Capture ${state.captureSha256.slice(0, 10)}… is bound; continuous route, terminal loci, and flexible-wire continuity are unavailable/unproved. Use the selected integrated player for governing conductor review.`)
+      : `Deposited ${completedTurns}/${state.depositions.length} plan-center turns; captured commanded/actual M0/M1/M2 progression and motorless M3 command state. Plan ${state.slotPlan.artifactSha256.slice(0, 10)}… bound.`;
+  }
+}
+
+function updateRunState() {
+  $('play').textContent = playing ? 'Pause' : (virtualTime >= state.virtualDuration ? 'Replay' : 'Play');
+  $('run-badge').textContent = playing ? 'Playing' : (virtualTime >= state.virtualDuration ? 'Complete' : 'Paused');
+  $('run-badge').classList.toggle('active', playing);
+}
+
+function seek(time) {
+  virtualTime = Math.max(0, Math.min(state.virtualDuration, Number(time)));
+  // AnimationAction repeats by default.  Stay one floating-point instant
+  // inside the clip at the terminal pose instead of wrapping to frame zero.
+  if (mixer) mixer.setTime(Math.min(
+    virtualTime / state.exportSpeed,
+    Math.max(0, clipDuration - 1e-5)
+  ));
+  if (machine) machine.updateMatrixWorld(true);
+  const pose = state.axisKnots.map(knots => sampleKnots(knots, virtualTime));
+  $('scrub').value = String(virtualTime);
+  $('time-label').textContent = `${formatTime(virtualTime)} / ${formatTime(state.virtualDuration)} virtual`;
+  updateWire(virtualTime, pose);
+  updateStatus(virtualTime, pose);
+  updateCoils(virtualTime);
+  updateCoilStart(virtualTime);
+  updateCoilNavigation(virtualTime);
+}
+
+function setPlaying(value) {
+  if (value && virtualTime >= state.virtualDuration) {
+    virtualTime = 0;
+    heldCoilStartPasses.clear();
+    coilStartHoldUntilMs = 0;
+  }
+  playing = value;
+  updateRunState();
+}
+
+function stepCommand(direction) {
+  const index = upperBound(state.commands, virtualTime + (direction < 0 ? -1e-4 : 1e-4));
+  const targetIndex = direction < 0 ? Math.max(0, index - 1) : Math.min(state.commands.length - 1, index);
+  setPlaying(false);
+  seek(state.commands[targetIndex][0]);
+}
+
+$('scrub').max = String(state.virtualDuration);
+const speedOption = [...$('speed').options].find(option => Number(option.value) === state.defaultRate);
+const requestedSpeedOption = [...$('speed').options].find(
+  option => Number(option.value) === playbackRate
+);
+if (requestedSpeedOption) $('speed').value = requestedSpeedOption.value;
+else if (speedOption) $('speed').value = speedOption.value;
+$('play').addEventListener('click', () => setPlaying(!playing));
+$('restart').addEventListener('click', () => { setPlaying(false); seek(0); });
+$('prev-command').addEventListener('click', () => stepCommand(-1));
+$('next-command').addEventListener('click', () => stepCommand(1));
+$('prev-coil').addEventListener('click', () => stepCoil(-1));
+$('next-coil').addEventListener('click', () => stepCoil(1));
+$('scrub').addEventListener('input', event => { setPlaying(false); seek(event.target.value); });
+$('speed').addEventListener('change', event => { playbackRate = Number(event.target.value); });
+$('camera').addEventListener('change', event => setCameraPreset(event.target.value));
+$('show-wire').addEventListener('change', () => seek(virtualTime));
+$('show-coils').addEventListener('change', () => updateCoils(virtualTime));
+$('show-reference').addEventListener('change', event => {
+  grid.visible = event.target.checked;
+  axes.visible = event.target.checked;
+});
+
+addEventListener('keydown', event => {
+  if (event.target.matches('input, select, button')) return;
+  if (event.code === 'Space') {
+    event.preventDefault();
+    setPlaying(!playing);
+  } else if (event.code === 'ArrowLeft') {
+    event.preventDefault();
+    setPlaying(false);
+    seek(virtualTime - 1);
+  } else if (event.code === 'ArrowRight') {
+    event.preventDefault();
+    setPlaying(false);
+    seek(virtualTime + 1);
+  } else if (event.code === 'Comma') {
+    event.preventDefault();
+    stepCommand(-1);
+  } else if (event.code === 'Period') {
+    event.preventDefault();
+    stepCommand(1);
+  } else if (event.code === 'BracketLeft') {
+    event.preventDefault();
+    stepCoil(-1);
+  } else if (event.code === 'BracketRight') {
+    event.preventDefault();
+    stepCoil(1);
+  }
+});
+
+new GLTFLoader().parse(glb.buffer, '', result => {
+  machine = result.scene;
+  scene.add(machine);
+  spindleNode = machine.getObjectByName('spindle');
+  wireStaticNode = machine.getObjectByName('wire_static');
+  wireFlyerNode = machine.getObjectByName('wire_flyer');
+  mixer = new THREE.AnimationMixer(machine);
+  clipDuration = result.animations[0].duration;
+  const action = mixer.clipAction(result.animations[0]);
+  action.play();
+  createCoils();
+  createCoilStartMarker();
+  $('loading').remove();
+  seek(reviewStartTime);
+  updateRunState();
+}, error => {
+  $('loading').textContent = `Could not load embedded model: ${error.message || error}`;
+  setPlaying(false);
+});
+
+const clock = new THREE.Clock();
+function animate() {
+  requestAnimationFrame(animate);
+  const delta = Math.min(clock.getDelta(), 0.1);
+  if (playing && mixer) {
+    const now = performance.now();
+    const activeStart = coilStartAt(virtualTime);
+    const startFactor = $('hold-coil-starts').checked && activeStart
+      ? COIL_START_SLOW_FACTOR : 1.0;
+    const next = virtualTime + delta * playbackRate * startFactor;
+    const crossedStart = crossedUnheldCoilStart(virtualTime, next);
+    if (now < coilStartHoldUntilMs) {
+      // Keep the exact raw virtual clock stationary for one real second so
+      // the coil identity, first side, and all axis commands can be read.
+    } else if (crossedStart) {
+      heldCoilStartPasses.add(crossedStart.passIndex);
+      coilStartHoldUntilMs = now + COIL_START_HOLD_MS;
+      focusCoilStart(crossedStart);
+      seek(crossedStart.positioningStart);
+    } else if (next >= state.virtualDuration) {
+      seek(state.virtualDuration);
+      setPlaying(false);
+    } else {
+      seek(next);
+    }
+  }
+  controls.update();
+  renderer.render(scene, camera);
+}
+animate();
+
+addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+</script>
+</body>
+</html>

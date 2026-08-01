@@ -1,0 +1,19 @@
+{
+  "type": "process",
+  "name": "Winder 0.20mm Strength PETG @BBL A1",
+  "inherits": "0.20mm Strength @BBL A1",
+  "from": "User",
+  "instantiation": "true",
+  "compatible_printers": ["Bambu Lab A1 0.4 nozzle"],
+  "curr_bed_type": "Textured PEI Plate",
+  "layer_height": "0.2",
+  "initial_layer_print_height": "0.2",
+  "wall_loops": "6",
+  "top_shell_layers": "5",
+  "bottom_shell_layers": "3",
+  "sparse_infill_density": "25%",
+  "sparse_infill_pattern": "cubic",
+  "filename_format": "{input_filename_base}.gcode",
+  "elefant_foot_compensation": "0.075",
+  "enable_support": "0"
+}
