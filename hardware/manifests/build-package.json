@@ -1,0 +1,659 @@
+{
+  "schema": "stator-winder-build-package/v1",
+  "release_status": "alpha_research_not_production_authorized",
+  "third_party_cad_included": false,
+  "files": [
+    {
+      "path": "hardware/assembly/stator_winder_reference_envelope.step",
+      "source": "cad/assembly.py --reference-mode envelope",
+      "category": "reference_assembly",
+      "bytes": 15002518,
+      "sha256": "cb1a92aabb0e1f8f2c17c24269addd1ebdaad681ac65a51f7a0f13589ca47360"
+    },
+    {
+      "path": "hardware/coupon/coupon-manifest.json",
+      "source": "out/print/coupon/coupon-manifest.json",
+      "category": "proof_coupon",
+      "bytes": 4721,
+      "sha256": "3c4b66ae4745207005f624aad44522a8a87acfa1ec0a92a0a427c78f68609696"
+    },
+    {
+      "path": "hardware/coupon/fit_bridge_coupon.3mf",
+      "source": "out/print/coupon/fit_bridge_coupon.3mf",
+      "category": "proof_coupon",
+      "bytes": 203627,
+      "sha256": "c903bb9c0f0a479ee3ec9ad5d71194fee216113fa81e7d46ff4f362b849eb765"
+    },
+    {
+      "path": "hardware/coupon/fit_bridge_coupon.step",
+      "source": "out/print/coupon/fit_bridge_coupon.step",
+      "category": "proof_coupon",
+      "bytes": 213243,
+      "sha256": "ec2b0ee0239796d263315e290f23d50049a43a514c6a9f4b768da49ec0f16e02"
+    },
+    {
+      "path": "hardware/coupon/fit_bridge_coupon.stl",
+      "source": "out/print/coupon/fit_bridge_coupon.stl",
+      "category": "proof_coupon",
+      "bytes": 865184,
+      "sha256": "a513ca6f093f74448ccd70927527dfbdd9c72259e4b4f41eafe43f1ccf1ee0cb"
+    },
+    {
+      "path": "hardware/drawings/bearing_retention_spacers.pdf",
+      "source": "output/pdf/bearing_retention_spacers.pdf",
+      "category": "shop_drawing",
+      "bytes": 3141,
+      "sha256": "a4eb91a09a6dde7987dcbfba88a644212f1d1b49977275937ac311844dc76977"
+    },
+    {
+      "path": "hardware/drawings/dancer_standoff_sleeves.pdf",
+      "source": "output/pdf/dancer_standoff_sleeves.pdf",
+      "category": "shop_drawing",
+      "bytes": 3048,
+      "sha256": "956cc9301928c7421f7af729285f266ce8127e188ed68e12dcf194814d315c90"
+    },
+    {
+      "path": "hardware/drawings/extrusion_cut_list.pdf",
+      "source": "output/pdf/extrusion_cut_list.pdf",
+      "category": "shop_drawing",
+      "bytes": 3180,
+      "sha256": "69d6bd1068b980fbe18b3b18797dfb26a6cd856b0bf263f06bdb7c57cfa17918"
+    },
+    {
+      "path": "hardware/drawings/felt_tensioner_consumables.pdf",
+      "source": "output/pdf/felt_tensioner_consumables.pdf",
+      "category": "shop_drawing",
+      "bytes": 3525,
+      "sha256": "7311a458244dcf02dd5592c3c2353a40599f88207f9d616826809f9c5706c355"
+    },
+    {
+      "path": "hardware/drawings/fixed_eyelet_id4_od9_t3.pdf",
+      "source": "output/pdf/fixed_eyelet_id4_od9_t3.pdf",
+      "category": "shop_drawing",
+      "bytes": 3391,
+      "sha256": "33e527ca4fb73ef5fbcfeec4e47c7a869e40b1068e92f03bc2c35fd2b4ffa391"
+    },
+    {
+      "path": "hardware/drawings/flyer_shaft_d10_id6_to_id9_l79.pdf",
+      "source": "output/pdf/flyer_shaft_d10_id6_to_id9_l79.pdf",
+      "category": "shop_drawing",
+      "bytes": 3468,
+      "sha256": "2588bf558f6b9739fa2f4f603e55be5b0a73891a79f67d33c5990e232cfe98c0"
+    },
+    {
+      "path": "hardware/drawings/shaft8_socket_holder.pdf",
+      "source": "output/pdf/shaft8_socket_holder.pdf",
+      "category": "shop_drawing",
+      "bytes": 3869,
+      "sha256": "6d407d03abe458234c52373b63c13c21ba53784e78a83fd7b2b70390e70f1324"
+    },
+    {
+      "path": "hardware/drawings/shaft_wrap_sleeve_family.pdf",
+      "source": "output/pdf/shaft_wrap_sleeve_family.pdf",
+      "category": "shop_drawing",
+      "bytes": 2828,
+      "sha256": "dcb1969ea17316c30f1d7d145de4cc40a5c2f189eb67c7bbb4eda367347516cd"
+    },
+    {
+      "path": "hardware/drawings/successor_custom_parts_rfq.pdf",
+      "source": "output/pdf/successor_custom_parts_rfq.pdf",
+      "category": "shop_drawing",
+      "bytes": 6937,
+      "sha256": "4a3ad31e475b57235d1466ccea506dfa76b700e28f0b9b744b50787d5a2532f0"
+    },
+    {
+      "path": "hardware/drawings/t8x8_leadscrew_188_journal30.pdf",
+      "source": "output/pdf/t8x8_leadscrew_188_journal30.pdf",
+      "category": "shop_drawing",
+      "bytes": 3299,
+      "sha256": "8480c071e4c6e49d89e99c2329bd50d9848679585ac1f49d3c16d099dea7cc80"
+    },
+    {
+      "path": "hardware/fabrication/fabricated_carriage.dxf",
+      "source": "cad/fabricated_carriage.dxf",
+      "category": "fabrication_dxf",
+      "bytes": 20677,
+      "sha256": "b7b7f5ee38a5df0d27ef810c1a2add62d64d78cdc87fc8991eb62c0c38feb6c2"
+    },
+    {
+      "path": "hardware/machining/legacy/fixed_eyelet_id4_od9_t3.step",
+      "source": "out/custom/step/fixed_eyelet_id4_od9_t3.step",
+      "category": "custom_machining_step",
+      "bytes": 14658,
+      "sha256": "40a88746e712583cd3b1c0e5a07d4a461199a25bb33c4faba416ff53e409efa0"
+    },
+    {
+      "path": "hardware/machining/legacy/flyer_shaft_d10_id6_to_id9_l79.step",
+      "source": "out/custom/step/flyer_shaft_d10_id6_to_id9_l79.step",
+      "category": "custom_machining_step",
+      "bytes": 42067,
+      "sha256": "caf1ed9fd3259307f4cf892e184467dbacff8f7036014aae155aef1b317b7f18"
+    },
+    {
+      "path": "hardware/machining/legacy/m0_fixed_collar.step",
+      "source": "out/custom/step/m0_fixed_collar.step",
+      "category": "custom_machining_step",
+      "bytes": 50465,
+      "sha256": "bf80a104f8411f7a5c84e07158a5e7dcfabfc207075791d14d3d8e37b82c7dbd"
+    },
+    {
+      "path": "hardware/machining/legacy/m0_inner_shim.step",
+      "source": "out/custom/step/m0_inner_shim.step",
+      "category": "custom_machining_step",
+      "bytes": 9271,
+      "sha256": "c72197c38fd4b137d3d3be26b497b9bfdbb61645c1a6cf0b4dff6bbafd5e3937"
+    },
+    {
+      "path": "hardware/machining/legacy/m1_inner_race_spacer.step",
+      "source": "out/custom/step/m1_inner_race_spacer.step",
+      "category": "custom_machining_step",
+      "bytes": 9296,
+      "sha256": "80592d2012397050a199e30513b33aabf5f005066ec0a46b45b701ccb544407d"
+    },
+    {
+      "path": "hardware/machining/legacy/m1_lower_inner_spacer.step",
+      "source": "out/custom/step/m1_lower_inner_spacer.step",
+      "category": "custom_machining_step",
+      "bytes": 9299,
+      "sha256": "51008046db87c63b26cd9761e92dd6af44d0bc17353202268167555f8aa03597"
+    },
+    {
+      "path": "hardware/machining/legacy/m1_outer_race_spacer.step",
+      "source": "out/custom/step/m1_outer_race_spacer.step",
+      "category": "custom_machining_step",
+      "bytes": 9288,
+      "sha256": "91b27ceedcecba79a70b34baa1d779589124e1cc6a37c95dac3c6aa968533df8"
+    },
+    {
+      "path": "hardware/machining/legacy/m1_upper_collar.step",
+      "source": "out/custom/step/m1_upper_collar.step",
+      "category": "custom_machining_step",
+      "bytes": 46848,
+      "sha256": "311fd0ce18bcd09a64e68887a1a78b0efa4cac52a35c1ac7e5aa6a83a264dc26"
+    },
+    {
+      "path": "hardware/machining/legacy/m2_center_inner_spacer.step",
+      "source": "out/custom/step/m2_center_inner_spacer.step",
+      "category": "custom_machining_step",
+      "bytes": 9316,
+      "sha256": "e930dad8ebd374a13a9ee4324a33c8020107f509c87f2462c84919a2c1eff674"
+    },
+    {
+      "path": "hardware/machining/legacy/m2_front_inner_spacer.step",
+      "source": "out/custom/step/m2_front_inner_spacer.step",
+      "category": "custom_machining_step",
+      "bytes": 9289,
+      "sha256": "5564fc79db61d4a9ccd90d31fa3d8b8be52c7495cf9aee895614eabc94db4096"
+    },
+    {
+      "path": "hardware/machining/legacy/m2_outer_race_spacer.step",
+      "source": "out/custom/step/m2_outer_race_spacer.step",
+      "category": "custom_machining_step",
+      "bytes": 9299,
+      "sha256": "7c4462bbeb7de2fd0ac317dea40105533a6f3beb59dc7491455c280e24a11caf"
+    },
+    {
+      "path": "hardware/machining/legacy/m2_rear_shim.step",
+      "source": "out/custom/step/m2_rear_shim.step",
+      "category": "custom_machining_step",
+      "bytes": 9292,
+      "sha256": "3a61bb0b61b244d71926a64d2708cc81c130233fbc348ec0da5423819c0f6d78"
+    },
+    {
+      "path": "hardware/machining/legacy/manifest.json",
+      "source": "out/custom/manifest.json",
+      "category": "custom_manifest",
+      "bytes": 5552,
+      "sha256": "8a5e4ec9dc8eb16fa948e752ad9766afa0ad8ce210ab15729f2a87f7bee6c659"
+    },
+    {
+      "path": "hardware/machining/legacy/shaft8_socket_holder.step",
+      "source": "out/custom/step/shaft8_socket_holder.step",
+      "category": "custom_machining_step",
+      "bytes": 98236,
+      "sha256": "6835c8cf51472e936b807ef213705dcd38152473abe33b0ff758427b95801b4c"
+    },
+    {
+      "path": "hardware/machining/legacy/shaft_wrap_sleeve_d4.step",
+      "source": "out/custom/step/shaft_wrap_sleeve_d4.step",
+      "category": "custom_machining_step",
+      "bytes": 14537,
+      "sha256": "0339954dda5f99cf53f9a307b1b0bf2570ce119ec2e568dd69e23b917376d491"
+    },
+    {
+      "path": "hardware/machining/legacy/t8x8_leadscrew_188_journal30.step",
+      "source": "out/custom/step/t8x8_leadscrew_188_journal30.step",
+      "category": "custom_machining_step",
+      "bytes": 5645,
+      "sha256": "8fb994af287f0dd8e9804f0590958f6a42a6373e28e663bb3679e0bd029e32f9"
+    },
+    {
+      "path": "hardware/machining/successor/active_sector_aluminum_yoke.step",
+      "source": "out/custom/successor/step/active_sector_aluminum_yoke.step",
+      "category": "successor_machining_step",
+      "bytes": 420620,
+      "sha256": "8eddee6f4abc18060a760c6bfed0a6037dcc244051f663bc77739e17e3ad10e9"
+    },
+    {
+      "path": "hardware/machining/successor/active_sector_peek_guide_front.step",
+      "source": "out/custom/successor/step/active_sector_peek_guide_front.step",
+      "category": "successor_machining_step",
+      "bytes": 406672,
+      "sha256": "8ddf2185aa11525ac785c977de001b7fdcd8d80de6ed6b30bacb5268d825e639"
+    },
+    {
+      "path": "hardware/machining/successor/active_sector_peek_guide_rear.step",
+      "source": "out/custom/successor/step/active_sector_peek_guide_rear.step",
+      "category": "successor_machining_step",
+      "bytes": 406103,
+      "sha256": "8d8618a2a91c3c2a4d9a109449f3b47a8ee0d6cee4b150632a1dc5cb148ba250"
+    },
+    {
+      "path": "hardware/machining/successor/balance_b777_front_left.step",
+      "source": "out/custom/successor/step/balance_b777_front_left.step",
+      "category": "successor_machining_step",
+      "bytes": 10940,
+      "sha256": "02918cc9665965e717403876d092954198f311bc69c94c48846c955ab7270d10"
+    },
+    {
+      "path": "hardware/machining/successor/balance_b777_front_right.step",
+      "source": "out/custom/successor/step/balance_b777_front_right.step",
+      "category": "successor_machining_step",
+      "bytes": 10935,
+      "sha256": "21068cd84b27ab36400d5110bb5ff61c5095cb86d5e43ba5ed3bb4d906dcfee2"
+    },
+    {
+      "path": "hardware/machining/successor/balance_b777_rear_1_rear_left.step",
+      "source": "out/custom/successor/step/balance_b777_rear_1_rear_left.step",
+      "category": "successor_machining_step",
+      "bytes": 11021,
+      "sha256": "2fc9abc396dd6ebb1494881c9991e2f38d16045553ea6560cedc347f3132fc94"
+    },
+    {
+      "path": "hardware/machining/successor/balance_b777_rear_2_rear_right.step",
+      "source": "out/custom/successor/step/balance_b777_rear_2_rear_right.step",
+      "category": "successor_machining_step",
+      "bytes": 10928,
+      "sha256": "e193cb6b454d9e396b941a55a4014c8c6692e1d187a811b4db41bc20ef11b0a7"
+    },
+    {
+      "path": "hardware/machining/successor/balance_b777_rear_3_front_left.step",
+      "source": "out/custom/successor/step/balance_b777_rear_3_front_left.step",
+      "category": "successor_machining_step",
+      "bytes": 10995,
+      "sha256": "abddf46627d7cd912c0e93655358932483a372efa7b991ca5faa74ba9ac0792d"
+    },
+    {
+      "path": "hardware/machining/successor/balance_b777_rear_4_front_right.step",
+      "source": "out/custom/successor/step/balance_b777_rear_4_front_right.step",
+      "category": "successor_machining_step",
+      "bytes": 10995,
+      "sha256": "4e3b6966571f96ae8637038f444e7f2ce9968f3b63676cc494a015edb442d0a5"
+    },
+    {
+      "path": "hardware/machining/successor/flyer_peek_guide_bell.step",
+      "source": "out/custom/successor/step/flyer_peek_guide_bell.step",
+      "category": "successor_machining_step",
+      "bytes": 215811,
+      "sha256": "41117960cb93ac3291beea5ef24a66cc6a553c7ab272fc986da56c8878a751f0"
+    },
+    {
+      "path": "hardware/machining/successor/manifest.json",
+      "source": "out/custom/successor/manifest.json",
+      "category": "successor_manifest",
+      "bytes": 32155,
+      "sha256": "08714b0f6b8b4a2b089a05b6d21053900784148b2315a2a257063ed0f91b8572"
+    },
+    {
+      "path": "hardware/machining/successor/stator_short_leadin_cap_front.step",
+      "source": "out/custom/successor/step/stator_short_leadin_cap_front.step",
+      "category": "successor_machining_step",
+      "bytes": 18486397,
+      "sha256": "b63ce9ef1831166957b1455005e6139f428da846f8e91e2a1fcd362a8e2a6229"
+    },
+    {
+      "path": "hardware/machining/successor/stator_short_leadin_cap_rear.step",
+      "source": "out/custom/successor/step/stator_short_leadin_cap_rear.step",
+      "category": "successor_machining_step",
+      "bytes": 18618250,
+      "sha256": "e6489ce2a8b17825cd8c732371fa757fb62614c1785113ab1a5d1abf42e79f12"
+    },
+    {
+      "path": "hardware/machining/successor/successor_rfq.csv",
+      "source": "out/custom/successor/successor_rfq.csv",
+      "category": "successor_rfq",
+      "bytes": 21120,
+      "sha256": "f48d61f94cd02829ebcb6d759101d831b8521458ecdec4ecc72de62b0e24b8c3"
+    },
+    {
+      "path": "hardware/orders/full_order.csv",
+      "source": "out/order/full_order.csv",
+      "category": "order_csv",
+      "bytes": 21167,
+      "sha256": "3c7795a4c270c3376fdfef77437ffba58a9ce6a16170d96ab4dd3810a2f9b9ac"
+    },
+    {
+      "path": "hardware/orders/hardware_order.csv",
+      "source": "out/order/hardware_order.csv",
+      "category": "order_csv",
+      "bytes": 10117,
+      "sha256": "1233b14255ff5bf5d0ac5a79982b3a054340735b08d0f877caf114553c64812d"
+    },
+    {
+      "path": "hardware/orders/print_jobs.csv",
+      "source": "out/order/print_jobs.csv",
+      "category": "order_csv",
+      "bytes": 3407,
+      "sha256": "df76ed4342371f00ba79f4cfd6fb6fe56d0ce0e32fed5c3895e3efe5078550bb"
+    },
+    {
+      "path": "hardware/orders/print_manifest.csv",
+      "source": "out/order/print_manifest.csv",
+      "category": "order_csv",
+      "bytes": 2514,
+      "sha256": "7d2a339d99810c19d15bdd997d3d9ab40a7747416729217c32bf1bde98b66556"
+    },
+    {
+      "path": "hardware/printables/step/balance_retainer_front_left.step",
+      "source": "out/step/balance_retainer_front_left.step",
+      "category": "printable_step",
+      "bytes": 63584,
+      "sha256": "cf933348f4f783bcb40c9975d1da8f4642ad018f4d9cb822869800455f5f0b50"
+    },
+    {
+      "path": "hardware/printables/step/balance_retainer_front_right.step",
+      "source": "out/step/balance_retainer_front_right.step",
+      "category": "printable_step",
+      "bytes": 63519,
+      "sha256": "6266ccd881d7f56c929d6d935a49f4d8e73b65e0fa7c561c15a26f554aac6115"
+    },
+    {
+      "path": "hardware/printables/step/balance_retainer_rear_left.step",
+      "source": "out/step/balance_retainer_rear_left.step",
+      "category": "printable_step",
+      "bytes": 63699,
+      "sha256": "17e788a8fae6598f7435ecb8926856d0ac715e190b5c98a96c9a7322e0a15260"
+    },
+    {
+      "path": "hardware/printables/step/balance_retainer_rear_right.step",
+      "source": "out/step/balance_retainer_rear_right.step",
+      "category": "printable_step",
+      "bytes": 62865,
+      "sha256": "4d96f8db86ba867a6071e9052b83266520658e213290ca8166c3c9c45e2891bb"
+    },
+    {
+      "path": "hardware/printables/step/carriage_endstop_flag.step",
+      "source": "out/step/carriage_endstop_flag.step",
+      "category": "printable_step",
+      "bytes": 40084,
+      "sha256": "c5395c85de8ff3a1fa37278de2dc888633807927fd2f44a6845b14b168804b12"
+    },
+    {
+      "path": "hardware/printables/step/dancer_arm.step",
+      "source": "out/step/dancer_arm.step",
+      "category": "printable_step",
+      "bytes": 33743,
+      "sha256": "c8c6d1d6d7db60b0072a775d3ad0098ae13daac8829d2559b3bb5133a788b031"
+    },
+    {
+      "path": "hardware/printables/step/dancer_base.step",
+      "source": "out/step/dancer_base.step",
+      "category": "printable_step",
+      "bytes": 61446,
+      "sha256": "1edaae3584db4bde58133c29371c5c1ce4aab8f4ac0006e21b232e0f95babd42"
+    },
+    {
+      "path": "hardware/printables/step/dancer_pulley.step",
+      "source": "out/step/dancer_pulley.step",
+      "category": "printable_step",
+      "bytes": 26735,
+      "sha256": "577aac7591577fdb2f14563d9feb035affe8851a2db987916fd71c7b8c2aebb8"
+    },
+    {
+      "path": "hardware/printables/step/endstop_mount.step",
+      "source": "out/step/endstop_mount.step",
+      "category": "printable_step",
+      "bytes": 108446,
+      "sha256": "51f8cc886b0bbbac3af494140c49b9beb0b87fc4a1edd638cb3fce66c4c61e18"
+    },
+    {
+      "path": "hardware/printables/step/entry_bracket.step",
+      "source": "out/step/entry_bracket.step",
+      "category": "printable_step",
+      "bytes": 299562,
+      "sha256": "725adb9413494335fba377326091a2b4ea0a6f2aaff5037a16bf6fed1c91ef34"
+    },
+    {
+      "path": "hardware/printables/step/felt_tensioner.step",
+      "source": "out/step/felt_tensioner.step",
+      "category": "printable_step",
+      "bytes": 124250,
+      "sha256": "96ddbbc8c91d1458e05dad4b8335bd88b55e7a2dd4de41d925aa93ffb604c071"
+    },
+    {
+      "path": "hardware/printables/step/flyer_arm.step",
+      "source": "out/step/flyer_arm.step",
+      "category": "printable_step",
+      "bytes": 449726,
+      "sha256": "8a7ad59465d542217b4e5671174c6ce7907f11757aaa048b056b4e914777eecb"
+    },
+    {
+      "path": "hardware/printables/step/flyer_block.step",
+      "source": "out/step/flyer_block.step",
+      "category": "printable_step",
+      "bytes": 55233,
+      "sha256": "508a0905a0fbc7e4b9c0a6f26b9495e7a35ded33edf0b90d388b58b0c3a0cb7e"
+    },
+    {
+      "path": "hardware/printables/step/m0_fixed_end_mount.step",
+      "source": "out/step/m0_fixed_end_mount.step",
+      "category": "printable_step",
+      "bytes": 118224,
+      "sha256": "a632eca0724725d17a7665c949b365b60048cf2ba83fc645be3408ad1ae6d010"
+    },
+    {
+      "path": "hardware/printables/step/m0_motor_mount.step",
+      "source": "out/step/m0_motor_mount.step",
+      "category": "printable_step",
+      "bytes": 77146,
+      "sha256": "4adba6dbaaf6736acc63259b7b74848398391625aa5112304b0ebb4dd274b2e2"
+    },
+    {
+      "path": "hardware/printables/step/m2_motor_mount.step",
+      "source": "out/step/m2_motor_mount.step",
+      "category": "printable_step",
+      "bytes": 159495,
+      "sha256": "85d278e69e6ce42c411b02c8075f87235829edaf00cdd0a0d4f9675159eeb372"
+    },
+    {
+      "path": "hardware/printables/step/nut_bracket.step",
+      "source": "out/step/nut_bracket.step",
+      "category": "printable_step",
+      "bytes": 115769,
+      "sha256": "c843e766245b1406bbeb6baadf1f50a38314e3e976114d549bff07813eb25389"
+    },
+    {
+      "path": "hardware/printables/step/rear_post_left_shoe.step",
+      "source": "out/step/rear_post_left_shoe.step",
+      "category": "printable_step",
+      "bytes": 43748,
+      "sha256": "903813c7e5830bad7e20bc67d9824339ae08f9762722a8b1a43e726c45737f84"
+    },
+    {
+      "path": "hardware/printables/step/spindle_tower.step",
+      "source": "out/step/spindle_tower.step",
+      "category": "printable_step",
+      "bytes": 287955,
+      "sha256": "865415840dad72e6d91f01efadf04f97f9540a8c1dc18ecde2dc77eb46b4d3a9"
+    },
+    {
+      "path": "hardware/printables/step/spool_bracket.step",
+      "source": "out/step/spool_bracket.step",
+      "category": "printable_step",
+      "bytes": 64491,
+      "sha256": "9ea9b61e89f8dd554f5740a75f21a276289bdabe3c0658553e63d82082c2259f"
+    },
+    {
+      "path": "hardware/printables/step/spool_drum.step",
+      "source": "out/step/spool_drum.step",
+      "category": "printable_step",
+      "bytes": 18555,
+      "sha256": "bb2b6533d23f924edd973a8ca91dc0a421de8ee8a5cb3ac964c910d5749eb9c5"
+    },
+    {
+      "path": "hardware/printables/stl/balance_retainer_front_left.stl",
+      "source": "out/stl/balance_retainer_front_left.stl",
+      "category": "printable_stl",
+      "bytes": 69484,
+      "sha256": "b5c40bbf74158073efc741ff93040ff6fd8c4eeab009d4a482aaa01341f6d920"
+    },
+    {
+      "path": "hardware/printables/stl/balance_retainer_front_right.stl",
+      "source": "out/stl/balance_retainer_front_right.stl",
+      "category": "printable_stl",
+      "bytes": 69484,
+      "sha256": "c867d6b0ab267e03aa636e2473b7219a08b48ccd59f6570242dc88409e2240bc"
+    },
+    {
+      "path": "hardware/printables/stl/balance_retainer_rear_left.stl",
+      "source": "out/stl/balance_retainer_rear_left.stl",
+      "category": "printable_stl",
+      "bytes": 69484,
+      "sha256": "b0b8a823ca74e5b461bee72481b5e7757c9f92bdc029192b373d77a39654c520"
+    },
+    {
+      "path": "hardware/printables/stl/balance_retainer_rear_right.stl",
+      "source": "out/stl/balance_retainer_rear_right.stl",
+      "category": "printable_stl",
+      "bytes": 69484,
+      "sha256": "43df82341f9786b4010d73085bc0c281d563f10ecc38def818c696329bad4f36"
+    },
+    {
+      "path": "hardware/printables/stl/carriage_endstop_flag.stl",
+      "source": "out/stl/carriage_endstop_flag.stl",
+      "category": "printable_stl",
+      "bytes": 35484,
+      "sha256": "a1a6ff2d03f87ca40e94a89fef04d1f5611a4faa60ce807e4f576c38c45651dd"
+    },
+    {
+      "path": "hardware/printables/stl/dancer_arm.stl",
+      "source": "out/stl/dancer_arm.stl",
+      "category": "printable_stl",
+      "bytes": 95484,
+      "sha256": "b45c6608693b510acad7f0b5d0a55855590fdeaa0cd2e3ce2da6f98dbe9eb0f6"
+    },
+    {
+      "path": "hardware/printables/stl/dancer_base.stl",
+      "source": "out/stl/dancer_base.stl",
+      "category": "printable_stl",
+      "bytes": 157684,
+      "sha256": "c56a860cd3e09d45d17b1326133206616a0a4ad3a04032a2ab73671241cf7991"
+    },
+    {
+      "path": "hardware/printables/stl/dancer_pulley.stl",
+      "source": "out/stl/dancer_pulley.stl",
+      "category": "printable_stl",
+      "bytes": 100884,
+      "sha256": "5e5f4227fa6a942a5bd9add29031b7edacc82fa50ecdc3873564a6df1637fe8f"
+    },
+    {
+      "path": "hardware/printables/stl/endstop_mount.stl",
+      "source": "out/stl/endstop_mount.stl",
+      "category": "printable_stl",
+      "bytes": 159084,
+      "sha256": "fda44c9b44672ec143e4bb00f8781c47cb5aaaec0c211c3d1e6b9e8c075a28b6"
+    },
+    {
+      "path": "hardware/printables/stl/entry_bracket.stl",
+      "source": "out/stl/entry_bracket.stl",
+      "category": "printable_stl",
+      "bytes": 267684,
+      "sha256": "57baedcc1fe3a913dcb93dfea929fa0a3dd6a5c2c7e4cde9f4a77f4ff30b2b3e"
+    },
+    {
+      "path": "hardware/printables/stl/felt_tensioner.stl",
+      "source": "out/stl/felt_tensioner.stl",
+      "category": "printable_stl",
+      "bytes": 132084,
+      "sha256": "22be766d72629f8a02346e317829bc0c374bb4ca1cb45b3928a497e2e6f5eb85"
+    },
+    {
+      "path": "hardware/printables/stl/flyer_arm.stl",
+      "source": "out/stl/flyer_arm.stl",
+      "category": "printable_stl",
+      "bytes": 1026484,
+      "sha256": "4b6e6b6c57e0be57aa5d3ddfe190eb79b70cc4fd7ae041fbf506bb75fb9014cf"
+    },
+    {
+      "path": "hardware/printables/stl/flyer_block.stl",
+      "source": "out/stl/flyer_block.stl",
+      "category": "printable_stl",
+      "bytes": 169684,
+      "sha256": "14e42bed07208be4793554b336a878fbf0b9225c19adf2c7a36e7441190e9099"
+    },
+    {
+      "path": "hardware/printables/stl/m0_fixed_end_mount.stl",
+      "source": "out/stl/m0_fixed_end_mount.stl",
+      "category": "printable_stl",
+      "bytes": 169284,
+      "sha256": "a0d5efafb64bc0f1baec7ef24fe35c59e1f4fa766c632aaa22c5391c85137cd7"
+    },
+    {
+      "path": "hardware/printables/stl/m0_motor_mount.stl",
+      "source": "out/stl/m0_motor_mount.stl",
+      "category": "printable_stl",
+      "bytes": 121484,
+      "sha256": "20f3643fea79557441f1008f22b26a64376b51d22398409e9b1292b1c9c7a82b"
+    },
+    {
+      "path": "hardware/printables/stl/m2_motor_mount.stl",
+      "source": "out/stl/m2_motor_mount.stl",
+      "category": "printable_stl",
+      "bytes": 126784,
+      "sha256": "8ed104e9e179973c5d75c1c311eb63ebec459f8f34e419e48a63d87308e58df2"
+    },
+    {
+      "path": "hardware/printables/stl/nut_bracket.stl",
+      "source": "out/stl/nut_bracket.stl",
+      "category": "printable_stl",
+      "bytes": 113584,
+      "sha256": "b9c7a641571f3b16e24149aaf43078c5dc131ca195b24abdde7c5b7f1145129a"
+    },
+    {
+      "path": "hardware/printables/stl/rear_post_left_shoe.stl",
+      "source": "out/stl/rear_post_left_shoe.stl",
+      "category": "printable_stl",
+      "bytes": 52084,
+      "sha256": "92c49294eba62d879a504d8902615d8db9902bf801c0da669ec17e16bcd4f8e7"
+    },
+    {
+      "path": "hardware/printables/stl/spindle_tower.stl",
+      "source": "out/stl/spindle_tower.stl",
+      "category": "printable_stl",
+      "bytes": 450884,
+      "sha256": "b9e45d4bf4b7acf379c624df256b3489415283a063077564a43860ac3d1aa2c7"
+    },
+    {
+      "path": "hardware/printables/stl/spool_bracket.stl",
+      "source": "out/stl/spool_bracket.stl",
+      "category": "printable_stl",
+      "bytes": 103884,
+      "sha256": "339537ff66819c9dbade7a53cf05cc2b36943fe8d683609b383232e279dd1433"
+    },
+    {
+      "path": "hardware/printables/stl/spool_drum.stl",
+      "source": "out/stl/spool_drum.stl",
+      "category": "printable_stl",
+      "bytes": 67284,
+      "sha256": "5d76a4095a06cc3a7a0c1479984b840548e4395d2565a88f2a974a528b2e5cbc"
+    }
+  ],
+  "summary": {
+    "files": 92,
+    "bytes": 61375200,
+    "printable_stl": 21,
+    "printable_step": 21,
+    "custom_machining_step": 15,
+    "successor_machining_step": 12
+  }
+}

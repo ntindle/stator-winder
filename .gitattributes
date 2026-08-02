@@ -1,0 +1,7 @@
+*.step binary
+*.stp binary
+*.stl binary
+*.3mf binary
+*.dxf text
+*.pdf binary
+*.gif binary

@@ -1,0 +1,186 @@
+{
+  "status": "physical_coupon_test_required",
+  "production_release_allowed": false,
+  "coupon": {
+    "part": "fit_bridge_coupon",
+    "revision": "A",
+    "units": "mm",
+    "material": "same dry PETG and spool intended for production",
+    "base_mm": [
+      180.0,
+      90.0,
+      4.0
+    ],
+    "bearing_through_gauges": [
+      {
+        "id": "6001",
+        "diameter_mm": 28.1,
+        "center": [
+          -66.0,
+          -23.0
+        ],
+        "outer_diameter_mm": 36.0
+      },
+      {
+        "id": "608",
+        "diameter_mm": 22.1,
+        "center": [
+          -27.0,
+          -23.0
+        ],
+        "outer_diameter_mm": 30.0
+      },
+      {
+        "id": "688",
+        "diameter_mm": 16.1,
+        "center": [
+          4.0,
+          -23.0
+        ],
+        "outer_diameter_mm": 24.0
+      },
+      {
+        "id": "623",
+        "diameter_mm": 10.1,
+        "center": [
+          28.0,
+          -23.0
+        ],
+        "outer_diameter_mm": 18.0
+      }
+    ],
+    "pulley_bore_gauge": {
+      "diameter_mm": 12.05,
+      "center": [
+        55.0,
+        -23.0
+      ],
+      "height_mm": 12.0
+    },
+    "elbow_sleeve_male_gauge": {
+      "diameter_mm": 8.96,
+      "center": [
+        78.0,
+        -23.0
+      ],
+      "height_mm": 12.0
+    },
+    "heat_set_pilots": [
+      {
+        "sku": "94459A769",
+        "depth_mm": 3.4,
+        "center": [
+          -70.0,
+          20.0
+        ],
+        "marker_count": 1
+      },
+      {
+        "sku": "94459A130",
+        "depth_mm": 4.3,
+        "center": [
+          -52.0,
+          20.0
+        ],
+        "marker_count": 2
+      },
+      {
+        "sku": "94459A140",
+        "depth_mm": 5.7,
+        "center": [
+          -34.0,
+          20.0
+        ],
+        "marker_count": 3
+      }
+    ],
+    "bridge": {
+      "unsupported_gap_mm": 44.0,
+      "width_mm": 12.0,
+      "underside_z_mm": 20.0,
+      "roof_thickness_mm": 4.0
+    },
+    "acceptance": {
+      "bearing_gauges": "each named real bearing starts square, seats without cracking, has no radial rock, and can be pushed back out",
+      "pulley_bore": "real OD12 flyer tube enters without splitting",
+      "elbow_sleeve": "male OD8.96 gauge enters the real tube ID9 mouth",
+      "heat_set_pilots": "one insert of each SKU installs flush at its keyed depth without boss cracking or pullout",
+      "bridge": "44 mm underside is continuous, has no dropped strands, and midspan sag is at most 0.50 mm relative to both ends"
+    }
+  },
+  "slicer_input": {
+    "source_geometry_unchanged": true,
+    "translation_mm": [
+      128.0,
+      128.0,
+      0.0
+    ],
+    "mesh_watertight": true,
+    "mesh_winding_consistent": true,
+    "mesh_components": 1,
+    "bounds_mm": [
+      [
+        38.0,
+        83.0,
+        0.0
+      ],
+      [
+        218.0,
+        173.0,
+        24.0
+      ]
+    ]
+  },
+  "sliced_gcode": {
+    "profile_metadata_verified": true,
+    "values": {
+      "bottom_shell_layers": "3",
+      "curr_bed_type": "Textured PEI Plate",
+      "enable_support": "0",
+      "fan_max_speed": "40",
+      "fan_min_speed": "10",
+      "filament_density": "1.25",
+      "filament_flow_ratio": "0.94",
+      "filament_max_volumetric_speed": "9",
+      "layer_height": "0.2",
+      "nozzle_temperature": "260",
+      "sparse_infill_density": "25%",
+      "sparse_infill_pattern": "cubic",
+      "textured_plate_temp": "70",
+      "top_shell_layers": "5",
+      "wall_loops": "6"
+    }
+  },
+  "artifacts": [
+    {
+      "role": "canonical_step",
+      "path": "out/print/coupon/fit_bridge_coupon.step",
+      "bytes": 213243,
+      "sha256": "ec2b0ee0239796d263315e290f23d50049a43a514c6a9f4b768da49ec0f16e02"
+    },
+    {
+      "role": "canonical_stl",
+      "path": "out/print/coupon/fit_bridge_coupon.stl",
+      "bytes": 865184,
+      "sha256": "a513ca6f093f74448ccd70927527dfbdd9c72259e4b4f41eafe43f1ccf1ee0cb"
+    },
+    {
+      "role": "canonical_3mf_inspection_only",
+      "path": "out/print/coupon/fit_bridge_coupon.3mf",
+      "bytes": 203627,
+      "sha256": "c903bb9c0f0a479ee3ec9ad5d71194fee216113fa81e7d46ff4f362b849eb765"
+    },
+    {
+      "role": "a1_plate_stl",
+      "path": "out/print/coupon/fit_bridge_coupon_a1_plate.stl",
+      "bytes": 865184,
+      "sha256": "7b5a4570bdf76002fab11c62c4cd3a34fe0ea5eeb32d3d71ec8881f2c0fc87ae"
+    },
+    {
+      "role": "sliced_gcode",
+      "path": "out/print/coupon/fit_bridge_coupon.gcode",
+      "bytes": 8910302,
+      "sha256": "ea509ad5ff9a5f6c8f98a5ddbb17b28e58fe2a979608cf6fb809615f018a9c79"
+    }
+  ]
+}

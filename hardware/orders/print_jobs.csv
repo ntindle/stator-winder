@@ -1,0 +1,22 @@
+part,quantity,revision,printer,material,nozzle_mm,layer_height_mm,walls,top_layers,bottom_layers,infill_percent,infill_pattern,overrides_json
+flyer_block,1,unreleased,Bambu Lab A1 0.4 nozzle,INLAND PETG Plus,0.4,0.2,6,5,3,25,cubic,{}
+flyer_arm,1,successor-A,Bambu Lab A1 0.4 nozzle,INLAND PETG Plus,0.4,0.2,6,5,3,25,cubic,"{""infill_percent"": 100, ""postprocess"": [""ream the final unioned root sleeve ID12.10 to the released fit"", ""install and pull-test all flyer-guide and front-trim inserts before balance""], ""supports"": true}"
+m2_motor_mount,1,unreleased,Bambu Lab A1 0.4 nozzle,INLAND PETG Plus,0.4,0.2,6,5,3,25,cubic,"{""supports"": true}"
+carriage_endstop_flag,1,unreleased,Bambu Lab A1 0.4 nozzle,INLAND PETG Plus,0.4,0.2,6,5,3,25,cubic,{}
+spindle_tower,1,active-sector-A,Bambu Lab A1 0.4 nozzle,INLAND PETG Plus,0.4,0.2,6,5,3,25,cubic,"{""bridge_qualification"": ""44 mm coupon span must pass"", ""postprocess"": [""gauge four M4 insert pilots and two aluminum-yoke datum pockets""], ""supports"": false}"
+nut_bracket,1,unreleased,Bambu Lab A1 0.4 nozzle,INLAND PETG Plus,0.4,0.2,6,5,3,25,cubic,"{""supports"": true}"
+m0_motor_mount,1,unreleased,Bambu Lab A1 0.4 nozzle,INLAND PETG Plus,0.4,0.2,6,5,3,25,cubic,{}
+m0_fixed_end_mount,1,unreleased,Bambu Lab A1 0.4 nozzle,INLAND PETG Plus,0.4,0.2,6,5,3,25,cubic,"{""supports"": true}"
+endstop_mount,1,unreleased,Bambu Lab A1 0.4 nozzle,INLAND PETG Plus,0.4,0.2,6,5,3,25,cubic,"{""supports"": true}"
+spool_bracket,1,unreleased,Bambu Lab A1 0.4 nozzle,INLAND PETG Plus,0.4,0.2,6,5,3,25,cubic,{}
+spool_drum,1,unreleased,Bambu Lab A1 0.4 nozzle,INLAND PETG Plus,0.4,0.2,6,5,3,25,cubic,"{""supports"": true}"
+felt_tensioner,1,unreleased,Bambu Lab A1 0.4 nozzle,INLAND PETG Plus,0.4,0.2,6,5,3,25,cubic,{}
+dancer_base,1,unreleased,Bambu Lab A1 0.4 nozzle,INLAND PETG Plus,0.4,0.2,6,5,3,25,cubic,{}
+dancer_arm,1,unreleased,Bambu Lab A1 0.4 nozzle,INLAND PETG Plus,0.4,0.2,6,5,3,25,cubic,{}
+dancer_pulley,1,unreleased,Bambu Lab A1 0.4 nozzle,INLAND PETG Plus,0.4,0.2,6,5,3,25,cubic,{}
+entry_bracket,1,unreleased,Bambu Lab A1 0.4 nozzle,INLAND PETG Plus,0.4,0.2,6,5,3,25,cubic,"{""supports"": true}"
+rear_post_left_shoe,1,unreleased,Bambu Lab A1 0.4 nozzle,INLAND PETG Plus,0.4,0.2,6,5,3,25,cubic,{}
+balance_retainer_rear_left,1,successor-A,Bambu Lab A1 0.4 nozzle,INLAND PETG Plus,0.4,0.2,6,5,3,25,cubic,"{""infill_percent"": 100, ""postprocess"": [""weigh with its three integral spacer posts"", ""install 94459A130 insert and pass the stack pull coupon""], ""supports"": false}"
+balance_retainer_rear_right,1,successor-A,Bambu Lab A1 0.4 nozzle,INLAND PETG Plus,0.4,0.2,6,5,3,25,cubic,"{""infill_percent"": 100, ""postprocess"": [""weigh with its three integral spacer posts"", ""install 94459A130 insert and pass the stack pull coupon""], ""supports"": false}"
+balance_retainer_front_left,1,successor-A,Bambu Lab A1 0.4 nozzle,INLAND PETG Plus,0.4,0.2,6,5,3,25,cubic,"{""infill_percent"": 100, ""postprocess"": [""weigh with its three integral spacer posts"", ""install 94459A130 insert and pass the stack pull coupon""], ""supports"": false}"
+balance_retainer_front_right,1,successor-A,Bambu Lab A1 0.4 nozzle,INLAND PETG Plus,0.4,0.2,6,5,3,25,cubic,"{""infill_percent"": 100, ""postprocess"": [""weigh with its three integral spacer posts"", ""install 94459A130 insert and pass the stack pull coupon""], ""supports"": false}"

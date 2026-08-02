@@ -33,6 +33,15 @@ bambu-printers.json
 cad/models/**/*.xml
 cad/models/**/*.txt
 
+# Curated project-owned builder artifacts are intentionally versioned.  The
+# broad rules above still protect local supplier caches and generated audits.
+!hardware/**/*.step
+!hardware/**/*.stl
+!hardware/**/*.3mf
+!hardware/**/*.dxf
+!hardware/**/*.pdf
+!docs/media/*.png
+
 # IDE and OS noise
 .DS_Store
 Thumbs.db

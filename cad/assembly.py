@@ -14,6 +14,7 @@ collision checker.
 """
 
 import math
+import argparse
 from pathlib import Path
 from build123d import (
     Part, Cylinder, Cone, Pos, Rot, Align, Compound, Location, Axis,
@@ -209,6 +210,13 @@ def _belt():
     """200-2GT belt loop solid (models/upgrades/gt2_belt.py geometry,
     imported STEP): local loop XY centers (0,0)/(0,-60), extruded z
     0..6; placed in the belt plane."""
+    if cots.using_reference_envelopes():
+        from models.upgrades.gt2_belt import gt2_belt_loop
+        p = gt2_belt_loop()
+        p = Pos(0, 0, (P.pulley_z[0] + P.pulley_z[1]) / 2 - 3.0) * p
+        p.label = "gt2_belt"
+        return p
+
     from build123d import import_step
     from pathlib import Path as _P
     p = import_step(str(_P(__file__).parent / "models" / "upgrades" /
@@ -380,11 +388,27 @@ def gen_step():
     return machine()
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
     """Regenerate the review STEP promised by the repository workflow."""
-    target = Path(__file__).with_name("assembly.step")
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--reference-mode",
+        choices=("exact", "envelope"),
+        default="exact",
+        help=("use locally cached exact supplier CAD or redistributable "
+              "project-authored component envelopes"),
+    )
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=Path(__file__).with_name("assembly.step"),
+    )
+    args = parser.parse_args(argv)
+    cots.set_reference_mode(args.reference_mode)
+    target = args.output
+    target.parent.mkdir(parents=True, exist_ok=True)
     export_step(gen_step(), target)
-    print(target)
+    print(f"{target} (reference_mode={args.reference_mode})")
 
 
 if __name__ == "__main__":

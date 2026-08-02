@@ -1,0 +1,77 @@
+{
+  "schema": "stator-winder-external-cad/v1",
+  "purpose": "Optional exact-model cache for local verification; not required for the public reference-envelope assembly.",
+  "redistribution_policy": "Obtain each file from its source under the source's current terms. Do not copy these files into the public project or a derived build package without a clear redistribution grant.",
+  "items": [
+    {
+      "path": "cad/models/parts/bearing_608zz.step",
+      "sha256": "62d262cc91fb6e213ae85f182811201787e583d527d9a7718ea30a08e1f19fc9",
+      "source_class": "step.parts catalog",
+      "source_notes": "See bom.csv and cad/models/README.md",
+      "redistribution": "not established"
+    },
+    {
+      "path": "cad/models/parts/bearing_6001_zz_shielded_simple.step",
+      "sha256": "ec0e805c295b7b8805b9c703c5fdbb6993b60b8e53f4d594552f42bbce986d22",
+      "source_class": "step.parts catalog",
+      "source_notes": "See bom.csv and cad/models/README.md",
+      "redistribution": "not established"
+    },
+    {
+      "path": "cad/models/parts/beam_coupling_bore5_to_8.step",
+      "sha256": "4b7a5cdea786eca67307da1dcd504dae57b07f805de6b4eb1988a90193a1d78a",
+      "source_class": "step.parts catalog",
+      "source_notes": "Reference envelope only; selected purchased part is Ruland PCMR22-8-5-A",
+      "redistribution": "not established"
+    },
+    {
+      "path": "cad/models/parts/gt2_pulley_40t_bore5_w6.step",
+      "sha256": "47247b6b99878e89b5ee31b8c9bc8b49666371dcd911fcb6b9685d4a80265256",
+      "source_class": "step.parts catalog",
+      "source_notes": "Legacy reference geometry",
+      "redistribution": "not established"
+    },
+    {
+      "path": "cad/models/parts/profile_2020_b_slot6_a_l50.step",
+      "sha256": "a363e0cc1571dc08107d38d63fcae7ec10b81b9b608089af4a4a3dfb002c0c41",
+      "source_class": "step.parts catalog",
+      "source_notes": "B-type slot-6 section reference",
+      "redistribution": "not established"
+    },
+    {
+      "path": "cad/models/upgrades/6627T421.step",
+      "sha256": "2600b11154de8a113f20e392b5d31d3e99f23858f7cb2c69cedd20329b63a7ba",
+      "source_class": "manufacturer/catalog CAD",
+      "source_notes": "See cad/models/upgrades/motors.report.md and bom.csv",
+      "redistribution": "not permitted as a standalone asset"
+    },
+    {
+      "path": "cad/models/upgrades/mgn12r_rail.step",
+      "sha256": "4bdabf35795cb45e94fd9473d6ec5836fa2ed25c779ff26d2112fd29fb483030",
+      "source_class": "unlicensed community mirror",
+      "source_notes": "See cad/models/upgrades/mgn12.report.md",
+      "redistribution": "no license found"
+    },
+    {
+      "path": "cad/models/upgrades/mgn12h_block.step",
+      "sha256": "15d8741cabba9f71d6874316b065597115b54ddc56d9571c520f588dc96126db",
+      "source_class": "manufacturer/reference CAD",
+      "source_notes": "See cad/models/upgrades/mgn12.report.md",
+      "redistribution": "not established"
+    },
+    {
+      "path": "cad/models/upgrades/gt2_belt_200.step",
+      "sha256": "cf73ebd0abb1b80bcc34ad8763dcad6b312f44a671dda0242364650816f1f750",
+      "source_class": "project-generated",
+      "source_notes": "Regenerate from cad/models/upgrades/gt2_belt.py",
+      "redistribution": "project license"
+    },
+    {
+      "path": "cad/models/upgrades/er11_c8_hifi.step",
+      "sha256": "ff4b5e814430aa878d950abf1d686518b811e5627c9f5a1ad5101b233a7ad4f2",
+      "source_class": "project-generated",
+      "source_notes": "Regenerate from cad/models/upgrades/er11_c8_hifi.py",
+      "redistribution": "project license"
+    }
+  ]
+}

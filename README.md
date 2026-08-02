@@ -3,6 +3,8 @@
 Parametric CAD, simulation, and validation tooling for a four-axis flyer
 winding machine for small BLDC stators.
 
+![Stator winder reference assembly](docs/media/stator-winder-hero.png)
+
 > [!WARNING]
 > This is an engineering research prototype, not a production-ready machine.
 > It has not completed physical winding, endurance, electrical-safety, or
@@ -19,6 +21,14 @@ readiness before hardware is purchased.
 _Generated from the captured upstream-motion simulation. This is a mechanism
 visualization, not physical-process or production evidence._
 
+<p align="center">
+  <img src="docs/media/stator-winder-opposite.png" width="49%" alt="Stator winder drive-side assembly view">
+  <img src="docs/media/stator-winder-top.png" width="49%" alt="Stator winder top assembly view">
+</p>
+
+_High-resolution views of the redistributable reference assembly. Purchased
+components use project-authored dimensional envelopes._
+
 ## Project status
 
 - Parametric machine, tooling, and fixture source is present.
@@ -34,6 +44,18 @@ visualization, not physical-process or production evidence._
 The detailed working state lives in
 [`docs/engineering-status.md`](docs/engineering-status.md), and open release
 work is tracked in [`TODO.md`](TODO.md).
+
+## Download and build
+
+The public [`hardware/`](hardware/) package contains a vendor-free reference
+assembly, 21 print-oriented STL files with editable STEP counterparts, custom
+machining STEP files, the carriage DXF, shop drawings, proof coupon, and order
+CSVs. Start with the [`builder guide`](BUILD.md) and review the explicitly
+incomplete [`cost status`](COSTS.md) before ordering anything.
+
+The loadable assembly uses project-authored dimensional envelopes for
+purchased components. Exact supplier CAD remains optional local verification
+material and is not redistributed without a clear license grant.
 
 ## Architecture
 
@@ -60,15 +82,17 @@ serial protocol.
 cad/          parametric mechanism, parts, drawings, and CAD audits
 controller/   fail-closed entry point around the separate upstream controller
 docs/         requirements, engineering status, and RFQ material
+hardware/     loadable alpha build package containing project-owned artifacts
 print/        proof-coupon and slicer-profile tooling
 sim/          capture, kinematics, collision, conductor, and release audits
 bom.csv       purchasing candidates and qualification state
 TODO.md       open engineering and release blockers
 ```
 
-Generated CAD, reports, media, and locally downloaded supplier models are not
-tracked. They are reproducible or externally licensed artifacts rather than
-project source.
+Selected project-owned build artifacts are tracked under `hardware/`. The
+broader generated audit tree and locally downloaded supplier models remain
+untracked; they are either reproducible evidence or externally controlled
+reference assets rather than project source.
 
 ## Quick start
 
@@ -82,6 +106,9 @@ py -3.11 -m venv .venv
 .venv\Scripts\python.exe -m pip install -r requirements-dev.txt
 .venv\Scripts\python.exe -m playwright install chromium
 .venv\Scripts\python.exe cad\settings_gen.py --spindle er11
+.venv\Scripts\python.exe cad\assembly.py `
+  --reference-mode envelope `
+  --output out\stator_winder_reference_envelope.step
 ```
 
 Keep the two checkouts as siblings, or pass `--winder` explicitly to
@@ -92,6 +119,7 @@ Run the source-only smoke checks:
 ```powershell
 .venv\Scripts\python.exe -m unittest discover -s sim -p "test_controller_adapter.py"
 .venv\Scripts\python.exe -m unittest discover -s cad -p "test_settings_gen.py"
+.venv\Scripts\python.exe -m unittest discover -s cad -p "test_public_reference_envelopes.py"
 ```
 
 Many geometry and release tests require supplier CAD cached under
@@ -99,15 +127,23 @@ Many geometry and release tests require supplier CAD cached under
 [`cad/models/README.md`](cad/models/README.md) and the adjacent provenance
 reports before running the full suite.
 
+The source-only reference assembly and packaged manufacturing artifacts do not
+require that optional exact-model cache.
+
 ## Typical workflow
 
 ```powershell
 # Generate settings from the current geometry
 .venv\Scripts\python.exe cad\settings_gen.py --spindle er11
 
-# Export the legacy controller-compatible assembly and collision links
-.venv\Scripts\python.exe cad\assembly.py
+# Export the vendor-free reference assembly and collision links
+.venv\Scripts\python.exe cad\assembly.py `
+  --reference-mode envelope `
+  --output out\stator_winder_reference_envelope.step
 .venv\Scripts\python.exe cad\export_links.py --spindle er11
+
+# Optional: with the separately obtained exact supplier-model cache
+.venv\Scripts\python.exe cad\assembly.py --reference-mode exact
 
 # Capture the untouched upstream motion stream
 .venv\Scripts\python.exe sim\capture.py `
