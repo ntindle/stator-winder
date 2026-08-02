@@ -1,0 +1,559 @@
+{
+  "schema": "successor-manufacturing-packet/v1",
+  "generated_utc": "2026-07-12T18:39:47.094679+00:00",
+  "production_authorized": false,
+  "order_authorized": false,
+  "rfq_submission_authorized": true,
+  "drawing": "output/pdf/successor_custom_parts_rfq.pdf",
+  "rfq_csv": "out/custom/successor/successor_rfq.csv",
+  "artifacts": {
+    "rfq_csv": {
+      "path": "out/custom/successor/successor_rfq.csv",
+      "exists": true,
+      "bytes": 21120,
+      "sha256": "f48d61f94cd02829ebcb6d759101d831b8521458ecdec4ecc72de62b0e24b8c3"
+    },
+    "drawing_pdf": {
+      "path": "output/pdf/successor_custom_parts_rfq.pdf",
+      "exists": true,
+      "bytes": 6937,
+      "sha256": "4a3ad31e475b57235d1466ccea506dfa76b700e28f0b9b744b50787d5a2532f0"
+    }
+  },
+  "parts": [
+    {
+      "id": "flyer_peek_guide_bell",
+      "group": "wire_path",
+      "quantity": 1,
+      "material": "natural unfilled PEEK; exact resin grade and lot certification TBD",
+      "process": "5-axis CNC or supplier-approved molded-and-finish-machined process",
+      "geometry_authority": "step_exact",
+      "file": "out/custom/successor/step/flyer_peek_guide_bell.step",
+      "sha256": "41117960cb93ac3291beea5ef24a66cc6a553c7ab272fc986da56c8878a751f0",
+      "bytes": 215811,
+      "single_solid": true,
+      "bbox_mm": [
+        15.0,
+        71.7,
+        32.5
+      ],
+      "candidate_purchase_status": "rfq_ready",
+      "purchase_status": "rfq_ready",
+      "authorization_status": "blocked",
+      "rfq_submission_authorized": true,
+      "cost_status": "tbd",
+      "rfq_contract": {
+        "material_design_basis": "Natural, virgin, unfilled PEEK stock shape. Supplier must identify the stock-shape manufacturer, product/grade, filler declaration and traceable lot; no recycled, glass-, carbon-, PTFE- or bearing-filled substitution.",
+        "quote_requirements": [
+          "Confirm the supplied STEP is the exact shape authority and identify any feature that cannot be machined without changing it.",
+          "Return the stock-shape manufacturer, product/grade, filler declaration, lot-certificate availability and proposed machining process.",
+          "Propose an achievable wire-contact surface finish and the inspection method used to verify burr-free polished channels.",
+          "Quote a first-article dimensional inspection report against the STEP.",
+          "State how the continuous ID0.60 passage, R3.25 root elbow and integral exit bell will be produced and inspected without closing the bore."
+        ],
+        "receiving_inspection": [
+          "Verify the certificate and traceable lot identify natural virgin unfilled PEEK with no filler substitution.",
+          "Review the supplier first-article report and independently inspect all retention interfaces and wire-contact passages against the STEP.",
+          "Inspect every wire-contact edge and passage for burrs, chips, closure, bridging and polish damage before assembly.",
+          "Verify the continuous ID0.60 passage is open end-to-end and inspect its root elbow and exit bell with the supplier's stated method."
+        ],
+        "qualification_before_use": [
+          "Pass the M2 insert pull coupon, guide-to-arm fit check, wire abrasion, dielectric, varnish compatibility and 60 N hot-load coupons.",
+          "Pass the installed flexible-wire route and hot 300 RPM endurance gates."
+        ]
+      }
+    },
+    {
+      "id": "stator_short_leadin_cap_front",
+      "group": "wire_path",
+      "quantity": 1,
+      "material": "natural unfilled PEEK; exact resin grade and lot certification TBD",
+      "process": "CNC machine and polish all open wire-contact channels",
+      "geometry_authority": "step_exact",
+      "file": "out/custom/successor/step/stator_short_leadin_cap_front.step",
+      "sha256": "b63ce9ef1831166957b1455005e6139f428da846f8e91e2a1fcd362a8e2a6229",
+      "bytes": 18486397,
+      "single_solid": true,
+      "bbox_mm": [
+        46.0,
+        46.0,
+        15.65
+      ],
+      "candidate_purchase_status": "rfq_ready",
+      "purchase_status": "rfq_ready",
+      "authorization_status": "blocked",
+      "rfq_submission_authorized": true,
+      "cost_status": "tbd",
+      "rfq_contract": {
+        "material_design_basis": "Natural, virgin, unfilled PEEK stock shape. Supplier must identify the stock-shape manufacturer, product/grade, filler declaration and traceable lot; no recycled, glass-, carbon-, PTFE- or bearing-filled substitution.",
+        "quote_requirements": [
+          "Confirm the supplied STEP is the exact shape authority and identify any feature that cannot be machined without changing it.",
+          "Return the stock-shape manufacturer, product/grade, filler declaration, lot-certificate availability and proposed machining process.",
+          "Propose an achievable wire-contact surface finish and the inspection method used to verify burr-free polished channels.",
+          "Quote a first-article dimensional inspection report against the STEP.",
+          "Quote the front and rear caps as a matched pair from one material lot; preserve all 24 two-branch short-leadin sectors (48 open branch grooves) on each cap."
+        ],
+        "receiving_inspection": [
+          "Verify the certificate and traceable lot identify natural virgin unfilled PEEK with no filler substitution.",
+          "Review the supplier first-article report and independently inspect all retention interfaces and wire-contact passages against the STEP.",
+          "Inspect every wire-contact edge and passage for burrs, chips, closure, bridging and polish damage before assembly.",
+          "Verify all 24 two-branch short-leadin sectors (48 open branch grooves) per cap, matched front/rear identity and the shared through-fastener interfaces."
+        ],
+        "qualification_before_use": [
+          "Pass paired-cap fit, M2 retention, wire abrasion, dielectric and hot-varnish coupons.",
+          "Pass the flexible-conductor launch matrix before winding."
+        ]
+      }
+    },
+    {
+      "id": "stator_short_leadin_cap_rear",
+      "group": "wire_path",
+      "quantity": 1,
+      "material": "natural unfilled PEEK; exact resin grade and lot certification TBD",
+      "process": "CNC machine and polish all open wire-contact channels",
+      "geometry_authority": "step_exact",
+      "file": "out/custom/successor/step/stator_short_leadin_cap_rear.step",
+      "sha256": "e6489ce2a8b17825cd8c732371fa757fb62614c1785113ab1a5d1abf42e79f12",
+      "bytes": 18618250,
+      "single_solid": true,
+      "bbox_mm": [
+        46.0,
+        46.0,
+        15.65
+      ],
+      "candidate_purchase_status": "rfq_ready",
+      "purchase_status": "rfq_ready",
+      "authorization_status": "blocked",
+      "rfq_submission_authorized": true,
+      "cost_status": "tbd",
+      "rfq_contract": {
+        "material_design_basis": "Natural, virgin, unfilled PEEK stock shape. Supplier must identify the stock-shape manufacturer, product/grade, filler declaration and traceable lot; no recycled, glass-, carbon-, PTFE- or bearing-filled substitution.",
+        "quote_requirements": [
+          "Confirm the supplied STEP is the exact shape authority and identify any feature that cannot be machined without changing it.",
+          "Return the stock-shape manufacturer, product/grade, filler declaration, lot-certificate availability and proposed machining process.",
+          "Propose an achievable wire-contact surface finish and the inspection method used to verify burr-free polished channels.",
+          "Quote a first-article dimensional inspection report against the STEP.",
+          "Quote the front and rear caps as a matched pair from one material lot; preserve all 24 two-branch short-leadin sectors (48 open branch grooves) on each cap."
+        ],
+        "receiving_inspection": [
+          "Verify the certificate and traceable lot identify natural virgin unfilled PEEK with no filler substitution.",
+          "Review the supplier first-article report and independently inspect all retention interfaces and wire-contact passages against the STEP.",
+          "Inspect every wire-contact edge and passage for burrs, chips, closure, bridging and polish damage before assembly.",
+          "Verify all 24 two-branch short-leadin sectors (48 open branch grooves) per cap, matched front/rear identity and the shared through-fastener interfaces."
+        ],
+        "qualification_before_use": [
+          "Pass paired-cap fit, M2 retention, wire abrasion, dielectric and hot-varnish coupons.",
+          "Pass the flexible-conductor launch matrix before winding."
+        ]
+      }
+    },
+    {
+      "id": "active_sector_peek_guide_front",
+      "group": "wire_path",
+      "quantity": 1,
+      "material": "natural unfilled PEEK; exact resin grade and lot certification TBD",
+      "process": "CNC machine open bowls, keys and heat-insert pilots; polish wire surfaces",
+      "geometry_authority": "step_exact",
+      "file": "out/custom/successor/step/active_sector_peek_guide_front.step",
+      "sha256": "8ddf2185aa11525ac785c977de001b7fdcd8d80de6ed6b30bacb5268d825e639",
+      "bytes": 406672,
+      "single_solid": true,
+      "bbox_mm": [
+        14.891957,
+        21.8,
+        9.15
+      ],
+      "candidate_purchase_status": "rfq_ready",
+      "purchase_status": "rfq_ready",
+      "authorization_status": "blocked",
+      "rfq_submission_authorized": true,
+      "cost_status": "tbd",
+      "rfq_contract": {
+        "material_design_basis": "Natural, virgin, unfilled PEEK stock shape. Supplier must identify the stock-shape manufacturer, product/grade, filler declaration and traceable lot; no recycled, glass-, carbon-, PTFE- or bearing-filled substitution.",
+        "quote_requirements": [
+          "Confirm the supplied STEP is the exact shape authority and identify any feature that cannot be machined without changing it.",
+          "Return the stock-shape manufacturer, product/grade, filler declaration, lot-certificate availability and proposed machining process.",
+          "Propose an achievable wire-contact surface finish and the inspection method used to verify burr-free polished channels.",
+          "Quote a first-article dimensional inspection report against the STEP.",
+          "Quote the front and rear guides as a matched pair from one material lot; preserve the open bowls, datum keys and heat-insert pilots."
+        ],
+        "receiving_inspection": [
+          "Verify the certificate and traceable lot identify natural virgin unfilled PEEK with no filler substitution.",
+          "Review the supplier first-article report and independently inspect all retention interfaces and wire-contact passages against the STEP.",
+          "Inspect every wire-contact edge and passage for burrs, chips, closure, bridging and polish damage before assembly.",
+          "Verify front/rear identity, all datum keys, open bowls and M3 insert pilots against the STEP before installing inserts."
+        ],
+        "qualification_before_use": [
+          "Pass guide-key fit, all four M3 insert pull tests, wire abrasion and flexible-conductor capture coupons.",
+          "Pass the full launch matrix and hot 300 RPM endurance gates."
+        ]
+      }
+    },
+    {
+      "id": "active_sector_peek_guide_rear",
+      "group": "wire_path",
+      "quantity": 1,
+      "material": "natural unfilled PEEK; exact resin grade and lot certification TBD",
+      "process": "CNC machine open bowls, keys and heat-insert pilots; polish wire surfaces",
+      "geometry_authority": "step_exact",
+      "file": "out/custom/successor/step/active_sector_peek_guide_rear.step",
+      "sha256": "8d8618a2a91c3c2a4d9a109449f3b47a8ee0d6cee4b150632a1dc5cb148ba250",
+      "bytes": 406103,
+      "single_solid": true,
+      "bbox_mm": [
+        14.891957,
+        21.8,
+        9.15
+      ],
+      "candidate_purchase_status": "rfq_ready",
+      "purchase_status": "rfq_ready",
+      "authorization_status": "blocked",
+      "rfq_submission_authorized": true,
+      "cost_status": "tbd",
+      "rfq_contract": {
+        "material_design_basis": "Natural, virgin, unfilled PEEK stock shape. Supplier must identify the stock-shape manufacturer, product/grade, filler declaration and traceable lot; no recycled, glass-, carbon-, PTFE- or bearing-filled substitution.",
+        "quote_requirements": [
+          "Confirm the supplied STEP is the exact shape authority and identify any feature that cannot be machined without changing it.",
+          "Return the stock-shape manufacturer, product/grade, filler declaration, lot-certificate availability and proposed machining process.",
+          "Propose an achievable wire-contact surface finish and the inspection method used to verify burr-free polished channels.",
+          "Quote a first-article dimensional inspection report against the STEP.",
+          "Quote the front and rear guides as a matched pair from one material lot; preserve the open bowls, datum keys and heat-insert pilots."
+        ],
+        "receiving_inspection": [
+          "Verify the certificate and traceable lot identify natural virgin unfilled PEEK with no filler substitution.",
+          "Review the supplier first-article report and independently inspect all retention interfaces and wire-contact passages against the STEP.",
+          "Inspect every wire-contact edge and passage for burrs, chips, closure, bridging and polish damage before assembly.",
+          "Verify front/rear identity, all datum keys, open bowls and M3 insert pilots against the STEP before installing inserts."
+        ],
+        "qualification_before_use": [
+          "Pass guide-key fit, all four M3 insert pull tests, wire abrasion and flexible-conductor capture coupons.",
+          "Pass the full launch matrix and hot 300 RPM endurance gates."
+        ]
+      }
+    },
+    {
+      "id": "active_sector_aluminum_yoke",
+      "group": "structure",
+      "quantity": 1,
+      "material": "6061-T6 aluminum; no equivalent without written approval",
+      "process": "CNC mill as one solid; preserve keyed tower and guide datums",
+      "geometry_authority": "step_exact",
+      "file": "out/custom/successor/step/active_sector_aluminum_yoke.step",
+      "sha256": "8eddee6f4abc18060a760c6bfed0a6037dcc244051f663bc77739e17e3ad10e9",
+      "bytes": 420620,
+      "single_solid": true,
+      "bbox_mm": [
+        33.85,
+        79.0,
+        140.55
+      ],
+      "candidate_purchase_status": "rfq_ready",
+      "purchase_status": "rfq_ready",
+      "authorization_status": "blocked",
+      "rfq_submission_authorized": true,
+      "cost_status": "tbd",
+      "rfq_contract": {
+        "material_design_basis": "6061-T6 aluminum; no equivalent is pre-authorized.",
+        "quote_requirements": [
+          "Quote one-piece CNC machining from certified 6061-T6 aluminum; no alloy or temper substitution without written approval.",
+          "Confirm all keyed guide/tower datums and M3/M4 clearance-hole axes are included and return a proposed dimensional inspection plan.",
+          "State achievable tolerance, datum-face flatness and surface-treatment proposal; keep locating and mating faces free of dimensional buildup.",
+          "Quote a first-article dimensional inspection report against the STEP."
+        ],
+        "receiving_inspection": [
+          "Verify the material certificate states 6061-T6 and matches the serialized first article.",
+          "Review the supplier first-article report and independently inspect the tower keys, guide seats, datum faces and every M3/M4 clearance hole.",
+          "Confirm the yoke is one solid with no plugged, bonded or separately fastened structural substitutions."
+        ],
+        "qualification_before_use": [
+          "Re-run the exact rigid sweep with the received-part measurements.",
+          "Pass guide fit, flexible-conductor, launch-matrix and physical-load qualification before production use."
+        ]
+      }
+    },
+    {
+      "id": "balance_b777_rear_1_rear_left",
+      "group": "balance",
+      "quantity": 1,
+      "material": "ASTM B777 tungsten heavy alloy at 18.49 g/cm3 design density; class and certified lot TBD",
+      "process": "precision turn/mill annular trim to solved length; weigh and serialize",
+      "geometry_authority": "step_exact",
+      "file": "out/custom/successor/step/balance_b777_rear_1_rear_left.step",
+      "sha256": "2fc9abc396dd6ebb1494881c9991e2f38d16045553ea6560cedc347f3132fc94",
+      "bytes": 11021,
+      "single_solid": true,
+      "bbox_mm": [
+        12.5,
+        12.5,
+        1.537534
+      ],
+      "candidate_purchase_status": "rfq_ready",
+      "purchase_status": "rfq_ready",
+      "authorization_status": "blocked",
+      "rfq_submission_authorized": true,
+      "cost_status": "tbd",
+      "rfq_contract": {
+        "material_design_basis": "ASTM B777 tungsten heavy alloy at 18.49 g/cm3 (the immutable digital balance basis); grade/class and lot certificate must be returned by the supplier.",
+        "quote_requirements": [
+          "Quote each serialized STEP separately in ASTM B777 tungsten heavy alloy at the 18.49 g/cm3 balance-design density.",
+          "State ASTM B777 class, certified density, chemistry, traceable lot, machining process and achievable dimensional tolerance.",
+          "Return the predicted finished mass for each serial and quote an actual mass record with the finished parts.",
+          "Flag any proposed density other than 18.49 g/cm3; it requires a new balance solve and six new STEP files before order approval."
+        ],
+        "receiving_inspection": [
+          "Verify the ASTM B777 certificate, class, chemistry, traceable lot and certified density before accepting the parts.",
+          "Measure and record each serial's OD, ID, axial length and finished mass.",
+          "Reject mixed-up serials, rounded bearing faces, burrs or density drift until the balance solution is regenerated and reviewed."
+        ],
+        "qualification_before_use": [
+          "Install all six measured serials and pass the final G2.5 balance check.",
+          "Pass all rear/front retention pull tests and hot 300 RPM endurance."
+        ]
+      }
+    },
+    {
+      "id": "balance_b777_rear_2_rear_right",
+      "group": "balance",
+      "quantity": 1,
+      "material": "ASTM B777 tungsten heavy alloy at 18.49 g/cm3 design density; class and certified lot TBD",
+      "process": "precision turn/mill annular trim to solved length; weigh and serialize",
+      "geometry_authority": "step_exact",
+      "file": "out/custom/successor/step/balance_b777_rear_2_rear_right.step",
+      "sha256": "e193cb6b454d9e396b941a55a4014c8c6692e1d187a811b4db41bc20ef11b0a7",
+      "bytes": 10928,
+      "single_solid": true,
+      "bbox_mm": [
+        12.5,
+        12.5,
+        0.6
+      ],
+      "candidate_purchase_status": "rfq_ready",
+      "purchase_status": "rfq_ready",
+      "authorization_status": "blocked",
+      "rfq_submission_authorized": true,
+      "cost_status": "tbd",
+      "rfq_contract": {
+        "material_design_basis": "ASTM B777 tungsten heavy alloy at 18.49 g/cm3 (the immutable digital balance basis); grade/class and lot certificate must be returned by the supplier.",
+        "quote_requirements": [
+          "Quote each serialized STEP separately in ASTM B777 tungsten heavy alloy at the 18.49 g/cm3 balance-design density.",
+          "State ASTM B777 class, certified density, chemistry, traceable lot, machining process and achievable dimensional tolerance.",
+          "Return the predicted finished mass for each serial and quote an actual mass record with the finished parts.",
+          "Flag any proposed density other than 18.49 g/cm3; it requires a new balance solve and six new STEP files before order approval."
+        ],
+        "receiving_inspection": [
+          "Verify the ASTM B777 certificate, class, chemistry, traceable lot and certified density before accepting the parts.",
+          "Measure and record each serial's OD, ID, axial length and finished mass.",
+          "Reject mixed-up serials, rounded bearing faces, burrs or density drift until the balance solution is regenerated and reviewed."
+        ],
+        "qualification_before_use": [
+          "Install all six measured serials and pass the final G2.5 balance check.",
+          "Pass all rear/front retention pull tests and hot 300 RPM endurance."
+        ]
+      }
+    },
+    {
+      "id": "balance_b777_rear_3_front_left",
+      "group": "balance",
+      "quantity": 1,
+      "material": "ASTM B777 tungsten heavy alloy at 18.49 g/cm3 design density; class and certified lot TBD",
+      "process": "precision turn/mill annular trim to solved length; weigh and serialize",
+      "geometry_authority": "step_exact",
+      "file": "out/custom/successor/step/balance_b777_rear_3_front_left.step",
+      "sha256": "abddf46627d7cd912c0e93655358932483a372efa7b991ca5faa74ba9ac0792d",
+      "bytes": 10995,
+      "single_solid": true,
+      "bbox_mm": [
+        11.0,
+        11.0,
+        0.630832
+      ],
+      "candidate_purchase_status": "rfq_ready",
+      "purchase_status": "rfq_ready",
+      "authorization_status": "blocked",
+      "rfq_submission_authorized": true,
+      "cost_status": "tbd",
+      "rfq_contract": {
+        "material_design_basis": "ASTM B777 tungsten heavy alloy at 18.49 g/cm3 (the immutable digital balance basis); grade/class and lot certificate must be returned by the supplier.",
+        "quote_requirements": [
+          "Quote each serialized STEP separately in ASTM B777 tungsten heavy alloy at the 18.49 g/cm3 balance-design density.",
+          "State ASTM B777 class, certified density, chemistry, traceable lot, machining process and achievable dimensional tolerance.",
+          "Return the predicted finished mass for each serial and quote an actual mass record with the finished parts.",
+          "Flag any proposed density other than 18.49 g/cm3; it requires a new balance solve and six new STEP files before order approval."
+        ],
+        "receiving_inspection": [
+          "Verify the ASTM B777 certificate, class, chemistry, traceable lot and certified density before accepting the parts.",
+          "Measure and record each serial's OD, ID, axial length and finished mass.",
+          "Reject mixed-up serials, rounded bearing faces, burrs or density drift until the balance solution is regenerated and reviewed."
+        ],
+        "qualification_before_use": [
+          "Install all six measured serials and pass the final G2.5 balance check.",
+          "Pass all rear/front retention pull tests and hot 300 RPM endurance."
+        ]
+      }
+    },
+    {
+      "id": "balance_b777_rear_4_front_right",
+      "group": "balance",
+      "quantity": 1,
+      "material": "ASTM B777 tungsten heavy alloy at 18.49 g/cm3 design density; class and certified lot TBD",
+      "process": "precision turn/mill annular trim to solved length; weigh and serialize",
+      "geometry_authority": "step_exact",
+      "file": "out/custom/successor/step/balance_b777_rear_4_front_right.step",
+      "sha256": "4e3b6966571f96ae8637038f444e7f2ce9968f3b63676cc494a015edb442d0a5",
+      "bytes": 10995,
+      "single_solid": true,
+      "bbox_mm": [
+        11.0,
+        11.0,
+        1.56804
+      ],
+      "candidate_purchase_status": "rfq_ready",
+      "purchase_status": "rfq_ready",
+      "authorization_status": "blocked",
+      "rfq_submission_authorized": true,
+      "cost_status": "tbd",
+      "rfq_contract": {
+        "material_design_basis": "ASTM B777 tungsten heavy alloy at 18.49 g/cm3 (the immutable digital balance basis); grade/class and lot certificate must be returned by the supplier.",
+        "quote_requirements": [
+          "Quote each serialized STEP separately in ASTM B777 tungsten heavy alloy at the 18.49 g/cm3 balance-design density.",
+          "State ASTM B777 class, certified density, chemistry, traceable lot, machining process and achievable dimensional tolerance.",
+          "Return the predicted finished mass for each serial and quote an actual mass record with the finished parts.",
+          "Flag any proposed density other than 18.49 g/cm3; it requires a new balance solve and six new STEP files before order approval."
+        ],
+        "receiving_inspection": [
+          "Verify the ASTM B777 certificate, class, chemistry, traceable lot and certified density before accepting the parts.",
+          "Measure and record each serial's OD, ID, axial length and finished mass.",
+          "Reject mixed-up serials, rounded bearing faces, burrs or density drift until the balance solution is regenerated and reviewed."
+        ],
+        "qualification_before_use": [
+          "Install all six measured serials and pass the final G2.5 balance check.",
+          "Pass all rear/front retention pull tests and hot 300 RPM endurance."
+        ]
+      }
+    },
+    {
+      "id": "balance_b777_front_left",
+      "group": "balance",
+      "quantity": 1,
+      "material": "ASTM B777 tungsten heavy alloy at 18.49 g/cm3 design density; class and certified lot TBD",
+      "process": "precision turn annular trim to common solved thickness; weigh and serialize",
+      "geometry_authority": "step_exact",
+      "file": "out/custom/successor/step/balance_b777_front_left.step",
+      "sha256": "02918cc9665965e717403876d092954198f311bc69c94c48846c955ab7270d10",
+      "bytes": 10940,
+      "single_solid": true,
+      "bbox_mm": [
+        6.0,
+        6.0,
+        1.502168
+      ],
+      "candidate_purchase_status": "rfq_ready",
+      "purchase_status": "rfq_ready",
+      "authorization_status": "blocked",
+      "rfq_submission_authorized": true,
+      "cost_status": "tbd",
+      "rfq_contract": {
+        "material_design_basis": "ASTM B777 tungsten heavy alloy at 18.49 g/cm3 (the immutable digital balance basis); grade/class and lot certificate must be returned by the supplier.",
+        "quote_requirements": [
+          "Quote each serialized STEP separately in ASTM B777 tungsten heavy alloy at the 18.49 g/cm3 balance-design density.",
+          "State ASTM B777 class, certified density, chemistry, traceable lot, machining process and achievable dimensional tolerance.",
+          "Return the predicted finished mass for each serial and quote an actual mass record with the finished parts.",
+          "Flag any proposed density other than 18.49 g/cm3; it requires a new balance solve and six new STEP files before order approval."
+        ],
+        "receiving_inspection": [
+          "Verify the ASTM B777 certificate, class, chemistry, traceable lot and certified density before accepting the parts.",
+          "Measure and record each serial's OD, ID, axial length and finished mass.",
+          "Reject mixed-up serials, rounded bearing faces, burrs or density drift until the balance solution is regenerated and reviewed."
+        ],
+        "qualification_before_use": [
+          "Install all six measured serials and pass the final G2.5 balance check.",
+          "Pass all rear/front retention pull tests and hot 300 RPM endurance."
+        ]
+      }
+    },
+    {
+      "id": "balance_b777_front_right",
+      "group": "balance",
+      "quantity": 1,
+      "material": "ASTM B777 tungsten heavy alloy at 18.49 g/cm3 design density; class and certified lot TBD",
+      "process": "precision turn annular trim to common solved thickness; weigh and serialize",
+      "geometry_authority": "step_exact",
+      "file": "out/custom/successor/step/balance_b777_front_right.step",
+      "sha256": "21068cd84b27ab36400d5110bb5ff61c5095cb86d5e43ba5ed3bb4d906dcfee2",
+      "bytes": 10935,
+      "single_solid": true,
+      "bbox_mm": [
+        6.0,
+        6.0,
+        1.502168
+      ],
+      "candidate_purchase_status": "rfq_ready",
+      "purchase_status": "rfq_ready",
+      "authorization_status": "blocked",
+      "rfq_submission_authorized": true,
+      "cost_status": "tbd",
+      "rfq_contract": {
+        "material_design_basis": "ASTM B777 tungsten heavy alloy at 18.49 g/cm3 (the immutable digital balance basis); grade/class and lot certificate must be returned by the supplier.",
+        "quote_requirements": [
+          "Quote each serialized STEP separately in ASTM B777 tungsten heavy alloy at the 18.49 g/cm3 balance-design density.",
+          "State ASTM B777 class, certified density, chemistry, traceable lot, machining process and achievable dimensional tolerance.",
+          "Return the predicted finished mass for each serial and quote an actual mass record with the finished parts.",
+          "Flag any proposed density other than 18.49 g/cm3; it requires a new balance solve and six new STEP files before order approval."
+        ],
+        "receiving_inspection": [
+          "Verify the ASTM B777 certificate, class, chemistry, traceable lot and certified density before accepting the parts.",
+          "Measure and record each serial's OD, ID, axial length and finished mass.",
+          "Reject mixed-up serials, rounded bearing faces, burrs or density drift until the balance solution is regenerated and reviewed."
+        ],
+        "qualification_before_use": [
+          "Install all six measured serials and pass the final G2.5 balance check.",
+          "Pass all rear/front retention pull tests and hot 300 RPM endurance."
+        ]
+      }
+    }
+  ],
+  "pending_rev2_packaging_parts": [],
+  "pending_supplier_authority_parts": [],
+  "rfq_readiness": {
+    "rfq_ready_part_ids": [
+      "active_sector_aluminum_yoke",
+      "active_sector_peek_guide_front",
+      "active_sector_peek_guide_rear",
+      "balance_b777_front_left",
+      "balance_b777_front_right",
+      "balance_b777_rear_1_rear_left",
+      "balance_b777_rear_2_rear_right",
+      "balance_b777_rear_3_front_left",
+      "balance_b777_rear_4_front_right",
+      "flyer_peek_guide_bell",
+      "stator_short_leadin_cap_front",
+      "stator_short_leadin_cap_rear"
+    ],
+    "order_ready_part_ids": [],
+    "production_authorized_part_ids": [],
+    "meaning": "RFQ_READY authorizes sending the hash-bound STEP/drawing/CSV packet for supplier quotation only. It does not authorize an order, installation or production use."
+  },
+  "balance_contract": {
+    "rear_slug_lengths_mm": [
+      1.5375341624852528,
+      0.6,
+      0.6308324065833766,
+      1.5680396641162582
+    ],
+    "front_trim_common_thickness_mm": 1.5021684970204356,
+    "authority": "INTEGRATED_REV_D_L79_D10_SHAFT_OFFICIAL_NBK_P30_D10_28G_J3E6_SUPPLIED_M2_CLAMP_PEEK_GUIDE_ROOT_SLEEVE_BASE_ROWS"
+  },
+  "source_hashes": {
+    "cad/successor_manufacturing.py": "7752075876d85aa9c1a9175fcd72a2d7caf0ed7491d7d0fa28af77075aaa7120",
+    "cad/custom_drawings.py": "0cdc684cfe3fc536a5fc5caaf4ae757399cab76ee0d113147bc9ca7c12dbe459",
+    "cad/integrated_release_candidate.py": "0436fb9eeb6b1df11ebbb0a487accf6b58caf6e86f305105eca3ef8578729122",
+    "cad/retained_flyer_peek_guide_successor.py": "79588131775fd46a558e342330e09acf63238a33160c2dae7085437b12f77a72",
+    "cad/permanent_cap_offset_spoke_retained_review.py": "93dd22f59c2549a61d4babc03f0d92b7f34247fe238e545313365224d6cf7b1e",
+    "cad/carriage_active_sector_terminal_guide.py": "ef35437481bed682a2104cf5646f68d9bacd0ab3272acc23af2b67b8cc08526c"
+  },
+  "blockers": [
+    "Supplier-returned PEEK grade/lot, DFM, finish and dimensional-inspection commitments are absent.",
+    "Supplier-returned ASTM B777 class/18.49 g/cm3 density certificate, serialized weights and machining tolerances are absent.",
+    "Prices, receiving inspection and every physical qualification gate remain open; RFQ readiness is not order authorization."
+  ]
+}

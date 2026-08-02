@@ -35,6 +35,29 @@ MODELS = Path(__file__).parent / "models" / "parts"
 
 CTR = (Align.CENTER, Align.CENTER, Align.CENTER)
 
+# Exact supplier/catalog geometry is useful for the project's local fit and
+# collision audits, but most of those files cannot be redistributed.  Keep
+# exact mode as the verification default and expose an explicit envelope mode
+# for public, source-only assembly generation.
+_REFERENCE_MODE = "exact"
+
+
+def set_reference_mode(mode: str) -> None:
+    """Select ``exact`` cached CAD or redistributable parametric envelopes."""
+    normalized = str(mode).strip().lower()
+    if normalized not in {"exact", "envelope"}:
+        raise ValueError("reference mode must be 'exact' or 'envelope'")
+    global _REFERENCE_MODE
+    _REFERENCE_MODE = normalized
+
+
+def reference_mode() -> str:
+    return _REFERENCE_MODE
+
+
+def using_reference_envelopes() -> bool:
+    return _REFERENCE_MODE == "envelope"
+
 
 @lru_cache(maxsize=None)
 def _imp(name: str) -> Compound:
@@ -82,13 +105,22 @@ def nema23(label="nema23") -> Part:
 
 
 def bearing_608(label="608zz") -> Part:
-    p = _copy("bearing_608zz")  # centered, axis Z, ±3.5
+    if using_reference_envelopes():
+        p = (Cylinder(11.0, 7.0, align=CTR)
+             - Cylinder(4.0, 9.0, align=CTR))
+    else:
+        p = _copy("bearing_608zz")  # centered, axis Z, ±3.5
     p.label = label
     return p
 
 
 def bearing_6001(label="6001zz") -> Part:
-    p = Pos(0, 0, -4.0) * _copy("bearing_6001_zz_shielded_simple")  # center it
+    if using_reference_envelopes():
+        p = (Cylinder(14.0, 8.0, align=CTR)
+             - Cylinder(6.0, 10.0, align=CTR))
+    else:
+        p = Pos(0, 0, -4.0) * _copy(
+            "bearing_6001_zz_shielded_simple")  # center it
     p.label = label
     return p
 
@@ -218,9 +250,21 @@ def nema17_mcmaster_6627t421(label="nema17_6627t421") -> Compound:
     cable/individual pin detail.  The asymmetric connector envelope remains.
     Local frame: mounting face z=0, body/encoder -Z, shaft +Z.
     """
-    raw = _imp_upgrade("6627T421")
-    keep = [solid for solid in raw.solids() if solid.volume > 500.0]
-    p = Compound(children=[Pos(0, 0, -28.0126) * solid for solid in keep])
+    if using_reference_envelopes():
+        body = Box(42.3, 42.3, 78.1,
+                   align=(Align.CENTER, Align.CENTER, Align.MAX))
+        boss = Cylinder(11.0, 2.0,
+                        align=(Align.CENTER, Align.CENTER, Align.MIN))
+        shaft = Cylinder(2.5, 22.0,
+                         align=(Align.CENTER, Align.CENTER, Align.MIN))
+        connector = Pos(0, -23.0, -58.0) * Box(
+            18.0, 8.0, 18.0, align=CTR)
+        p = body + boss + shaft + connector
+    else:
+        raw = _imp_upgrade("6627T421")
+        keep = [solid for solid in raw.solids() if solid.volume > 500.0]
+        p = Compound(children=[Pos(0, 0, -28.0126) * solid
+                               for solid in keep])
     p.label = label
     return p
 
@@ -377,12 +421,21 @@ def gt2_pulley_40t_b5(label="gt2_40t_b5") -> Part:
     0.15 mm annular end caps to the 10 mm reference model so its axial
     envelope cannot understate the orderable part.
     """
-    p = _copy("gt2_pulley_40t_bore5_w6")  # axis Z centered ±5
-    cap = Cylinder(15.5, 0.15,
-                   align=(Align.CENTER, Align.CENTER, Align.MIN)) - \
-        Cylinder(2.5, 0.25,
-                 align=(Align.CENTER, Align.CENTER, Align.MIN))
-    p = p + Pos(0, 0, 5.0) * cap + Pos(0, 0, -5.15) * cap
+    if using_reference_envelopes():
+        body = Cylinder(13.0, 10.0, align=CTR)
+        rear_flange = Pos(0, 0, -5.15) * Cylinder(
+            15.5, 0.15, align=(Align.CENTER, Align.CENTER, Align.MIN))
+        front_flange = Pos(0, 0, 5.0) * Cylinder(
+            15.5, 0.15, align=(Align.CENTER, Align.CENTER, Align.MIN))
+        p = body + rear_flange + front_flange
+        p -= Cylinder(2.5, 12.0, align=CTR)
+    else:
+        p = _copy("gt2_pulley_40t_bore5_w6")  # axis Z centered ±5
+        cap = Cylinder(15.5, 0.15,
+                       align=(Align.CENTER, Align.CENTER, Align.MIN)) - \
+            Cylinder(2.5, 0.25,
+                     align=(Align.CENTER, Align.CENTER, Align.MIN))
+        p = p + Pos(0, 0, 5.0) * cap + Pos(0, 0, -5.15) * cap
     p.label = label
     return p
 
@@ -395,8 +448,12 @@ def beam_coupling_5x8(label="coupling_5x8") -> Part:
     collision checks overbounds the supplier body by 0.9 mm radially and
     2.5 mm at each end.
     """
-    p = Rot(0, 90, 0) * _copy("beam_coupling_bore5_to_8")
-    # after Rot about Y, former X axis -> Z... verify at assembly; envelope Ø24 x32
+    if using_reference_envelopes():
+        p = Cylinder(12.0, 32.0, align=CTR)
+        p -= Cylinder(4.0, 34.0, align=CTR)
+    else:
+        p = Rot(0, 90, 0) * _copy("beam_coupling_bore5_to_8")
+        # after Rot about Y, former X axis -> Z; envelope Ø24 x32
     p.label = label
     return p
 
@@ -423,6 +480,19 @@ def mgn12_rail(length: float = 150.0, label="mgn12_rail") -> Part:
     """
     if abs(length - 150.0) > 1e-6:
         raise ValueError("corrected MGN12 rail source currently supports 150 mm only")
+
+    if using_reference_envelopes():
+        # Same shared frame as the cached reference: X centered, Y from
+        # -5.5 to +2.5, and rail length along Z about zero.
+        p = Pos(0, -1.5, 0) * Box(12.0, 8.0, length, align=CTR)
+        for z in (-65.0, -40.0, -15.0, 10.0, 35.0, 60.0):
+            through = Pos(0, 3.0, z) * (Rot(90, 0, 0) * Cylinder(
+                1.75, 10.0, align=(Align.CENTER, Align.CENTER, Align.MIN)))
+            counterbore = Pos(0, 3.0, z) * (Rot(90, 0, 0) * Cylinder(
+                3.0, 5.0, align=(Align.CENTER, Align.CENTER, Align.MIN)))
+            p -= through + counterbore
+        p.label = label
+        return p
 
     p = _imp_upgrade("mgn12r_rail")
 
@@ -459,7 +529,17 @@ def mgn12h_block_real(label="mgn12h") -> Part:
     deep travel.  Y remains in the shared rail frame; local Z=0 is now the
     block mounting-grid center.
     """
-    p = Pos(0, 0, 26.033) * _imp_upgrade("mgn12h_block")
+    if using_reference_envelopes():
+        # Match the cached occurrence frame: X is width, Y is height above
+        # the rail datum, and Z runs along the rail through the 20x20 grid.
+        p = Pos(0, 2.5, 0) * Box(27.0, 10.0, 45.4, align=CTR)
+        for x in (-10.0, 10.0):
+            for z in (-10.0, 10.0):
+                p -= Pos(x, 8.0, z) * (Rot(90, 0, 0) * Cylinder(
+                    1.7, 12.0,
+                    align=(Align.CENTER, Align.CENTER, Align.MIN)))
+    else:
+        p = Pos(0, 0, 26.033) * _imp_upgrade("mgn12h_block")
     p.label = label
     return p
 
@@ -585,7 +665,11 @@ def gt2_pulley_40t_b8(label="gt2_40t_b8") -> Part:
 def er11_chuck_c8_hifi(label="er11_c8"):
     """High-fidelity ER11-A chuck (drawing-faithful; er11.report.md).
     Same drop-in frame as er11_chuck_c8: axis +Z, nut top z=0, shank -Z."""
-    p = _imp_upgrade("er11_c8_hifi")
+    if using_reference_envelopes():
+        from models.upgrades.er11_c8_hifi import er11_chuck_c8 as source_model
+        p = source_model(label=label)
+    else:
+        p = _imp_upgrade("er11_c8_hifi")
     p.label = label
     return p
 

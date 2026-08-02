@@ -1,0 +1,197 @@
+{
+  "schema": 1,
+  "parts": [
+    {
+      "id": "fixed_eyelet_id4_od9_t3",
+      "file": "out/custom/step/fixed_eyelet_id4_od9_t3.step",
+      "sha256": "40a88746e712583cd3b1c0e5a07d4a461199a25bb33c4faba416ff53e409efa0",
+      "bytes": 14658,
+      "single_solid": true,
+      "bbox_mm": [
+        9.0,
+        9.0,
+        3.0
+      ],
+      "artifact_id": "fixed-ceramic-eyelet-id4-od9",
+      "drawing": "output/pdf/fixed_eyelet_id4_od9_t3.pdf",
+      "scope": "one fixed entry wire guide plus one fragile-part spare",
+      "supplier_sku": null
+    },
+    {
+      "id": "shaft_wrap_sleeve_d4",
+      "file": "out/custom/step/shaft_wrap_sleeve_d4.step",
+      "sha256": "0339954dda5f99cf53f9a307b1b0bf2570ce119ec2e568dd69e23b917376d491",
+      "bytes": 14537,
+      "single_solid": true,
+      "bbox_mm": [
+        8.0,
+        8.0,
+        6.0
+      ]
+    },
+    {
+      "id": "t8x8_leadscrew_188_journal30",
+      "file": "out/custom/step/t8x8_leadscrew_188_journal30.step",
+      "sha256": "8fb994af287f0dd8e9804f0590958f6a42a6373e28e663bb3679e0bd029e32f9",
+      "bytes": 5645,
+      "single_solid": true,
+      "bbox_mm": [
+        8.0,
+        8.0,
+        188.0
+      ]
+    },
+    {
+      "id": "flyer_shaft_d10_id6_to_id9_l79",
+      "file": "out/custom/step/flyer_shaft_d10_id6_to_id9_l79.step",
+      "sha256": "caf1ed9fd3259307f4cf892e184467dbacff8f7036014aae155aef1b317b7f18",
+      "bytes": 42067,
+      "single_solid": true,
+      "bbox_mm": [
+        12.0,
+        12.0,
+        79.0
+      ],
+      "artifact_id": "m2-flyer-shaft-stock-d10-rev-d",
+      "drawing": "output/pdf/flyer_shaft_d10_id6_to_id9_l79.pdf",
+      "scope": "normal-GOAL stock-D10 flyer: full 18.5 mm round clamp seat, ID6-to-ID9 wire transition, and two printed-arm flats",
+      "supplier_sku": null
+    },
+    {
+      "id": "shaft8_socket_holder",
+      "file": "out/custom/step/shaft8_socket_holder.step",
+      "sha256": "6835c8cf51472e936b807ef213705dcd38152473abe33b0ff758427b95801b4c",
+      "bytes": 98236,
+      "single_solid": true,
+      "bbox_mm": [
+        16.0,
+        16.0,
+        116.0
+      ],
+      "artifact_id": "m1-spindle-custom-d8-c8-100l",
+      "drawing": "output/pdf/shaft8_socket_holder.pdf",
+      "scope": "exact 8.00 mm stator-shaft endpoint only",
+      "supplier_sku": null
+    },
+    {
+      "id": "m0_fixed_collar",
+      "file": "out/custom/step/m0_fixed_collar.step",
+      "sha256": "bf80a104f8411f7a5c84e07158a5e7dcfabfc207075791d14d3d8e37b82c7dbd",
+      "bytes": 50465,
+      "single_solid": true,
+      "bbox_mm": [
+        18.0,
+        18.0,
+        9.0
+      ]
+    },
+    {
+      "id": "m0_inner_shim",
+      "file": "out/custom/step/m0_inner_shim.step",
+      "sha256": "c72197c38fd4b137d3d3be26b497b9bfdbb61645c1a6cf0b4dff6bbafd5e3937",
+      "bytes": 9271,
+      "single_solid": true,
+      "bbox_mm": [
+        12.0,
+        12.0,
+        1.0
+      ]
+    },
+    {
+      "id": "m1_outer_race_spacer",
+      "file": "out/custom/step/m1_outer_race_spacer.step",
+      "sha256": "91b27ceedcecba79a70b34baa1d779589124e1cc6a37c95dac3c6aa968533df8",
+      "bytes": 9288,
+      "single_solid": true,
+      "bbox_mm": [
+        21.8,
+        21.8,
+        16.0
+      ]
+    },
+    {
+      "id": "m1_inner_race_spacer",
+      "file": "out/custom/step/m1_inner_race_spacer.step",
+      "sha256": "80592d2012397050a199e30513b33aabf5f005066ec0a46b45b701ccb544407d",
+      "bytes": 9296,
+      "single_solid": true,
+      "bbox_mm": [
+        17.8,
+        17.8,
+        16.0
+      ]
+    },
+    {
+      "id": "m1_lower_inner_spacer",
+      "file": "out/custom/step/m1_lower_inner_spacer.step",
+      "sha256": "51008046db87c63b26cd9761e92dd6af44d0bc17353202268167555f8aa03597",
+      "bytes": 9299,
+      "single_solid": true,
+      "bbox_mm": [
+        17.8,
+        17.8,
+        12.0
+      ]
+    },
+    {
+      "id": "m1_upper_collar",
+      "file": "out/custom/step/m1_upper_collar.step",
+      "sha256": "311fd0ce18bcd09a64e68887a1a78b0efa4cac52a35c1ac7e5aa6a83a264dc26",
+      "bytes": 46848,
+      "single_solid": true,
+      "bbox_mm": [
+        16.0,
+        16.0,
+        9.0
+      ]
+    },
+    {
+      "id": "m2_outer_race_spacer",
+      "file": "out/custom/step/m2_outer_race_spacer.step",
+      "sha256": "7c4462bbeb7de2fd0ac317dea40105533a6f3beb59dc7491455c280e24a11caf",
+      "bytes": 9299,
+      "single_solid": true,
+      "bbox_mm": [
+        27.8,
+        27.8,
+        11.0
+      ]
+    },
+    {
+      "id": "m2_rear_shim",
+      "file": "out/custom/step/m2_rear_shim.step",
+      "sha256": "3a61bb0b61b244d71926a64d2708cc81c130233fbc348ec0da5423819c0f6d78",
+      "bytes": 9292,
+      "single_solid": true,
+      "bbox_mm": [
+        18.0,
+        18.0,
+        0.5
+      ]
+    },
+    {
+      "id": "m2_center_inner_spacer",
+      "file": "out/custom/step/m2_center_inner_spacer.step",
+      "sha256": "e930dad8ebd374a13a9ee4324a33c8020107f509c87f2462c84919a2c1eff674",
+      "bytes": 9316,
+      "single_solid": true,
+      "bbox_mm": [
+        17.8,
+        17.8,
+        11.0
+      ]
+    },
+    {
+      "id": "m2_front_inner_spacer",
+      "file": "out/custom/step/m2_front_inner_spacer.step",
+      "sha256": "5564fc79db61d4a9ccd90d31fa3d8b8be52c7495cf9aee895614eabc94db4096",
+      "bytes": 9289,
+      "single_solid": true,
+      "bbox_mm": [
+        18.0,
+        18.0,
+        4.0
+      ]
+    }
+  ]
+}

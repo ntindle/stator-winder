@@ -1,0 +1,57 @@
+sku,description,standard,required_qty,spare_qty,pack_qty,packages_to_order,order_qty,status,design_status,purchase_status,supplier,supplier_sku,checkout_condition,mapping_blocker,schedule_ids
+91116A130,McMaster 91116A130 M4 oversized flat thrust washer,McMaster 91116A130,1,4,100,1,100,selected,selected,cart_ready,McMaster-Carr,91116A130,,"""""",felt_spring_thrust_washer
+94125K614,McMaster 94125K614 compression spring,McMaster 94125K614,1,4,5,1,5,selected,selected,cart_ready,McMaster-Carr,94125K614,,"""""",felt_compression_spring
+CUSTOM-304-DISC-20-4.5-1,OD20xID4.5x1 304 backing disc,dimensioned laser-cut disc,2,0,1,2,2,selected,selected,rfq_ready,,,,"""""",felt_backing_washers
+CUSTOM-FELT-20-4.5-3,OD20xID4.5x3 felt washer,dimensioned consumable,2,0,1,2,2,selected,selected,rfq_ready,,,,"""""",felt_pads
+DIN315-M4,M4 wing nut,DIN 315,1,0,10,1,10,selected,selected,cart_ready,McMaster-Carr,94300A411,,"""""",felt_wingnut
+DIN976-M4x55,M4x55 fully-threaded stud,DIN 976-1,1,0,1,1,1,selected,selected,cart_ready,McMaster-Carr,90024A221,,"""""",felt_stud
+DIN988-3x6x0.5,OD3 DIN 988 thrust washer,DIN 988,7,0,1,7,7,selected,selected,cart_ready,Accu,HSHN-3-6-0-5-A2,,"""""",dancer_pulley_shims
+DIN988-5x10x0.5,OD5 DIN 988 thrust washer,DIN 988,2,0,50,1,50,selected,selected,cart_ready,McMaster-Carr,98055A098,,"""""",dancer_pivot_shims
+ELESA-432001,Elesa DVB.6 OD20x17 M5 rubber foot,Elesa 432001 / DVB.6-20-17-M5-6-55,4,0,1,4,4,selected,selected,cart_ready,Reiman,DVB.6-20-17-M5-6-55,,"""""",machine_feet
+ISO10511-M2,M2 prevailing-torque nut,ISO 10511 / DIN 985,7,2,10,1,10,selected,selected,cart_ready,McMaster-Carr,90576A211,,"""""",endstop_switch_nylocs;cap_retention_nylocs;dancer_anchor_nylocs
+ISO10511-M2.5,M2.5 prevailing-torque nut,ISO 10511 / DIN 985,1,1,25,1,25,selected,selected,cart_ready,McMaster-Carr,93625A103,,"""""",dancer_pulley_nyloc
+ISO10511-M4,M4 prevailing-torque nut,ISO 10511 / DIN 985,6,2,100,1,100,selected,selected,cart_ready,McMaster-Carr,90576A103,,"""""",carriage_m4_nylocs
+ISO10511-M8,M8 prevailing-torque nut,ISO 10511 / DIN 985,1,1,100,1,100,selected,selected,cart_ready,McMaster-Carr,90576A117,,"""""",spool_axle_nyloc
+ISO10642-M3x6,M3x6 countersunk rear-balance screw,McMaster 92125A126 / ISO 10642,4,0,100,1,100,selected,selected,cart_ready,McMaster-Carr,92125A126,Confirm current pack price and line-specific fulfillment for this exact SKU at checkout; cart_ready is not order or motion authorization.,"""""",counterweight_screws
+ISO10642-M5x12,M5x12 flush M0 bearing-support screw,ISO 10642,10,2,100,1,100,selected,selected,cart_ready,McMaster-Carr,91263A833,,"""""",m0_support_screws;m3_base_screws
+ISO14581-M2x12,M2x12 flush fixed spring pin,ISO 14581,1,1,50,1,50,selected,selected,cart_ready,McMaster-Carr,90236A107,,"""""",dancer_fixed_anchor_screw
+ISO14581-M2x16,M2x16 flush moving spring pin,ISO 14581,1,1,50,1,50,selected,selected,cart_ready,McMaster-Carr,90236A108,,"""""",dancer_moving_anchor_screw
+ISO4026-M3x8,M3x8 flat-point arm set screw,ISO 4026,2,2,25,1,25,selected,selected,cart_ready,McMaster-Carr,92605A102,,"""""",flyer_set_screws
+ISO4026-M5x12,M5x12 flat-point bonded foot stud,ISO 4026 / DIN 913,4,0,1,4,4,selected,selected,cart_ready,Accu,SSF-M5-12-A2,,"""""",machine_foot_set_screws
+ISO4032-M4,M4 jam/hex nut,ISO 4032,1,0,100,1,100,selected,selected,cart_ready,McMaster-Carr,90592A011,,"""""",felt_jam_nut
+ISO4762-M2x16,M2x16 switch screw,ISO 4762,2,2,100,1,100,selected,selected,cart_ready,McMaster-Carr,91290A047,,"""""",endstop_switch_screws
+ISO4762-M2x20,M2x20 paired-cap through screw,ISO 4762,3,0,100,1,100,selected,selected,cart_ready,McMaster-Carr,91290A049,Confirm current pack price and line-specific fulfillment for this exact SKU at checkout; cart_ready is not order or motion authorization.,"""""",cap_retention_screws
+ISO4762-M2x6,M2x6 PEEK flyer-guide screw,ISO 4762,3,0,100,1,100,selected,selected,cart_ready,McMaster-Carr,91290A013,Confirm current pack price and line-specific fulfillment for this exact SKU at checkout; cart_ready is not order or motion authorization.,"""""",flyer_guide_screws
+ISO4762-M2x8,M2x8 front-balance screw,ISO 4762,2,0,100,1,100,selected,selected,cart_ready,McMaster-Carr,91290A015,Confirm current pack price and line-specific fulfillment for this exact SKU at checkout; cart_ready is not order or motion authorization.,"""""",front_trim_screws
+ISO4762-M3x10,M3x10 carriage-block screw,ISO 4762,22,4,100,1,100,selected,selected,cart_ready,McMaster-Carr,91502A104,,"""""",block_screws;motor_screws;dancer_stop_screws
+ISO4762-M3x12,M3x12 T8 flange-nut screw,ISO 4762,4,1,100,1,100,selected,selected,cart_ready,McMaster-Carr,91502A105,,"""""",t8_nut_screws
+ISO4762-M3x14,M3x14 active-sector guide screw,ISO 4762,4,0,100,1,100,selected,selected,cart_ready,McMaster-Carr,91502A106,Confirm current pack price and line-specific fulfillment for this exact SKU at checkout; cart_ready is not order or motion authorization.,"""""",active_sector_m3_screws
+ISO4762-M3x8,M3x8 rail screw,ISO 4762,12,3,100,1,100,selected,selected,cart_ready,McMaster-Carr,91502A103,,"""""",rail_screws
+ISO4762-M4x10,M4x10 yoke-to-tower screw,ISO 4762,4,0,100,1,100,selected,selected,cart_ready,McMaster-Carr,90128A212,Confirm current pack price and line-specific fulfillment for this exact SKU at checkout; cart_ready is not order or motion authorization.,"""""",active_sector_m4_screws
+ISO4762-M4x20,M4x20 front tower screw,ISO 4762,2,2,100,1,100,selected,selected,cart_ready,McMaster-Carr,90128A216,,"""""",carriage_m4_screws
+ISO4762-M4x25,M4x25 rear tower/flag screw,ISO 4762,4,2,100,1,100,selected,selected,cart_ready,McMaster-Carr,90128A217,,"""""",carriage_flag_m4_screws;nut_bracket_m4_screws
+ISO4762-M5x12,M5x12 rear-post shoe screw,ISO 4762,10,4,100,1,100,selected,selected,cart_ready,McMaster-Carr,90128A236,,"""""",rear_post_shoe_screws;m0_mount_screws;endstop_pedestal_screws;m2_mount_screws
+ISO4762-M5x16,M5x16 flyer-block screw,ISO 4762,4,1,100,1,100,selected,selected,cart_ready,McMaster-Carr,90128A244,,"""""",flyer_block_screws
+ISO4762-M8x75,M8x75 socket-head axle bolt,ISO 4762,1,0,25,1,25,selected,selected,cart_ready,McMaster-Carr,91290A461,,"""""",spool_axle
+ISO7089-M2,M2 normal washer,ISO 7089 / DIN 125-A,14,2,100,1,100,selected,selected,cart_ready,McMaster-Carr,91166A180,,"""""",endstop_switch_washers;front_trim_washers;cap_retention_washers;dancer_anchor_washers
+ISO7089-M3,M3 normal washer,ISO 7089 / DIN 125-A,10,4,100,1,100,selected,selected,cart_ready,McMaster-Carr,91166A210,,"""""",t8_nut_washers;active_sector_m3_washers;dancer_stop_washers
+ISO7089-M4,M4 normal washer,ISO 7089 / DIN 125-A,10,2,100,1,100,selected,selected,cart_ready,McMaster-Carr,91166A230,,"""""",carriage_m4_washers;active_sector_m4_washers
+ISO7089-M8,M8 normal washer,ISO 7089 / DIN 125-A,2,2,100,1,100,selected,selected,cart_ready,McMaster-Carr,91166A270,,"""""",spool_axle_washers
+LEM050AB01,Lee Spring LEM050AB 01 extension spring,Lee Spring metric instrument series,1,1,1,2,2,selected,selected,cart_ready,Lee Spring,LEM050AB 01 M,,"""""",dancer_extension_spring
+MCMASTER-90265A420,OD3x16 shoulder screw,ISO 7379 / McMaster 90265A420,1,0,1,1,1,selected,selected,cart_ready,McMaster-Carr,90265A420,,"""""",dancer_pulley_shoulder
+MCMASTER-94459A120,M2 standard heat-set insert,McMaster 94459A120,5,0,50,1,50,selected,selected,cart_ready,McMaster-Carr,94459A120,Confirm current pack price and line-specific fulfillment for this exact SKU at checkout; cart_ready is not order or motion authorization.,"""""",front_trim_inserts;flyer_guide_inserts
+MCMASTER-94459A130,M3 short heat-set insert,McMaster 94459A130,8,1,50,1,50,selected,selected,cart_ready,McMaster-Carr,94459A130,,"""""",counterweight_inserts;active_sector_m3_inserts
+MCMASTER-94459A140,M3 standard heat-set insert,McMaster 94459A140,2,2,50,1,50,selected,selected,cart_ready,McMaster-Carr,94459A140,,"""""",flyer_set_inserts
+MCMASTER-94459A150,M4 short tower heat-set insert,McMaster 94459A150,4,0,50,1,50,selected,selected,cart_ready,McMaster-Carr,94459A150,Confirm current pack price and line-specific fulfillment for this exact SKU at checkout; cart_ready is not order or motion authorization.,"""""",active_sector_m4_inserts
+MCMASTER-94459A769,M3 short heat-set stop insert,McMaster 94459A769,2,1,50,1,50,selected,selected,cart_ready,McMaster-Carr,94459A769,,"""""",dancer_stop_inserts
+MCMASTER-96654A127,OD5x10 shoulder screw,McMaster 96654A127,1,0,1,1,1,selected,selected,cart_ready,McMaster-Carr,96654A127,,"""""",dancer_pivot_shoulder
+MISUMI-CBSA5-10,M5x10 extra-low-head bracket screw,MISUMI CBSA5-10,30,4,1,34,34,selected,selected,cart_ready,MISUMI,CBSA5-10,,"""""",frame_bracket_screws
+MISUMI-HBKTST5,2020 right-angle bracket,MISUMI 5-series slot-6,15,1,1,16,16,selected,selected,cart_ready,MISUMI,HBKTST5,,"""""",frame_brackets
+MISUMI-HNTA5-3,M3 slot-6 post-assembly T-nut,MISUMI HNTA5-3,12,2,1,14,14,selected,selected,cart_ready,MISUMI,HNTA5-3,,"""""",rail_tnuts
+MISUMI-HNTA5-4,M4 slot-6 pivot T-nut,MISUMI HNTA5-4,1,1,1,2,2,selected,selected,cart_ready,MISUMI,HNTA5-4,,"""""",dancer_pivot_tnut
+MISUMI-HNTA5-5,M5 slot-6 post-assembly T-nut,MISUMI HNTA5-5,54,6,1,60,60,selected,selected,cart_ready,MISUMI,HNTA5-5,,"""""",frame_bracket_tnuts;rear_post_shoe_tnuts;machine_foot_tnuts;m0_mount_tnuts;endstop_pedestal_tnuts;flyer_block_tnuts;m2_mount_tnuts;m3_base_tnuts
+MISUMI-HNTAJ5-5,M5 short slot-6 post-assembly T-nut,MISUMI HNTAJ5-5,4,1,1,5,5,selected,selected,cart_ready,MISUMI,HNTAJ5-5,,"""""",m0_support_tnuts;dancer_base_tnuts
+SLEEVE-4-2.2-1.5,OD4xID2.2x1.5 sleeve,dimensioned steel sleeve,1,0,1,1,1,selected,selected,rfq_ready,,,,"""""",dancer_fixed_anchor_sleeve
+SLEEVE-4-2.2-4,OD4xID2.2x4 sleeve,dimensioned steel sleeve,1,0,1,1,1,selected,selected,rfq_ready,,,,"""""",dancer_moving_anchor_sleeve
+SLEEVE-5-3.2-4,OD5xID3.2x4 stop sleeve,dimensioned steel sleeve,2,0,1,2,2,selected,selected,rfq_ready,,,,"""""",dancer_stop_sleeves
+WURTH-970180581,M5 female/female AF8x18 foot standoff,Würth 970180581 WA-SSTII,4,0,1,4,4,selected,selected,cart_ready,Farnell,2884560,,"""""",machine_foot_standoffs
